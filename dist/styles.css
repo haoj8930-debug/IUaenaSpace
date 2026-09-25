@@ -276,6 +276,15 @@ h3 {
   border: 14px solid rgba(255, 255, 255, 0.18);
 }
 
+.releaseCard.hasImage::before,
+.miniCover.hasImage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 12, 22, 0.18), rgba(8, 12, 22, 0.74));
+  z-index: 0;
+}
+
 .releaseCard strong {
   font-size: 1.02rem;
   line-height: 1.2;

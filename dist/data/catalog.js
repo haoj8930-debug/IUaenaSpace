@@ -30,7 +30,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       }
     },
     {
@@ -47,7 +51,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       }
     },
     {
@@ -64,7 +72,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       }
     },
     {
@@ -81,7 +93,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       }
     },
     {
@@ -98,7 +114,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real-single/421111521?uo=4",
+        "matchedName": "Real+ - Single"
       }
     },
     {
@@ -115,7 +135,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       }
     },
     {
@@ -132,7 +156,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       }
     },
     {
@@ -149,7 +177,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "GD"
+        "initials": "GD",
+        "image": "./assets/covers/good-day.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/good-day/1440936514?uo=4",
+        "matchedName": "Good Day"
       }
     },
     {
@@ -166,7 +198,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "SO"
+        "initials": "SO",
+        "image": "./assets/covers/spring-of-a-twenty-year-old.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-spring-of-twenty-single/526669179?uo=4",
+        "matchedName": "The Spring of Twenty - Single"
       }
     },
     {
@@ -183,7 +219,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "Y&"
+        "initials": "Y&",
+        "image": "./assets/covers/you-i.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/you-i-single/559830026?uo=4",
+        "matchedName": "You & I - Single"
       }
     },
     {
@@ -200,7 +240,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       }
     },
     {
@@ -217,7 +261,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "MA"
+        "initials": "MA",
+        "image": "./assets/covers/monday-afternoon.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/monday-afternoon/1843554296?uo=4",
+        "matchedName": "Monday Afternoon"
       }
     },
     {
@@ -234,7 +282,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       }
     },
     {
@@ -251,7 +303,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       }
     },
     {
@@ -268,7 +324,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       }
     },
     {
@@ -285,7 +345,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       }
     },
     {
@@ -302,7 +366,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       }
     },
     {
@@ -319,7 +387,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       }
     },
     {
@@ -336,7 +408,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       }
     },
     {
@@ -353,7 +429,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       }
     },
     {
@@ -370,7 +450,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/pieces.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/pieces-ep/1602185213?uo=4",
+        "matchedName": "Pieces - EP"
       }
     },
     {
@@ -387,7 +471,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "TW"
+        "initials": "TW",
+        "image": "./assets/covers/the-winning.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-winning-ep/1731352613?uo=4",
+        "matchedName": "The Winning - EP"
       }
     },
     {
@@ -404,7 +492,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       }
     },
     {
@@ -421,7 +513,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "BS"
+        "initials": "BS",
+        "image": "./assets/covers/bye-summer.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/bye-summer-single/1838383717?uo=4",
+        "matchedName": "Bye, Summer - Single"
       }
     },
     {
@@ -438,7 +534,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "UP"
+        "initials": "UP",
+        "image": "./assets/covers/unknown-planet.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/unknown-planet/1687382478?uo=4",
+        "matchedName": "Unknown Planet"
       }
     }
   ],
@@ -466,7 +566,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Ugly%20Duckling%20(%EB%AF%B8%EC%9A%B4%20%EC%98%A4%EB%A6%AC%3B%20Miun%20ori)",
@@ -498,7 +602,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lost%20Child%20(%EB%AF%B8%EC%95%84%3B%20Mia)",
@@ -540,7 +648,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20You%20Know%20(%EC%9E%88%EC%9E%96%EC%95%84%3B%20Itjana%2C%20featuring%20Mario)",
@@ -582,7 +694,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Feel%20So%20Good",
@@ -614,7 +730,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Every%20Sweet%20Day",
@@ -646,7 +766,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "LA"
+        "initials": "LA",
+        "image": "./assets/covers/lost-and-found.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/lost-and-found/1471006903?uo=4",
+        "matchedName": "Lost and Found"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lost%20Child%20(Instrumental)",
@@ -688,7 +812,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Looking%20at%20You%20(%EB%B0%94%EB%9D%BC%EB%B3%B4%EA%B8%B0%3B%20Barabogi)",
@@ -720,7 +848,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Boo",
@@ -762,7 +894,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Pitiful%20(%EA%B0%80%EC%97%AC%EC%9B%8C%3B%20Gayeowo)",
@@ -794,7 +930,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20A%20Dreamer",
@@ -826,7 +966,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Every%20Sweet%20Day",
@@ -858,7 +1002,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lost%20Child%20(%EB%AF%B8%EC%95%84%3B%20Mia)",
@@ -900,7 +1048,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Four%20Without%20Me%20(%EB%82%98%20%EB%A7%90%EA%B3%A0%20%EB%84%B7%3B%20Na%20Malgo%20Net)",
@@ -932,7 +1084,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20You%20Know%20(featuring%20Mario)%20(%EC%9E%88%EC%9E%96%20%EC%95%84%3B%20Itjana)",
@@ -974,7 +1130,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Graduation%20Day%20(%EC%A1%B8%EC%97%85%ED%95%98%EB%8A%94%20%EB%82%A0%3B%20Joreophaneun%20Nal)",
@@ -1006,7 +1166,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Feel%20So%20Good",
@@ -1038,7 +1202,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Ugly%20Duckling%20(%EB%AF%B8%EC%9A%B4%20%EC%98%A4%EB%A6%AC%3B%20Miun%20Ori)",
@@ -1070,7 +1238,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Face%20to%20Face%20(After%20Looking%20at%20You)%20(%EB%A7%88%EC%A3%BC%EB%B3%B4%EA%B8%B0%20(%EB%B0%94%EB%9D%BC%EB%B3%B4%EA%B8%B0%20%EA%B7%B8%20%ED%9B%84)%3B%20Majubogi%20(Barabogi%20Geu%20Hu))",
@@ -1102,7 +1274,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lost%20Child%20(acoustic%20version)%20(%EB%AF%B8%EC%95%84%20Mia)",
@@ -1144,7 +1320,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20You%20Know%20(rock%20version)%20(%EC%9E%88%EC%9E%96%20%EC%95%84%20Itjana)",
@@ -1186,7 +1366,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Boo%20(instrumental)",
@@ -1228,7 +1412,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "GU"
+        "initials": "GU",
+        "image": "./assets/covers/growing-up.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/growing-up/343278916?uo=4",
+        "matchedName": "Growing up"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Pitiful%20(instrumental)%20(%EA%B0%80%EC%97%AC%EC%9B%8C%3B%20Gayeowo)",
@@ -1260,7 +1448,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20Attack",
@@ -1292,7 +1484,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Taking%20a%20Train%20(%EA%B8%B0%EC%B0%A8%EB%A5%BC%20%ED%83%80%EA%B3%A0%3B%20Gichareul%20Tago)",
@@ -1324,7 +1520,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Marshmallow%20(%EB%A7%88%EC%89%AC%EB%A9%9C%EB%A1%9C%EC%9A%B0%3B%20Mashimello)",
@@ -1366,7 +1566,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Morning%20Tears%20(%EC%95%84%EC%B9%A8%20%EB%88%88%EB%AC%BC%3B%20Achim%20Nunmul)",
@@ -1398,7 +1602,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Heartbeating%20Date%20(%EB%91%90%EA%B7%BC%EB%91%90%EA%B7%BC%20%EB%8D%B0%EC%9D%B4%ED%8A%B8%3B%20Dugeundugeun%20Deiteu)",
@@ -1430,7 +1638,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Taking%20a%20Train%20(Instrumental)",
@@ -1462,7 +1674,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/iuim.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-im/340375473?uo=4",
+        "matchedName": "IU...IM"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Morning%20Tears%20(Instrumental)",
@@ -1494,7 +1710,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Not%20Like%20This%20(%EC%9D%B4%EA%B2%8C%20%EC%95%84%EB%8B%8C%EB%8D%B0%3B%20Ige%20Aninde%2C%20lit.%20Not%20Like%20This)",
@@ -1526,7 +1746,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20What%20I'm%20Doing%20Slow%20(%EB%8A%90%EB%A6%AC%EA%B2%8C%20%ED%95%98%EB%8A%94%20%EC%9D%BC%3B%20Neurige%20Haneun%20Il%2C%20lit.%20What%20I'm%20Doing%20Slow)",
@@ -1558,7 +1782,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Good%20Day%20(%EC%A2%8B%EC%9D%80%20%EB%82%A0%3B%20Joeun%20Nal)",
@@ -1609,7 +1837,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Night%20of%20the%20First%20Breakup%20(%EC%B2%AB%20%EC%9D%B4%EB%B3%84%20%EA%B7%B8%EB%82%A0%20%EB%B0%A4%3B%20Cheot%20Ibyeol%20Geunal%20Bam)",
@@ -1641,7 +1873,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20In%20a%20Room%20Alone%20(%ED%98%BC%EC%9E%90%20%EC%9E%88%EB%8A%94%20%EB%B0%A9%3B%20Honja%20Itneun%20Bang%2C%20lit.%20Lonely%20Room)",
@@ -1673,7 +1909,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Merry%20Christmas%20Ahead%20(%EB%AF%B8%EB%A6%AC%20%EB%A9%94%EB%A6%AC%20%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4%3B%20Miri%20Meri%20Keuriseumaseu%2C%20featuring%20Thunder)",
@@ -1705,7 +1945,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real/409076726?uo=4",
+        "matchedName": "Real"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Good%20Day%20(Instrumental)",
@@ -1756,7 +2000,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real-single/421111521?uo=4",
+        "matchedName": "Real+ - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Only%20I%20Didn't%20Know%20(%EB%82%98%EB%A7%8C%20%EB%AA%B0%EB%9E%90%EB%8D%98%20%EC%9D%B4%EC%95%BC%EA%B8%B0%3B%20Naman%20Mollatdeon%20Iyagi)",
@@ -1807,7 +2055,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real-single/421111521?uo=4",
+        "matchedName": "Real+ - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Cruel%20Fairytale%20(%EC%9E%94%ED%98%B9%EB%8F%99%ED%99%94%3B%20Janhokdonghwa)",
@@ -1839,7 +2091,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "R"
+        "initials": "R",
+        "image": "./assets/covers/real.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/real-single/421111521?uo=4",
+        "matchedName": "Real+ - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Only%20I%20Didn't%20Know%20(with%20Kim%20Kwang-min)",
@@ -1890,7 +2146,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Secret%20(%EB%B9%84%EB%B0%80%3B%20Bimil)",
@@ -1922,7 +2182,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Sleeping%20Prince%20(%EC%9E%A0%EC%9E%90%EB%8A%94%20%EC%88%B2%20%EC%86%8D%EC%9D%98%20%EC%99%95%EC%9E%90%3B%20Jamjaneun%20Sup%20Sogui%20Wangja%2C%20featuring%20Yoon%20Sang)",
@@ -1954,7 +2218,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Holding%20a%20Star%20in%20My%20Heart%20(%EB%B3%84%EC%9D%84%20%EC%B0%BE%EB%8A%94%20%EC%95%84%EC%9D%B4%3B%20Byeoreul%20Chatneun%20Ai%2C%20featuring%20Kim%20Kwang-jin)",
@@ -1986,7 +2254,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20You%20%26%20I%20(%EB%84%88%EB%9E%91%20%EB%82%98%3B%20Neorang%20Na)",
@@ -2018,7 +2290,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Wallpaper%20Pattern%20(%EB%B2%BD%EC%A7%80%EB%AC%B4%EB%8A%AC%3B%20Byeokjimunui)",
@@ -2050,7 +2326,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Uncle%20(%EC%82%BC%EC%B4%8C%3B%20Samchon%2C%20featuring%20Lee%20Juck)",
@@ -2082,7 +2362,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Wisdom%20Tooth%20(%EC%82%AC%EB%9E%91%EB%8B%88%3B%20Sarangni)",
@@ -2114,7 +2398,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Everything's%20Alright%20(featuring%20Kim%20Hyeon-cheol)",
@@ -2146,7 +2434,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Last%20Fantasy",
@@ -2188,7 +2480,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Teacher%20(featuring%20Ra.D)",
@@ -2220,7 +2516,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Abandoned%20(%EA%B8%B8%20%EC%9E%83%EC%9D%80%20%EA%B0%95%EC%95%84%EC%A7%80%3B%20Gil%20Ireun%20Gang-aji)",
@@ -2252,7 +2552,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%204AM",
@@ -2284,7 +2588,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "LF"
+        "initials": "LF",
+        "image": "./assets/covers/last-fantasy.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/last-fantasy/484346200?uo=4",
+        "matchedName": "Last Fantasy"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20L'Amant%20(%EB%9D%BC%EB%A7%9D%3B%20Ramang)",
@@ -2316,7 +2624,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Good%20Day",
@@ -2367,7 +2679,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Nagging%20(with%20Seulong%2C%20%E3%82%B3%E3%83%BB%E3%82%B4%E3%83%BB%E3%83%88%20Ko%E3%83%BBGo%E3%83%BBTo)",
@@ -2409,7 +2725,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Rain%20Drop",
@@ -2441,7 +2761,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lost%20Child",
@@ -2483,7 +2807,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Only%20I%20Didn't%20Know%20(%E7%A7%81%E3%81%A0%E3%81%91%E7%9F%A5%E3%82%89%E3%81%AA%E3%81%84%3B%20Watashi%20Dake%20Shiranai)",
@@ -2534,7 +2862,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "I"
+        "initials": "I",
+        "image": "./assets/covers/i-u.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/60c1bac3-9390-4e7e-904f-67c7305b0f22",
+        "matchedName": "I□U"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Last%20Fantasy%20(Bonus%20track)",
@@ -2576,7 +2908,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "SO"
+        "initials": "SO",
+        "image": "./assets/covers/spring-of-a-twenty-year-old.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-spring-of-twenty-single/526669179?uo=4",
+        "matchedName": "The Spring of Twenty - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Peach%20(%EB%B3%B5%EC%88%AD%EC%95%84%3B%20Boksunga)",
@@ -2608,7 +2944,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "SO"
+        "initials": "SO",
+        "image": "./assets/covers/spring-of-a-twenty-year-old.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-spring-of-twenty-single/526669179?uo=4",
+        "matchedName": "The Spring of Twenty - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Every%20End%20of%20the%20Day%20(%ED%95%98%EB%A3%A8%20%EB%81%9D%3B%20Haru%20kkeut)",
@@ -2650,7 +2990,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "SO"
+        "initials": "SO",
+        "image": "./assets/covers/spring-of-a-twenty-year-old.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-spring-of-twenty-single/526669179?uo=4",
+        "matchedName": "The Spring of Twenty - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20I%20Really%20Don't%20Like%20Her%20(%EA%B7%B8%20%EC%95%A0%20%EC%B0%B8%20%EC%8B%AB%EB%8B%A4%3B%20Geu%20ae%20cham%20silta)",
@@ -2682,7 +3026,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Beautiful%20Dancer",
@@ -2724,7 +3072,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Truth",
@@ -2756,7 +3108,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Fairytale",
@@ -2788,7 +3144,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Voice-mail",
@@ -2820,7 +3180,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20New%20World",
@@ -2852,7 +3216,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "CY"
+        "initials": "CY",
+        "image": "./assets/covers/can-you-hear-me.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/can-you-hear-me/923575107?uo=4",
+        "matchedName": "Can You Hear Me"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Age%20of%20the%20Cathedrals",
@@ -2884,7 +3252,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20of%20B%20(%EC%9D%84%EC%9D%98%20%EC%97%B0%EC%95%A0%3B%20Eurui%20Yeonae%2C%20with%20Park%20Ju-won)",
@@ -2916,7 +3288,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Everybody%20Has%20Secrets%20(%EB%88%84%EA%B5%AC%EB%82%98%20%EB%B9%84%EB%B0%80%EC%9D%80%20%EC%9E%88%EB%8B%A4%3B%20Nuguna%20Bimireun%20Itda%2C%20featuring%20Gain%20of%20Brown%20Eyed%20Girls)",
@@ -2948,7 +3324,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Between%20the%20Lips%20(50cm)%20(%EC%9E%85%EC%88%A0%20%EC%82%AC%EC%9D%B4%3B%20Ipsul%20Sai)",
@@ -2980,7 +3360,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Red%20Shoes%20(%EB%B6%84%ED%99%8D%EC%8B%A0%3B%20Bunhongsin)",
@@ -3031,7 +3415,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Modern%20Times",
@@ -3063,7 +3451,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Bad%20Day%20(%EC%8B%AB%EC%9D%80%20%EB%82%A0%3B%20Sireun%20Nal)",
@@ -3095,7 +3487,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Obliviate",
@@ -3127,7 +3523,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Walk%20with%20Me%2C%20Girl%20(%EC%95%84%EC%9D%B4%EC%95%BC%2C%20%EB%82%98%EB%9E%91%20%EA%B1%B7%EC%9E%90%3B%20Aiya%2C%20Narang%20Geotja%2C%20featuring%20Choi%20Baek-ho)",
@@ -3159,7 +3559,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Havana",
@@ -3191,7 +3595,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20A%20Gloomy%20Clock%20(%EC%9A%B0%EC%9A%B8%EC%8B%9C%EA%B3%84%3B%20Uulsigye%2C%20featuring%20Jonghyun%20of%20Shinee)",
@@ -3223,7 +3631,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Daydream%20(%ED%95%9C%EB%82%AE%EC%9D%98%20%EA%BF%88%3B%20Hannajui%20Kkum%2C%20featuring%20Yang%20Hee-eun)",
@@ -3255,7 +3667,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Wait%20(%EA%B8%B0%EB%8B%A4%EB%A0%A4%3B%20Gidaryeo)",
@@ -3287,7 +3703,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times/721958263?uo=4",
+        "matchedName": "Modern Times"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Voice%20Mail%20(Korean%20version)%20(Bonus%20track)",
@@ -3319,7 +3739,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Friday%20(%EA%B8%88%EC%9A%94%EC%9D%BC%EC%97%90%20%EB%A7%8C%EB%82%98%EC%9A%94%3B%20Geumyoil-e%20Mannayo%2C%20featuring%20Jang%20Yi-jeong%20of%20History)",
@@ -3361,7 +3785,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Pastel%20Crayon%20(%ED%81%AC%EB%A0%88%ED%8C%8C%EC%8A%A4%3B%20Keurepaseu%2C%20from%20Bel%20Ami)",
@@ -3393,7 +3821,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20of%20B%20(%EC%9D%84%EC%9D%98%20%EC%97%B0%EC%95%A0%3B%20Eurui%20Yeonae%2C%20with%20Park%20Ju-won)",
@@ -3425,7 +3857,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Everybody%20Has%20Secrets%20(%EB%88%84%EA%B5%AC%EB%82%98%20%EB%B9%84%EB%B0%80%EC%9D%80%20%EC%9E%88%EB%8B%A4%3B%20Nuguna%20Bimireun%20Itda%2C%20featuring%20Gain%20of%20Brown%20Eyed%20Girls)",
@@ -3457,7 +3893,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Between%20the%20Lips%20(50cm)%20(%EC%9E%85%EC%88%A0%20%EC%82%AC%EC%9D%B4%3B%20Ipsul%20Sai)",
@@ -3489,7 +3929,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Red%20Shoes%20(%EB%B6%84%ED%99%8D%EC%8B%A0%3B%20Bunhongsin)",
@@ -3540,7 +3984,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Modern%20Times",
@@ -3572,7 +4020,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Bad%20Day%20(%EC%8B%AB%EC%9D%80%20%EB%82%A0%3B%20Sireun%20Nal)",
@@ -3604,7 +4056,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Obliviate",
@@ -3636,7 +4092,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Walk%20with%20Me%2C%20Girl%20(%EC%95%84%EC%9D%B4%EC%95%BC%2C%20%EB%82%98%EB%9E%91%20%EA%B1%B7%EC%9E%90%3B%20Aiya%2C%20Narang%20Geotja%2C%20featuring%20Choi%20Baek-ho)",
@@ -3668,7 +4128,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Havana",
@@ -3700,7 +4164,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20A%20Gloomy%20Clock%20(%EC%9A%B0%EC%9A%B8%EC%8B%9C%EA%B3%84%3B%20Uulsigye%2C%20featuring%20Jonghyun%20of%20Shinee)",
@@ -3732,7 +4200,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Daydream%20(%ED%95%9C%EB%82%AE%EC%9D%98%20%EA%BF%88%3B%20Hannajui%20Kkum%2C%20featuring%20Yang%20Hee-eun)",
@@ -3764,7 +4236,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Wait%20(%EA%B8%B0%EB%8B%A4%EB%A0%A4%3B%20Gidaryeo)",
@@ -3796,7 +4272,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "MT"
+        "initials": "MT",
+        "image": "./assets/covers/modern-times-epilogue.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/modern-times-epilogue/786862990?uo=4",
+        "matchedName": "Modern Times – Epilogue"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Voice%20Mail%20(Korean%20version)%20(Bonus%20track)",
@@ -3828,7 +4308,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20My%20Old%20Story%20(%EB%82%98%EC%9D%98%20%EC%98%9B%EB%82%A0%20%EC%9D%B4%EC%95%BC%EA%B8%B0%3B%20Naui%20Yetnal%20Iyagi)",
@@ -3870,7 +4354,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Flower%20(%EA%BD%83%3B%20Kkot)",
@@ -3902,7 +4390,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Pierrot%20Smiles%20at%20Us%20(%EC%82%90%EC%97%90%EB%A1%9C%EB%8A%94%20%EC%9A%B0%EB%A6%B4%20%EB%B3%B4%EA%B3%A0%20%EC%9B%83%EC%A7%80%3B%20Ppieroneun%20Uril%20Bogo%20Utji)",
@@ -3934,7 +4426,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20When%20Love%20Passes%20By%20(%EC%82%AC%EB%9E%91%EC%9D%B4%20%EC%A7%80%EB%82%98%EA%B0%80%EB%A9%B4%3B%20Sarang-i%20Jinagamyeon)",
@@ -3966,7 +4462,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Meaning%20of%20You%20(%EB%84%88%EC%9D%98%20%EC%9D%98%EB%AF%B8%3B%20Neoui%20Euimi%2C%20featuring%20Kim%20Chang-wan)",
@@ -4008,7 +4508,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Dreams%20in%20Summer%20Night%20(%EC%97%AC%EB%A6%84%EB%B0%A4%EC%9D%98%20%EA%BF%88%3B%20Yeoreumbamui%20Kkum)",
@@ -4040,7 +4544,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Boom%20Ladi%20Dadi%20(%EA%BF%8D%EB%94%B0%EB%A6%AC%20%EC%83%A4%EB%B0%94%EB%9D%BC%3B%20Kkungddari%20Shabara%2C%20featuring%20Clon)",
@@ -4072,7 +4580,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Shoes%20(%EC%83%88%20%EC%8B%A0%EB%B0%9C%3B%20Sae%20Sinbal)",
@@ -4104,7 +4616,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Zez%C3%A9",
@@ -4146,7 +4662,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Twenty-Three%20(%EC%8A%A4%EB%AC%BC%EC%85%8B%3B%20Seumulset)",
@@ -4188,7 +4708,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Shower%20(%ED%91%B8%EB%A5%B4%EB%8D%98%3B%20Pureudeon)",
@@ -4230,7 +4754,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Red%20Queen%20(featuring%20Zion.T)",
@@ -4262,7 +4790,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Knees%20(%EB%AC%B4%EB%A6%8E%3B%20Mureup)",
@@ -4304,7 +4836,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Glasses%20(%EC%95%88%EA%B2%BD%3B%20An-gyeong)",
@@ -4336,7 +4872,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Heart%20(%EB%A7%88%EC%9D%8C%3B%20Maeum%2C%20from%20The%20Producers)",
@@ -4368,7 +4908,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "C"
+        "initials": "C",
+        "image": "./assets/covers/chat-shire.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/chat-shire/1051977837?uo=4",
+        "matchedName": "CHAT-SHIRE"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Twenty%20Three%20(from%20The%20Producers)",
@@ -4410,7 +4954,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Dlwlrma%20(%EC%9D%B4%20%EC%A7%80%EA%B8%88%3B%20I%20jigeum)",
@@ -4442,7 +4990,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Palette%20(%ED%8C%94%EB%A0%88%ED%8A%B8%3B%20Palleteu%3B%20featuring%20G-Dragon)",
@@ -4484,7 +5036,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Ending%20Scene%20(%EC%9D%B4%EB%9F%B0%20%EC%97%94%EB%94%A9%3B%20Ireon%20ending)",
@@ -4526,7 +5082,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Can't%20Love%20You%20Anymore%20(%EC%82%AC%EB%9E%91%EC%9D%B4%20%EC%9E%98%3B%20Sarangi%20jal%3B%20with%20Oh%20Hyuk)",
@@ -4558,7 +5118,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Jam%20Jam%20(%EC%9E%BC%EC%9E%BC%3B%20Jaemjaem)",
@@ -4590,7 +5154,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Black%20Out",
@@ -4622,7 +5190,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Full%20Stop%20(%EB%A7%88%EC%B9%A8%ED%91%9C%3B%20Machimpyo)",
@@ -4654,7 +5226,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Through%20the%20Night%20(%EB%B0%A4%ED%8E%B8%EC%A7%80%3B%20Bampyeonji)",
@@ -4696,7 +5272,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20Alone%20(%EA%B7%B8%EB%A0%87%EA%B2%8C%20%EC%82%AC%EB%9E%91%EC%9D%80%3B%20Geureoke%20sarangeun)",
@@ -4728,7 +5308,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/palette.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/palette/1229073300?uo=4",
+        "matchedName": "Palette"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Dear%20Name%20(%EC%9D%B4%EB%A6%84%EC%97%90%EA%B2%8C%3B%20Ireumege)",
@@ -4770,7 +5354,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Autumn%20Morning%20(%EA%B0%80%EC%9D%84%20%EC%95%84%EC%B9%A8%3B%20Ga-eul%20achim)",
@@ -4802,7 +5390,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Secret%20Garden%20(%EB%B9%84%EB%B0%80%EC%9D%98%20%ED%99%94%EC%9B%90%3B%20Bimirui%20hwawon)",
@@ -4834,7 +5426,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Sleepless%20Rainy%20Night%20(%EC%9E%A0%20%EB%AA%BB%20%EB%93%9C%EB%8A%94%20%EB%B0%A4%20%EB%B9%84%EB%8A%94%20%EB%82%B4%EB%A6%AC%EA%B3%A0%3B%20Jam%20mot%20deuneun%20bam%20bineun%20naerigo)",
@@ -4876,7 +5472,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Last%20Night%20Story%20(%EC%96%B4%EC%A0%AF%EB%B0%A4%20%EC%9D%B4%EC%95%BC%EA%B8%B0%3B%20Eojetbam%20iyagi)",
@@ -4918,7 +5518,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20By%20the%20Stream%20(%EA%B0%9C%EC%97%AC%EC%9A%B8%3B%20Gaeyeo-ul)",
@@ -4950,7 +5554,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-2.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/588b1f21-5e99-4137-9e34-6584caaa6c35",
+        "matchedName": "A Flower Bookmark 2"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Everyday%20with%20You%20(%EB%A7%A4%EC%9D%BC%20%EA%B7%B8%EB%8C%80%EC%99%80%3B%20Mae-il%20geudaewa)",
@@ -4982,7 +5590,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Unlucky",
@@ -5014,7 +5626,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20The%20Visitor%20(%EA%B7%B8%20%EC%82%AC%EB%9E%8C%3B%20Geu%20saram%3B%20lit.%20That%20Person)",
@@ -5046,7 +5662,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Blueming",
@@ -5097,7 +5717,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Above%20the%20Time%20(%EC%8B%9C%EA%B0%84%EC%9D%98%20%EB%B0%94%EA%B9%A5%3B%20Sigan-ui%20bakkat%3B%20lit.%20Outside%20of%20Time)",
@@ -5148,7 +5772,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lullaby%20(%EC%9E%90%EC%9E%A5%EA%B0%80%3B%20Jajang-ga)",
@@ -5180,7 +5808,11 @@ window.IU_CATALOG = {
           "#2ec4b6",
           "#f6f7eb"
         ],
-        "initials": "LP"
+        "initials": "LP",
+        "image": "./assets/covers/love-poem.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/love-poem-ep/1488300927?uo=4",
+        "matchedName": "Love Poem - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20Poem",
@@ -5222,7 +5854,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Lilac%20(%EB%9D%BC%EC%9D%BC%EB%9D%BD)",
@@ -5264,7 +5900,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Flu",
@@ -5296,7 +5936,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Coin",
@@ -5347,7 +5991,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Hi%20Spring%20Bye%20(%EB%B4%84%20%EC%95%88%EB%85%95%20%EB%B4%84%3B%20Bom%20annyeong%20bom%3B%20lit.%20Spring%20Hello%20Spring)",
@@ -5379,7 +6027,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Celebrity",
@@ -5430,7 +6082,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Troll%20(%EB%8F%8C%EB%A6%BC%EB%85%B8%EB%9E%98%3B%20Dollimnorae%3B%20lit.%20Revolving%20Song%3B%20featuring%20Dean%3B%20writers%3A%20IU%2C%20Dean)",
@@ -5462,7 +6118,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Empty%20Cup%20(%EB%B9%88%20%EC%BB%B5%3B%20Bin%20keop)",
@@ -5494,7 +6154,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20My%20Sea%20(%EC%95%84%EC%9D%B4%EC%99%80%20%EB%82%98%EC%9D%98%20%EB%B0%94%EB%8B%A4%3B%20Aiwa%20naui%20bada%3B%20lit.%20The%20Sea%20of%20a%20Kid%20%26%20I)",
@@ -5526,7 +6190,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Ah%20Puh%20(%EC%96%B4%ED%91%B8%3B%20Eopu%3B%20writers%3A%20IU%2C%20Lee%20Chan-hyuk)",
@@ -5558,7 +6226,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "L"
+        "initials": "L",
+        "image": "./assets/covers/lilac.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/iu-5th-album-lilac/1560113132?uo=4",
+        "matchedName": "IU 5th Album 'LILAC'"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Epilogue%20(%EC%97%90%ED%95%84%EB%A1%9C%EA%B7%B8)",
@@ -5590,7 +6262,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/pieces.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/pieces-ep/1602185213?uo=4",
+        "matchedName": "Pieces - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Drama%20(%EB%93%9C%EB%9D%BC%EB%A7%88)",
@@ -5622,7 +6298,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/pieces.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/pieces-ep/1602185213?uo=4",
+        "matchedName": "Pieces - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Next%20Stop%20(%EC%A0%95%EA%B1%B0%EC%9E%A5%3B%20Jeonggeojang)",
@@ -5664,7 +6344,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/pieces.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/pieces-ep/1602185213?uo=4",
+        "matchedName": "Pieces - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Winter%20Sleep%20(%EA%B2%A8%EC%9A%B8%EC%9E%A0%3B%20Gyeouljam)",
@@ -5706,7 +6390,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/pieces.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/pieces-ep/1602185213?uo=4",
+        "matchedName": "Pieces - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20You%20(%EB%84%88%3B%20Neo)",
@@ -5738,7 +6426,11 @@ window.IU_CATALOG = {
           "#e9c46a",
           "#fff8dc"
         ],
-        "initials": "P"
+        "initials": "P",
+        "image": "./assets/covers/pieces.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/pieces-ep/1602185213?uo=4",
+        "matchedName": "Pieces - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20Letter%20(%EB%9F%AC%EB%B8%8C%EB%A0%88%ED%84%B0)",
@@ -5770,7 +6462,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "TW"
+        "initials": "TW",
+        "image": "./assets/covers/the-winning.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-winning-ep/1731352613?uo=4",
+        "matchedName": "The Winning - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Shopper",
@@ -5812,7 +6508,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "TW"
+        "initials": "TW",
+        "image": "./assets/covers/the-winning.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-winning-ep/1731352613?uo=4",
+        "matchedName": "The Winning - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Holssi%20(%ED%99%80%EC%94%A8)",
@@ -5854,7 +6554,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "TW"
+        "initials": "TW",
+        "image": "./assets/covers/the-winning.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-winning-ep/1731352613?uo=4",
+        "matchedName": "The Winning - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Shh..%20(featuring%20Hyein%20and%20Wonsun%20Joe%3B%20narration%20by%20Patti%20Kim)",
@@ -5896,7 +6600,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "TW"
+        "initials": "TW",
+        "image": "./assets/covers/the-winning.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-winning-ep/1731352613?uo=4",
+        "matchedName": "The Winning - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Love%20Wins%20All",
@@ -5938,7 +6646,11 @@ window.IU_CATALOG = {
           "#9d4edd",
           "#f4edff"
         ],
-        "initials": "TW"
+        "initials": "TW",
+        "image": "./assets/covers/the-winning.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/the-winning-ep/1731352613?uo=4",
+        "matchedName": "The Winning - EP"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20I%20Stan%20U%20(%EA%B4%80%EA%B0%9D%EC%9D%B4%20%EB%90%A0%EA%B2%8C)",
@@ -5970,7 +6682,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Red%20Sneakers%20(%EB%B9%A8%EA%B0%84%20%EC%9A%B4%EB%8F%99%ED%99%94%3B%20Ppalgan%20undonghwa)",
@@ -6002,7 +6718,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Never%20Ending%20Story",
@@ -6044,7 +6764,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20October%204th%20(10%EC%9B%94%204%EC%9D%BC%3B%20Si-wol%20sa-il)",
@@ -6076,7 +6800,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Last%20Scene%20(featuring%20Wonstein)",
@@ -6108,7 +6836,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20A%20Beautiful%20Person%20(%EB%AF%B8%EC%9D%B8%3B%20Miin%3B%20featuring%20Balming%20Tiger)",
@@ -6150,7 +6882,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark-3.jpg",
+        "provider": "Cover Art Archive / MusicBrainz",
+        "providerUrl": "https://musicbrainz.org/release/b4ed8958-5849-4ec4-8d3a-c64833430cd7",
+        "matchedName": "A Flower Bookmark 3"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Square's%20Dream%20(%EB%84%A4%EB%AA%A8%EC%9D%98%20%EA%BF%88%3B%20Nemoui%20kkum)",
@@ -6182,7 +6918,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "GD"
+        "initials": "GD",
+        "image": "./assets/covers/good-day.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/good-day/1440936514?uo=4",
+        "matchedName": "Good Day"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Good%20Day%20(Japanese%20version)",
@@ -6233,7 +6973,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "GD"
+        "initials": "GD",
+        "image": "./assets/covers/good-day.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/good-day/1440936514?uo=4",
+        "matchedName": "Good Day"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Rain%20Drop",
@@ -6265,7 +7009,11 @@ window.IU_CATALOG = {
           "#fca311",
           "#fff7df"
         ],
-        "initials": "Y&"
+        "initials": "Y&",
+        "image": "./assets/covers/you-i.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/you-i-single/559830026?uo=4",
+        "matchedName": "You & I - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20You%20%26%20I%20(Japanese%20version)",
@@ -6297,7 +7045,11 @@ window.IU_CATALOG = {
           "#d72670",
           "#fff1f3"
         ],
-        "initials": "MA"
+        "initials": "MA",
+        "image": "./assets/covers/monday-afternoon.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/monday-afternoon/1843554296?uo=4",
+        "matchedName": "Monday Afternoon"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Monday%20Afternoon",
@@ -6339,7 +7091,11 @@ window.IU_CATALOG = {
           "#fee715",
           "#fffde7"
         ],
-        "initials": "BS"
+        "initials": "BS",
+        "image": "./assets/covers/bye-summer.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/bye-summer-single/1838383717?uo=4",
+        "matchedName": "Bye, Summer - Single"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Bye%2C%20Summer",
@@ -6371,7 +7127,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "UP"
+        "initials": "UP",
+        "image": "./assets/covers/unknown-planet.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/unknown-planet/1687382478?uo=4",
+        "matchedName": "Unknown Planet"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Unknown%20Planet",
@@ -6403,7 +7163,11 @@ window.IU_CATALOG = {
           "#d6414f",
           "#f7ead2"
         ],
-        "initials": "UP"
+        "initials": "UP",
+        "image": "./assets/covers/unknown-planet.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/unknown-planet/1687382478?uo=4",
+        "matchedName": "Unknown Planet"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Dear%20My%20Crazy%20Soulmate",
@@ -6435,7 +7199,11 @@ window.IU_CATALOG = {
           "#c8553d",
           "#fff0dc"
         ],
-        "initials": "AF"
+        "initials": "AF",
+        "image": "./assets/covers/a-flower-bookmark.jpg",
+        "provider": "Apple Music / iTunes",
+        "providerUrl": "https://music.apple.com/us/album/a-flower-bookmark/879281073?uo=4",
+        "matchedName": "A Flower Bookmark"
       },
       "audioLinks": {
         "spotify": "https://open.spotify.com/search/IU%20Uhuya%20Doongi%20Doongi%20(LP%20only)%20(%EC%96%B4%ED%97%88%EC%95%BC%20%EB%91%A5%EA%B8%B0%EB%91%A5%EA%B8%B0)",

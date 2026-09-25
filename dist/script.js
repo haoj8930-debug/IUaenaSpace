@@ -224,6 +224,9 @@ function renderRecords() {
 
 function coverStyle(cover) {
   const colors = cover?.colors || ["#0d1324", "#d6414f", "#f7ead2"];
+  if (cover?.image) {
+    return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); background-image: url('${cover.image}'); background-size: cover; background-position: center; color: ${colors[2]};`;
+  }
   return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); color: ${colors[2]};`;
 }
 
@@ -231,9 +234,9 @@ function renderReleaseShelf() {
   releaseShelf.innerHTML = catalog.releases
     .map(
       (release) => `
-      <button class="releaseCard" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}">
+      <button class="releaseCard ${release.cover?.image ? "hasImage" : ""}" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}">
         <strong>${escapeHtml(release.title)}</strong>
-        <span>${release.year} · ${escapeHtml(release.type)} · ${release.track_count} 首</span>
+        <span>${release.year} · ${escapeHtml(release.type)} · ${release.track_count} 首${release.cover?.provider ? ` · ${escapeHtml(release.cover.provider)}` : ""}</span>
       </button>
     `,
     )
@@ -284,7 +287,7 @@ function renderCatalog() {
         const mv = track.mv[0];
         return `
         <article class="trackCard">
-          <div class="miniCover" style="${coverStyle(track.cover)}">
+          <div class="miniCover ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}">
             <span>${escapeHtml(track.cover?.initials || "IU")}</span>
             <small>${escapeHtml(track.release)}</small>
           </div>
