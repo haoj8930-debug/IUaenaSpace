@@ -216,6 +216,200 @@ h3 {
   align-items: start;
 }
 
+.catalog {
+  margin-bottom: 78px;
+}
+
+.catalog__head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.catalog__head p:not(.eyebrow) {
+  max-width: 48rem;
+  color: rgba(247, 234, 210, 0.7);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.catalog__head strong {
+  color: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+
+.releaseShelf {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(150px, 1fr);
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 0 18px;
+  margin-bottom: 16px;
+}
+
+.releaseCard {
+  min-height: 180px;
+  border: 1px solid rgba(247, 234, 210, 0.18);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  align-content: space-between;
+  color: var(--paper);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.releaseCard::after {
+  content: "";
+  position: absolute;
+  width: 86px;
+  height: 86px;
+  right: -18px;
+  bottom: -18px;
+  border-radius: 50%;
+  border: 14px solid rgba(255, 255, 255, 0.18);
+}
+
+.releaseCard strong {
+  font-size: 1.02rem;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.releaseCard span {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.86rem;
+  position: relative;
+  z-index: 1;
+}
+
+.catalogTools {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, minmax(140px, 0.7fr));
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(247, 234, 210, 0.07);
+  margin-bottom: 16px;
+}
+
+.catalogTools label {
+  display: grid;
+  gap: 7px;
+  color: rgba(247, 234, 210, 0.68);
+  font-size: 0.9rem;
+}
+
+.catalogTools input,
+.catalogTools select {
+  min-height: 44px;
+  border: 1px solid rgba(247, 234, 210, 0.2);
+  border-radius: 8px;
+  background: rgba(8, 12, 22, 0.45);
+  color: var(--paper);
+  padding: 0 12px;
+  outline: none;
+}
+
+.trackGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.trackCard {
+  border: 1px solid rgba(247, 234, 210, 0.14);
+  border-radius: 8px;
+  background: rgba(13, 19, 36, 0.76);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  min-height: 160px;
+}
+
+.miniCover {
+  min-height: 100%;
+  padding: 10px;
+  display: grid;
+  align-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.miniCover::after {
+  content: "";
+  width: 54px;
+  height: 54px;
+  border: 10px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  position: absolute;
+  right: -16px;
+  bottom: -14px;
+}
+
+.miniCover span {
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1;
+  z-index: 1;
+}
+
+.miniCover small {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.72);
+  z-index: 1;
+}
+
+.trackBody {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.trackBody h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.trackBody p {
+  margin: 0;
+  color: rgba(247, 234, 210, 0.68);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.trackLinks,
+.trackBadges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.trackLinks a,
+.trackBadges span {
+  border: 1px solid rgba(247, 234, 210, 0.15);
+  color: rgba(247, 234, 210, 0.8);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 4px 7px;
+  font-size: 0.75rem;
+}
+
+.trackLinks a:hover {
+  border-color: var(--gold);
+  color: var(--paper);
+}
+
 .notebook {
   margin: 0 0 78px;
 }
@@ -589,8 +783,13 @@ h3 {
   }
 
   .stats,
-  .timeline__rail {
+  .timeline__rail,
+  .catalogTools {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trackGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .panel {
@@ -614,8 +813,19 @@ h3 {
 
   .stats,
   .grid,
-  .timeline__rail {
+  .timeline__rail,
+  .catalogTools,
+  .trackGrid {
     grid-template-columns: 1fr;
+  }
+
+  .catalog__head {
+    align-items: start;
+    display: grid;
+  }
+
+  .trackCard {
+    grid-template-columns: 76px minmax(0, 1fr);
   }
 
   .archive {

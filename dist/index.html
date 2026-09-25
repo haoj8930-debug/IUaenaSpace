@@ -58,6 +58,44 @@
         </article>
       </section>
 
+      <section class="catalog" id="catalog" aria-labelledby="catalog-title">
+        <div class="sectionHead catalog__head">
+          <div>
+            <p class="eyebrow">Full catalog</p>
+            <h2 id="catalog-title">完整歌库、音源与 MV</h2>
+            <p>
+              收录本机档案中的全部 167 条歌曲/版本记录。封面为发行卡片；音源入口跳转到平台搜索，MV 优先匹配档案中的影像记录。
+            </p>
+          </div>
+          <strong id="catalogCount">167 tracks</strong>
+        </div>
+        <div class="releaseShelf" id="releaseShelf" aria-label="发行封面"></div>
+        <div class="catalogTools" aria-label="歌库筛选">
+          <label>
+            <span>搜索</span>
+            <input id="catalogSearch" type="search" placeholder="歌名 / 专辑 / 作词作曲 / 年份" />
+          </label>
+          <label>
+            <span>发行</span>
+            <select id="releaseFilter"></select>
+          </label>
+          <label>
+            <span>年份</span>
+            <select id="yearFilter"></select>
+          </label>
+          <label>
+            <span>类型</span>
+            <select id="mediaFilter">
+              <option value="all">全部</option>
+              <option value="mv">有 MV / 影像</option>
+              <option value="creator">IU 参与创作</option>
+              <option value="version">版本 / 伴奏</option>
+            </select>
+          </label>
+        </div>
+        <div class="trackGrid" id="trackGrid"></div>
+      </section>
+
       <section class="notebook" aria-labelledby="notebook-title">
         <div class="sectionHead">
           <p class="eyebrow">Personal notebook</p>
@@ -210,6 +248,7 @@
         </div>
       </section>
     </main>
+    <script src="./data/catalog.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

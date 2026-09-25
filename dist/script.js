@@ -140,6 +140,14 @@ const spotlight = document.querySelector("#spotlight");
 const entryForm = document.querySelector("#entryForm");
 const libraryCards = document.querySelector("#libraryCards");
 const importFile = document.querySelector("#importFile");
+const catalog = window.IU_CATALOG;
+const releaseShelf = document.querySelector("#releaseShelf");
+const trackGrid = document.querySelector("#trackGrid");
+const catalogSearch = document.querySelector("#catalogSearch");
+const releaseFilter = document.querySelector("#releaseFilter");
+const yearFilter = document.querySelector("#yearFilter");
+const mediaFilter = document.querySelector("#mediaFilter");
+const catalogCount = document.querySelector("#catalogCount");
 
 let activeFilter = "all";
 let entries = loadEntries();
@@ -214,6 +222,94 @@ function renderRecords() {
     .join("");
 }
 
+function coverStyle(cover) {
+  const colors = cover?.colors || ["#0d1324", "#d6414f", "#f7ead2"];
+  return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); color: ${colors[2]};`;
+}
+
+function renderReleaseShelf() {
+  releaseShelf.innerHTML = catalog.releases
+    .map(
+      (release) => `
+      <button class="releaseCard" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}">
+        <strong>${escapeHtml(release.title)}</strong>
+        <span>${release.year} · ${escapeHtml(release.type)} · ${release.track_count} 首</span>
+      </button>
+    `,
+    )
+    .join("");
+}
+
+function fillCatalogFilters() {
+  releaseFilter.innerHTML = `<option value="all">全部发行</option>${catalog.releases
+    .map((release) => `<option value="${escapeHtml(release.title)}">${escapeHtml(release.title)}</option>`)
+    .join("")}`;
+  const years = [...new Set(catalog.tracks.map((track) => track.year))].sort((a, b) => b - a);
+  yearFilter.innerHTML = `<option value="all">全部年份</option>${years
+    .map((year) => `<option value="${year}">${year}</option>`)
+    .join("")}`;
+}
+
+function renderCatalog() {
+  const query = catalogSearch.value.trim().toLowerCase();
+  const releaseValue = releaseFilter.value;
+  const yearValue = yearFilter.value;
+  const mediaValue = mediaFilter.value;
+  const filtered = catalog.tracks.filter((track) => {
+    const haystack = [
+      track.title,
+      track.originalTitle,
+      track.release,
+      track.year,
+      track.lyrics,
+      track.music,
+      track.arrangement,
+      track.iuCreationRole,
+    ]
+      .join(" ")
+      .toLowerCase();
+    if (query && !haystack.includes(query)) return false;
+    if (releaseValue !== "all" && track.release !== releaseValue) return false;
+    if (yearValue !== "all" && String(track.year) !== yearValue) return false;
+    if (mediaValue === "mv" && !track.mv.length) return false;
+    if (mediaValue === "creator" && !track.iuCreationRole) return false;
+    if (mediaValue === "version" && !track.version) return false;
+    return true;
+  });
+
+  catalogCount.textContent = `${filtered.length} / ${catalog.tracks.length} tracks`;
+  trackGrid.innerHTML =
+    filtered
+      .map((track) => {
+        const mv = track.mv[0];
+        return `
+        <article class="trackCard">
+          <div class="miniCover" style="${coverStyle(track.cover)}">
+            <span>${escapeHtml(track.cover?.initials || "IU")}</span>
+            <small>${escapeHtml(track.release)}</small>
+          </div>
+          <div class="trackBody">
+            <h3>${escapeHtml(track.title)}</h3>
+            <p>${track.year} · ${escapeHtml(track.type)} · ${escapeHtml(track.language)}${track.length ? ` · ${escapeHtml(track.length)}` : ""}</p>
+            <p>${track.iuCreationRole ? `IU：${escapeHtml(track.iuCreationRole)}` : `作词：${escapeHtml(track.lyrics || "资料待补")}`}</p>
+            <div class="trackBadges">
+              ${track.version ? `<span>${escapeHtml(track.version)}</span>` : ""}
+              ${track.mv.length ? `<span>${track.mv.length} 条影像</span>` : ""}
+            </div>
+            <div class="trackLinks">
+              <a href="${track.audioLinks.spotify}" target="_blank" rel="noreferrer">Spotify</a>
+              <a href="${track.audioLinks.youtubeMusic}" target="_blank" rel="noreferrer">YouTube Music</a>
+              <a href="${track.audioLinks.appleMusic}" target="_blank" rel="noreferrer">Apple Music</a>
+              ${mv ? `<a href="${mv.youtube}" target="_blank" rel="noreferrer">MV / 影像</a>` : ""}
+              <a href="${track.source}" target="_blank" rel="noreferrer">来源</a>
+            </div>
+          </div>
+        </article>
+      `;
+      })
+      .join("") || `<div class="empty">没有匹配的歌曲，换个筛选试试。</div>`;
+}
+
 function renderLibrary() {
   libraryCards.innerHTML = entries
     .map(
@@ -243,6 +339,19 @@ chips.forEach((chip) => {
     chips.forEach((item) => item.classList.toggle("is-active", item === chip));
     renderRecords();
   });
+});
+
+releaseShelf.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-release-name]");
+  if (!button) return;
+  releaseFilter.value = button.dataset.releaseName;
+  renderCatalog();
+  document.querySelector("#catalog").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+[catalogSearch, releaseFilter, yearFilter, mediaFilter].forEach((control) => {
+  control.addEventListener("input", renderCatalog);
+  control.addEventListener("change", renderCatalog);
 });
 
 searchInput.addEventListener("input", renderRecords);
@@ -322,4 +431,7 @@ importFile.addEventListener("change", async () => {
 });
 
 renderRecords();
+renderReleaseShelf();
+fillCatalogFilters();
+renderCatalog();
 renderLibrary();
