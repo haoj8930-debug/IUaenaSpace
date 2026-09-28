@@ -13,7 +13,10 @@ window.IU_CATALOG = {
     "tangerines": "https://www.netflix.com/title/81681535",
     "when_life_tangerines_ost": "https://www.shazam.com/song/1802808901/midnight-walk",
     "golden_hour": "https://en.wikipedia.org/wiki/IU_Concert:_The_Golden_Hour",
-    "hereh": "https://en.wikipedia.org/wiki/H.E.R.E.H._World_Tour"
+    "hereh": "https://en.wikipedia.org/wiki/H.E.R.E.H._World_Tour",
+    "supplemental_collaborations": "https://en.wikipedia.org/wiki/IU_discography",
+    "december_24_cover": "https://www.soompi.com/article/682671wpp/iu-gifts-fans-with-sweet-cover-of-d-ears-december-24",
+    "first_winter": "https://en.wikipedia.org/wiki/First_Winter_(song)"
   },
   "releases": [
     {
@@ -539,6 +542,27 @@ window.IU_CATALOG = {
         "provider": "Apple Music / iTunes",
         "providerUrl": "https://music.apple.com/us/album/unknown-planet/1687382478?uo=4",
         "matchedName": "Unknown Planet"
+      }
+    },
+    {
+      "date": "",
+      "year": 2026,
+      "title": "Collaborations, Covers & Specials",
+      "type": "补充档案",
+      "language": "多语种",
+      "track_count": 18,
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
       }
     }
   ],
@@ -7211,6 +7235,834 @@ window.IU_CATALOG = {
         "appleMusic": "https://music.apple.com/us/search?term=IU%20Uhuya%20Doongi%20Doongi%20(LP%20only)%20(%EC%96%B4%ED%97%88%EC%95%BC%20%EB%91%A5%EA%B8%B0%EB%91%A5%EA%B8%B0)"
       },
       "mv": []
+    },
+    {
+      "id": "track-168",
+      "date": "2014-12-24",
+      "year": 2014,
+      "release": "Collaborations, Covers & Specials",
+      "type": "翻唱 / 特别公开",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "12월 24일 (December 24; D.ear Cover)",
+      "originalTitle": "12월 24일",
+      "lyrics": "D.ear",
+      "music": "D.ear",
+      "arrangement": "",
+      "length": "",
+      "version": "",
+      "iuCreationRole": "cover vocal",
+      "source": "https://www.soompi.com/article/682671wpp/iu-gifts-fans-with-sweet-cover-of-d-ears-december-24",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%2012%EC%9B%94%2024%EC%9D%BC%20(December%2024%3B%20D.ear%20Cover)",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%2012%EC%9B%94%2024%EC%9D%BC%20(December%2024%3B%20D.ear%20Cover)",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%2012%EC%9B%94%2024%EC%9D%BC%20(December%2024%3B%20D.ear%20Cover)"
+      },
+      "mv": [
+        {
+          "title": "12월 24일 (December 24; D.ear Cover)",
+          "year": "2014",
+          "type": "翻唱 / 特别公开",
+          "director": "",
+          "notes": "IU 在 2014 年圣诞前夕公开的 D.ear《December 24》翻唱礼物。",
+          "source": "https://www.soompi.com/article/682671wpp/iu-gifts-fans-with-sweet-cover-of-d-ears-december-24",
+          "youtube": "https://www.youtube.com/results?search_query=IU%2012%EC%9B%94%2024%EC%9D%BC%20(December%2024%3B%20D.ear%20Cover)%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-169",
+      "date": "2009",
+      "year": 2009,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "247",
+      "originalTitle": "",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "The Three Views featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_videography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20247",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20247",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20247"
+      },
+      "mv": [
+        {
+          "title": "247",
+          "year": "2009",
+          "type": "合作/主题音乐视频",
+          "director": "Fanny",
+          "notes": "",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20247%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-170",
+      "date": "2010",
+      "year": 2010,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / OST",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "I Believe in Love",
+      "originalTitle": "",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "IU and Yoo Seung-ho",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_videography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20I%20Believe%20in%20Love",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20I%20Believe%20in%20Love",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20I%20Believe%20in%20Love"
+      },
+      "mv": [
+        {
+          "title": "I Believe in Love",
+          "year": "2010",
+          "type": "合作/主题音乐视频",
+          "director": "Unknown",
+          "notes": "For KBS's Love Request OST",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20I%20Believe%20in%20Love%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-171",
+      "date": "2011",
+      "year": 2011,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 主题曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Ice Flower",
+      "originalTitle": "",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "IU and Yuna Kim",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_videography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Ice%20Flower",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Ice%20Flower",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Ice%20Flower"
+      },
+      "mv": [
+        {
+          "title": "Ice Flower",
+          "year": "2011",
+          "type": "合作/主题音乐视频",
+          "director": "Unknown",
+          "notes": "SBS's Kiss & Cry theme song",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Ice%20Flower%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-172",
+      "date": "2012",
+      "year": 2012,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 项目单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Sea of Moonlight",
+      "originalTitle": "달빛바다",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "IU and Fiestar",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_videography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Sea%20of%20Moonlight",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Sea%20of%20Moonlight",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Sea%20of%20Moonlight"
+      },
+      "mv": [
+        {
+          "title": "Sea of Moonlight",
+          "year": "2012",
+          "type": "合作/主题音乐视频",
+          "director": "Hwang Soo-ah",
+          "notes": "For LOEN Tree's summer project album, Summer Story",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Sea%20of%20Moonlight%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-173",
+      "date": "2014",
+      "year": 2014,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Not Spring, Love, or Cherry Blossoms",
+      "originalTitle": "봄 사랑 벚꽃 말고",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "High4 and IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Not%20Spring%2C%20Love%2C%20or%20Cherry%20Blossoms",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Not%20Spring%2C%20Love%2C%20or%20Cherry%20Blossoms",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Not%20Spring%2C%20Love%2C%20or%20Cherry%20Blossoms"
+      },
+      "mv": [
+        {
+          "title": "Not Spring, Love, or Cherry Blossoms",
+          "year": "2014",
+          "type": "合作/主题音乐视频",
+          "director": "Unknown",
+          "notes": "",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Not%20Spring%2C%20Love%2C%20or%20Cherry%20Blossoms%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-174",
+      "date": "2014",
+      "year": 2014,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 项目单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Sogyeokdong",
+      "originalTitle": "소격동",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Seo Taiji and IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Sogyeokdong",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Sogyeokdong",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Sogyeokdong"
+      },
+      "mv": [
+        {
+          "title": "Sogyeokdong",
+          "year": "2014",
+          "type": "合作/主题音乐视频",
+          "director": "Hwang Soo-ah",
+          "notes": "Features Sung Yu-bin and Kim Hyun-soo",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Sogyeokdong%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-175",
+      "date": "2014",
+      "year": 2014,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "When Would It Be",
+      "originalTitle": "언제쯤이면",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Yoon Hyun-sang and IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_videography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20When%20Would%20It%20Be",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20When%20Would%20It%20Be",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20When%20Would%20It%20Be"
+      },
+      "mv": [
+        {
+          "title": "When Would It Be",
+          "year": "2014",
+          "type": "合作/主题音乐视频",
+          "director": "Digipedi",
+          "notes": "",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20When%20Would%20It%20Be%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-176",
+      "date": "2015",
+      "year": 2015,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 节目企划",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Leon",
+      "originalTitle": "레옹",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Park Myung-soo and IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Leon",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Leon",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Leon"
+      },
+      "mv": [
+        {
+          "title": "Leon",
+          "year": "2015",
+          "type": "合作 / 节目企划",
+          "director": "",
+          "notes": "Park Myung-soo and IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Leon%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-177",
+      "date": "2017",
+      "year": 2017,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Love Story",
+      "originalTitle": "",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Epik High featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Love%20Story",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Love%20Story",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Love%20Story"
+      },
+      "mv": [
+        {
+          "title": "Love Story",
+          "year": "2017",
+          "type": "合作 / Featuring",
+          "director": "",
+          "notes": "Epik High featuring IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Love%20Story%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-178",
+      "date": "2018",
+      "year": 2018,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "SoulMate",
+      "originalTitle": "",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Zico and IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20SoulMate",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20SoulMate",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20SoulMate"
+      },
+      "mv": [
+        {
+          "title": "SoulMate",
+          "year": "2018",
+          "type": "合作/主题音乐视频",
+          "director": "Oui Kim (GDW)",
+          "notes": "",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20SoulMate%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-179",
+      "date": "2018",
+      "year": 2018,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Fairytale",
+      "originalTitle": "동화",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Kim Dong-ryul featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Fairytale",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Fairytale",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Fairytale"
+      },
+      "mv": [
+        {
+          "title": "Fairytale",
+          "year": "2018",
+          "type": "合作 / Featuring",
+          "director": "",
+          "notes": "Kim Dong-ryul featuring IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Fairytale%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-180",
+      "date": "2019-12-09",
+      "year": 2019,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 数字单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "First Winter",
+      "originalTitle": "첫 겨울이니까",
+      "lyrics": "Kyuho Lee",
+      "music": "Kyuho Lee",
+      "arrangement": "Gang Hwa-seong",
+      "length": "4:00",
+      "version": "Sung Si-kyung and IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/First_Winter_(song)",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20First%20Winter",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20First%20Winter",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20First%20Winter"
+      },
+      "mv": [
+        {
+          "title": "First Winter",
+          "year": "2019",
+          "type": "合作 / 数字单曲",
+          "director": "",
+          "notes": "Sung Si-kyung and IU",
+          "source": "https://en.wikipedia.org/wiki/First_Winter_(song)",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20First%20Winter%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-181",
+      "date": "2020",
+      "year": 2020,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Small Room",
+      "originalTitle": "작은방",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Sweet Sorrow featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Small%20Room",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Small%20Room",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Small%20Room"
+      },
+      "mv": [
+        {
+          "title": "Small Room",
+          "year": "2020",
+          "type": "合作 / Featuring",
+          "director": "",
+          "notes": "Sweet Sorrow featuring IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Small%20Room%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-182",
+      "date": "2021",
+      "year": 2021,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Nakka",
+      "originalTitle": "낙하",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "AKMU featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Nakka",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Nakka",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Nakka"
+      },
+      "mv": [
+        {
+          "title": "Nakka",
+          "year": "2021",
+          "type": "合作 / Featuring",
+          "director": "",
+          "notes": "AKMU featuring IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Nakka%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-183",
+      "date": "2022",
+      "year": 2022,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Mother Nature (H₂O)",
+      "originalTitle": "",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Kang Seung-won featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Mother%20Nature%20(H%E2%82%82O)",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Mother%20Nature%20(H%E2%82%82O)",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Mother%20Nature%20(H%E2%82%82O)"
+      },
+      "mv": [
+        {
+          "title": "Mother Nature (H₂O)",
+          "year": "2022",
+          "type": "合作 / Featuring",
+          "director": "",
+          "notes": "Kang Seung-won featuring IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Mother%20Nature%20(H%E2%82%82O)%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-184",
+      "date": "2022",
+      "year": 2022,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / 单曲",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "Ganadara",
+      "originalTitle": "GANADARA",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Jay Park featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20Ganadara",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20Ganadara",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20Ganadara"
+      },
+      "mv": [
+        {
+          "title": "Ganadara",
+          "year": "2022",
+          "type": "合作/主题音乐视频",
+          "director": "FLIPEVIL",
+          "notes": "",
+          "source": "https://en.wikipedia.org/wiki/IU_videography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20Ganadara%20IU"
+        }
+      ]
+    },
+    {
+      "id": "track-185",
+      "date": "2023",
+      "year": 2023,
+      "release": "Collaborations, Covers & Specials",
+      "type": "合作 / Featuring",
+      "language": "韩语",
+      "trackNo": "",
+      "title": "People Pt. 2",
+      "originalTitle": "사람 Pt.2",
+      "lyrics": "",
+      "music": "",
+      "arrangement": "",
+      "length": "",
+      "version": "Agust D featuring IU",
+      "iuCreationRole": "collaboration / featured vocal",
+      "source": "https://en.wikipedia.org/wiki/IU_discography",
+      "cover": {
+        "colors": [
+          "#101820",
+          "#d9a441",
+          "#fff7df"
+        ],
+        "initials": "IU",
+        "image": "./assets/hero-notebook.png",
+        "provider": "IU-UAENA Archive",
+        "providerUrl": "https://iu-uaena.vercel.app",
+        "matchedName": "Collaborations, Covers & Specials"
+      },
+      "audioLinks": {
+        "spotify": "https://open.spotify.com/search/IU%20People%20Pt.%202",
+        "youtubeMusic": "https://music.youtube.com/search?q=IU%20People%20Pt.%202",
+        "appleMusic": "https://music.apple.com/us/search?term=IU%20People%20Pt.%202"
+      },
+      "mv": [
+        {
+          "title": "People Pt. 2",
+          "year": "2023",
+          "type": "合作 / Featuring",
+          "director": "",
+          "notes": "Agust D featuring IU",
+          "source": "https://en.wikipedia.org/wiki/IU_discography",
+          "youtube": "https://www.youtube.com/results?search_query=IU%20People%20Pt.%202%20IU"
+        }
+      ]
     }
   ],
   "videos": [
@@ -7862,5 +8714,198 @@ window.IU_CATALOG = {
       "type": "专辑曲/现场影像",
       "source": "https://en.wikipedia.org/wiki/IU_videography"
     }
-  ]
+  ],
+  "screen": {
+    "checkedDate": "2026-09-14",
+    "films": [
+      {
+        "year": "2012",
+        "title": "A Turtle's Tale 2: Sammy's Escape from Paradise",
+        "role": "Ella (voice)",
+        "notes": "Korean dub",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2017",
+        "title": "Real",
+        "role": "A ceremony guide",
+        "notes": "Cameo",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2019",
+        "title": "Shades of the Heart",
+        "role": "Mi-young",
+        "notes": "",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2022",
+        "title": "Broker",
+        "role": "Moon So-young",
+        "notes": "",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2023",
+        "title": "Dream",
+        "role": "Lee So-min",
+        "notes": "",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2023",
+        "title": "IU Concert: The Golden Hour",
+        "role": "Herself",
+        "notes": "",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2025",
+        "title": "IU Concert: The Winning",
+        "role": "Herself",
+        "notes": "",
+        "type": "电影/配音",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      }
+    ],
+    "tv": [
+      {
+        "year": "2011",
+        "title": "Dream High",
+        "role": "Kim Pil-suk",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2012",
+        "title": "Salamander Guru and The Shadows",
+        "role": "Pickpocket Jieun",
+        "notes": "Cameo (Episode 6)",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2012",
+        "title": "Dream High 2",
+        "role": "Kim Pil-suk",
+        "notes": "Cameo (Episode 1)",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2013",
+        "title": "You Are the Best!",
+        "role": "Lee Soon-shin",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2013",
+        "title": "Bel Ami",
+        "role": "Kim Bo-tong",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2015",
+        "title": "The Producers",
+        "role": "Cindy",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2016",
+        "title": "Moon Lovers: Scarlet Heart Ryeo",
+        "role": "Go Ha-jin / Hae Soo",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2018",
+        "title": "My Mister",
+        "role": "Lee Ji-an",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2019",
+        "title": "Persona",
+        "role": "IU / Eun / Han-na / Ji-eun",
+        "notes": "Anthology series",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2019",
+        "title": "Hotel del Luna",
+        "role": "Jang Man-wol",
+        "notes": "",
+        "type": "电视剧/网络剧",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2025",
+        "title": "When Life Gives You Tangerines",
+        "role": "Oh Ae-sun / Yang Geum-myeong",
+        "notes": "Netflix series；IU饰演 Oh Ae-sun / Yang Geum-myeong",
+        "type": "电视剧/网络剧",
+        "source": "https://www.netflix.com/title/81681535"
+      },
+      {
+        "year": "2026",
+        "title": "Perfect Crown",
+        "role": "Seong Hui-ju",
+        "notes": "MBC；12集；2026-04-10至2026-05-16播出；官方页面核实",
+        "type": "电视剧/网络剧",
+        "source": "https://program.imbc.com/Enews/Detail/PerfectCrown?idx=498983"
+      }
+    ],
+    "programs": [
+      {
+        "year": "2010–2011",
+        "title": "Heroes",
+        "role": "Cast member",
+        "notes": "",
+        "type": "综艺/固定出演",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2011",
+        "title": "Welcome to the Show",
+        "role": "Herself",
+        "notes": "",
+        "type": "综艺/固定出演",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2011",
+        "title": "Kim Yuna's Kiss & Cry",
+        "role": "Contestant",
+        "notes": "As figure skater",
+        "type": "综艺/固定出演",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      },
+      {
+        "year": "2017",
+        "title": "Hyori's Homestay (Season 1)",
+        "role": "Cast member",
+        "notes": "",
+        "type": "综艺/固定出演",
+        "source": "https://en.wikipedia.org/wiki/IU_filmography"
+      }
+    ]
+  }
 };
