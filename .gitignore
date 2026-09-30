@@ -1,0 +1,18 @@
+# Tencent Cloud EdgeOne
+.env
+.edgeone/*
+.tef_dist/*
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
+
+# Local QA output and generated caches
+outputs/
+test-results/
+work/*
+!work/*.mjs
+!work/*.cjs
+!work/*.ps1

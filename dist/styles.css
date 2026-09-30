@@ -19,6 +19,512 @@
   font-family: "Inter", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
 }
 
+/* 2026-09-29 control polish: navigation, search and catalog filters */
+.catalogTools {
+  position: relative;
+  grid-template-columns: minmax(180px, 1.35fr) minmax(112px, 0.72fr) minmax(150px, 1fr) minmax(150px, 1fr);
+  gap: 9px;
+  padding: 11px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.115), rgba(255, 255, 255, 0.025) 48%, transparent 76%), rgba(13, 19, 36, 0.56);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 14px 34px rgba(0, 0, 0, 0.16), 0 0 28px var(--theme-glow-b, rgba(217, 164, 65, 0.1));
+}
+
+.catalogTools label {
+  gap: 5px;
+  padding: 2px;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.catalogTools label > span {
+  padding-left: 3px;
+  font-size: 0.76rem;
+  font-weight: 850;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.catalogTools label:focus-within > span {
+  color: #8cc8ff;
+  transform: translateX(2px);
+}
+
+.catalogTools select {
+  min-height: 46px;
+  border-radius: 13px;
+  background-color: rgba(7, 11, 21, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  transition: border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.catalogTools select:hover {
+  border-color: rgba(247, 234, 210, 0.34);
+  background-color: rgba(7, 11, 21, 0.6);
+}
+
+.catalogTools select:focus-visible {
+  border-color: rgba(140, 200, 255, 0.72);
+  background-color: rgba(7, 11, 21, 0.68);
+  box-shadow: inset 0 0 0 1px rgba(140, 200, 255, 0.14), 0 0 0 3px rgba(121, 185, 255, 0.1), 0 8px 22px rgba(0, 0, 0, 0.16);
+  transform: translateY(-1px);
+}
+
+.filterResetButton {
+  margin-top: -8px;
+  transition: border-color 220ms ease, background 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+.filterResetButton:hover,
+.filterResetButton:focus-visible {
+  border-color: rgba(140, 200, 255, 0.58);
+  color: #a9d8ff;
+  background: rgba(121, 185, 255, 0.12);
+  transform: translateX(-2px);
+  outline: none;
+}
+
+.searchGlassShell {
+  padding: 8px;
+  border-radius: 28px;
+}
+
+.searchGlassShell::after {
+  content: "";
+  position: absolute;
+  inset: 1px 12% auto;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.56), transparent);
+  opacity: 0.72;
+}
+
+.globalSearchPanel {
+  gap: 7px;
+}
+
+.globalSearchPanel input,
+.globalSearchPanel select {
+  min-height: 50px;
+  border-radius: 22px;
+  background-color: rgba(7, 11, 21, 0.42);
+}
+
+.globalSearchPanel input::placeholder {
+  color: rgba(247, 234, 210, 0.52);
+}
+
+.globalSearchBox:focus-within .globalSearchIcon {
+  transform: scale(1.12) rotate(-6deg);
+  filter: drop-shadow(0 0 7px rgba(121, 185, 255, 0.44));
+}
+
+.bottomNav {
+  bottom: max(12px, env(safe-area-inset-bottom));
+  padding: 6px;
+  border-color: rgba(247, 234, 210, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 18px 48px rgba(0, 0, 0, 0.32), 0 0 38px var(--theme-glow-b, rgba(217, 164, 65, 0.13));
+}
+
+.bottomNav__indicator {
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: calc((100% - 12px) / 5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 0 rgba(255, 255, 255, 0.08), 0 7px 20px rgba(0, 0, 0, 0.2), 0 0 26px rgba(121, 185, 255, 0.15);
+}
+
+.bottomNav button {
+  min-height: 60px;
+  gap: 4px;
+  transition: color 240ms ease, transform 180ms ease, opacity 240ms ease;
+}
+
+.bottomNav button:active {
+  transform: translateY(1px) scale(0.94);
+}
+
+.bottomNav button:focus-visible {
+  outline: 2px solid rgba(140, 200, 255, 0.74);
+  outline-offset: -4px;
+}
+
+.bottomNav button:not(.is-active) {
+  opacity: 0.82;
+}
+
+.bottomNav button.is-active {
+  opacity: 1;
+  text-shadow: 0 0 14px rgba(121, 185, 255, 0.34);
+}
+
+.bottomNav button.is-active .navIcon {
+  filter: drop-shadow(0 0 7px rgba(121, 185, 255, 0.42));
+}
+
+body.theme-light .catalogTools {
+  border-color: rgba(83, 64, 126, 0.16);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.42) 52%, transparent 78%), rgba(244, 239, 252, 0.68);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), 0 15px 34px rgba(91, 70, 125, 0.12), 0 0 28px rgba(150, 118, 205, 0.08);
+}
+
+body.theme-light .catalogTools label > span,
+body.theme-light .catalogTools label:focus-within > span {
+  color: #6d4aa0;
+}
+
+body.theme-light .catalogTools select,
+body.theme-light .globalSearchPanel input,
+body.theme-light .globalSearchPanel select {
+  color: #241a39;
+  border-color: rgba(83, 64, 126, 0.2);
+  background-color: rgba(255, 255, 255, 0.64);
+}
+
+body.theme-light .catalogTools select:hover,
+body.theme-light .catalogTools select:focus-visible,
+body.theme-light .globalSearchPanel input:focus,
+body.theme-light .globalSearchPanel select:focus {
+  border-color: rgba(111, 75, 166, 0.48);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(111, 75, 166, 0.08), 0 9px 22px rgba(91, 70, 125, 0.1);
+}
+
+body.theme-light .globalSearchPanel input::placeholder {
+  color: rgba(71, 51, 103, 0.52);
+}
+
+@media (max-width: 720px) {
+  .catalogTools {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 7px;
+    padding: 9px;
+    border-radius: 16px;
+  }
+
+  .catalogTools label:first-child,
+  .catalogTools label:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .catalogTools label > span {
+    font-size: 0.72rem;
+  }
+
+  .catalogTools select {
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 0.82rem;
+  }
+
+  .searchGlassShell {
+    padding: 7px;
+    border-radius: 23px;
+  }
+
+  .searchGlassShell:focus-within,
+  .searchPage.has-search .searchGlassShell {
+    border-radius: 18px;
+    transform: translateY(-1px);
+  }
+
+  .globalSearchPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .globalSearchPanel input,
+  .globalSearchPanel select {
+    min-height: 48px;
+    border-radius: 17px;
+  }
+
+  .bottomNav {
+    width: min(430px, calc(100% - 14px));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    padding: 5px;
+  }
+
+  .bottomNav__indicator {
+    left: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: calc((100% - 10px) / 5);
+  }
+
+  .bottomNav button {
+    min-height: 55px;
+    padding-inline: 2px;
+    font-size: clamp(0.56rem, 2.55vw, 0.66rem);
+  }
+
+  .navIcon {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media (max-width: 350px) {
+  .catalogTools {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  }
+
+  .bottomNav button {
+    min-height: 52px;
+    font-size: 0.55rem;
+  }
+
+  .navIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Paired lyrics: each translation stays visually attached to its source line. */
+.lyricsLoading {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.lyricCredits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: -5px 0 16px;
+}
+
+.lyricCredits span {
+  padding: 4px 8px;
+  border-left: 2px solid var(--gold);
+  color: rgba(247, 234, 210, 0.58);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.lyricLines {
+  overflow: hidden;
+  border: 1px solid rgba(247, 234, 210, 0.12);
+  border-radius: 8px;
+  background: rgba(6, 9, 18, 0.18);
+}
+
+.lyricPair {
+  padding: 13px 15px 12px;
+  border-bottom: 1px solid rgba(247, 234, 210, 0.075);
+  transition: background 180ms ease, border-color 180ms ease;
+}
+
+.lyricPair:last-child {
+  border-bottom: 0;
+}
+
+.lyricPair:hover {
+  border-color: rgba(140, 200, 255, 0.2);
+  background: rgba(121, 185, 255, 0.065);
+}
+
+.lyricOriginal,
+.lyricTranslation {
+  margin: 0;
+  word-break: break-word;
+}
+
+.lyricOriginal {
+  color: var(--paper-soft);
+  font-size: 1.02rem;
+  font-weight: 720;
+  line-height: 1.65;
+}
+
+.lyricTranslation {
+  margin-top: 4px;
+  color: rgba(247, 234, 210, 0.57);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+body.theme-light .lyricCredits span {
+  color: rgba(73, 49, 108, 0.64);
+  background: rgba(111, 75, 166, 0.055);
+}
+
+body.theme-light .lyricLines {
+  border-color: rgba(83, 64, 126, 0.14);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+body.theme-light .lyricPair {
+  border-color: rgba(83, 64, 126, 0.085);
+}
+
+body.theme-light .lyricPair:hover {
+  background: rgba(111, 75, 166, 0.055);
+}
+
+body.theme-light .lyricOriginal {
+  color: #281b40;
+}
+
+body.theme-light .lyricTranslation {
+  color: #745997;
+}
+
+/* Scene themes: distinct composition, surface treatment and accent behavior. */
+body[data-theme-preset="cosmic"] {
+  --gold: #ffd83d;
+  --red: #8d73df;
+  --rose: #b89bff;
+  --theme-glow-a: rgba(141, 115, 223, 0.4);
+  --theme-glow-b: rgba(255, 216, 61, 0.26);
+  background:
+    linear-gradient(118deg, rgba(4, 8, 21, 0.16), rgba(14, 8, 34, 0.54)),
+    var(--uaena-bg-dark-desktop) center center / cover fixed no-repeat,
+    #050814;
+}
+
+body[data-theme-preset="cinema"] {
+  --gold: #ffbd63;
+  --red: #a83e36;
+  --rose: #df7e59;
+  --theme-glow-a: rgba(168, 62, 54, 0.42);
+  --theme-glow-b: rgba(255, 189, 99, 0.28);
+  background:
+    linear-gradient(90deg, rgba(15, 8, 6, 0.9), rgba(46, 18, 13, 0.52) 42%, rgba(7, 8, 13, 0.9)),
+    var(--uaena-bg-dark-desktop) center center / cover fixed no-repeat,
+    #110b0a;
+}
+
+body[data-theme-preset="neon"] {
+  --gold: #61f2db;
+  --red: #ff4ea3;
+  --rose: #ff8bc3;
+  --theme-glow-a: rgba(255, 78, 163, 0.46);
+  --theme-glow-b: rgba(97, 242, 219, 0.34);
+  background:
+    linear-gradient(105deg, rgba(2, 5, 15, 0.96) 0 22%, rgba(24, 7, 39, 0.7) 47%, rgba(2, 28, 37, 0.75) 72%, rgba(2, 5, 15, 0.96)),
+    var(--uaena-bg-dark-desktop) center center / cover fixed no-repeat,
+    #02050f;
+}
+
+body[data-theme-preset="letter"] {
+  --gold: #ffdc52;
+  --red: #8f6ac7;
+  --rose: #d58fb3;
+  --theme-glow-a: rgba(143, 106, 199, 0.36);
+  --theme-glow-b: rgba(121, 185, 255, 0.24);
+  background:
+    linear-gradient(135deg, rgba(19, 17, 38, 0.72), rgba(34, 24, 55, 0.45)),
+    var(--uaena-bg-dark-desktop) center center / cover fixed no-repeat,
+    #111024;
+}
+
+body.theme-light[data-theme-preset="cosmic"] {
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.12), rgba(234, 226, 255, 0.24)), var(--uaena-bg-light-desktop) center center / cover fixed no-repeat, #fffdf7;
+}
+
+body.theme-light[data-theme-preset="cinema"] {
+  background: linear-gradient(90deg, rgba(255, 247, 224, 0.7), rgba(220, 166, 106, 0.16), rgba(255, 250, 238, 0.76)), var(--uaena-bg-light-desktop) center center / cover fixed no-repeat, #fff8e8;
+}
+
+body.theme-light[data-theme-preset="neon"] {
+  background: linear-gradient(105deg, rgba(242, 251, 255, 0.78), rgba(255, 225, 245, 0.38) 48%, rgba(219, 255, 249, 0.52)), var(--uaena-bg-light-desktop) center center / cover fixed no-repeat, #f7fbff;
+}
+
+body.theme-light[data-theme-preset="letter"] {
+  background: linear-gradient(135deg, rgba(255, 253, 247, 0.82), rgba(235, 224, 255, 0.36)), var(--uaena-bg-light-desktop) center center / cover fixed no-repeat, #fffdf9;
+}
+
+body[data-theme-preset="cosmic"]::before {
+  background: linear-gradient(127deg, transparent 0 38%, rgba(141, 115, 223, 0.14) 38% 39%, transparent 39% 67%, rgba(255, 216, 61, 0.1) 67% 68%, transparent 68%);
+}
+
+body[data-theme-preset="cinema"]::before {
+  background: repeating-linear-gradient(90deg, rgba(255, 189, 99, 0.035) 0 1px, transparent 1px 7px), linear-gradient(180deg, rgba(110, 34, 23, 0.16), transparent 28%, rgba(0, 0, 0, 0.24));
+}
+
+body[data-theme-preset="neon"]::before {
+  background: linear-gradient(112deg, transparent 0 18%, rgba(255, 78, 163, 0.13) 18% 19%, transparent 19% 63%, rgba(97, 242, 219, 0.13) 63% 64%, transparent 64%);
+}
+
+body[data-theme-preset="letter"]::before {
+  background: repeating-linear-gradient(0deg, transparent 0 31px, rgba(184, 155, 255, 0.055) 31px 32px), linear-gradient(90deg, transparent 0 11%, rgba(213, 143, 179, 0.08) 11% 11.3%, transparent 11.3%);
+}
+
+body[data-theme-preset="cinema"] :is(.catalogTools, .searchGlassShell, .settingsCard, .profileHero, .bottomNav, .sectionTabs, .trackCard, .screenCard, .merchCard) {
+  border-radius: 4px;
+  border-color: rgba(255, 189, 99, 0.24);
+}
+
+body[data-theme-preset="cinema"] :is(.catalogTools, .searchGlassShell, .settingsCard, .bottomNav) {
+  background: linear-gradient(145deg, rgba(255, 189, 99, 0.1), transparent 42%), rgba(23, 13, 14, 0.78);
+}
+
+body[data-theme-preset="neon"] :is(.catalogTools, .searchGlassShell, .settingsCard, .profileHero, .bottomNav, .sectionTabs) {
+  border-color: rgba(97, 242, 219, 0.3);
+  background: linear-gradient(115deg, rgba(255, 78, 163, 0.1), transparent 42%, rgba(97, 242, 219, 0.08)), rgba(3, 8, 19, 0.78);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.17), 0 0 28px rgba(97, 242, 219, 0.1), 0 18px 42px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme-preset="letter"] :is(.catalogTools, .searchGlassShell, .settingsCard, .profileHero, .bottomNav, .sectionTabs) {
+  border-radius: 8px;
+  border-color: rgba(184, 155, 255, 0.25);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(143, 106, 199, 0.06)), rgba(20, 17, 38, 0.74);
+}
+
+body.theme-light[data-theme-preset="cinema"] :is(.catalogTools, .searchGlassShell, .settingsCard, .bottomNav),
+body.theme-light[data-theme-preset="letter"] :is(.catalogTools, .searchGlassShell, .settingsCard, .bottomNav),
+body.theme-light[data-theme-preset="neon"] :is(.catalogTools, .searchGlassShell, .settingsCard, .bottomNav) {
+  color: #281b40;
+  background-color: rgba(255, 255, 255, 0.72);
+}
+
+.themePresetGrid button[data-preset="cosmic"] {
+  background: linear-gradient(135deg, #0a1025 0 48%, #7454be 48% 63%, #f4ce35 63%);
+}
+
+.themePresetGrid button[data-preset="cinema"] {
+  border-radius: 4px;
+  background: repeating-linear-gradient(90deg, transparent 0 12px, rgba(255,255,255,0.05) 12px 13px), linear-gradient(135deg, #1a1010, #8d352d 58%, #e2a654);
+}
+
+.themePresetGrid button[data-preset="neon"] {
+  background: linear-gradient(112deg, #030813 0 35%, #ff4ea3 35% 38%, #161025 38% 68%, #61f2db 68% 71%, #030813 71%);
+}
+
+.themePresetGrid button[data-preset="letter"] {
+  border-radius: 8px;
+  background: repeating-linear-gradient(0deg, #eee8ff 0 25px, #c5b5e8 25px 26px), linear-gradient(135deg, #f6eaff, #b892d3);
+  color: #3b285b;
+}
+
+.themePresetGrid button[data-preset="letter"] small {
+  color: rgba(59, 40, 91, 0.68);
+}
+
+@media (max-width: 720px) {
+  body[data-theme-preset="cosmic"],
+  body[data-theme-preset="cinema"],
+  body[data-theme-preset="neon"],
+  body[data-theme-preset="letter"] {
+    background-attachment: fixed;
+    background-position: center 42%;
+    background-size: cover;
+  }
+
+  .lyricPair {
+    padding: 11px 12px 10px;
+  }
+
+  .lyricOriginal {
+    font-size: 0.94rem;
+  }
+
+  .lyricTranslation {
+    font-size: 0.7rem;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -2841,6 +3347,16 @@ body.theme-light .lyricsDialog__body pre {
   color: rgba(41, 30, 72, 0.74);
 }
 
+body.theme-light .lyricsMeta span {
+  color: #654497;
+  border-color: rgba(101, 68, 151, 0.22);
+  background: rgba(151, 112, 229, 0.1);
+}
+
+body.theme-light .lyricsDialog__body h3 {
+  color: #5e3f8f;
+}
+
 @media (max-width: 920px) {
   .hero,
   .workspace,
@@ -3037,5 +3553,248 @@ body.theme-light .lyricsDialog__body pre {
 
   .record__meta {
     display: grid;
+  }
+}
+
+/* Final control overrides live at the end so they win the responsive cascade. */
+.catalogTools {
+  position: relative;
+  grid-template-columns: minmax(180px, 1.35fr) minmax(112px, 0.72fr) minmax(150px, 1fr) minmax(150px, 1fr);
+  gap: 9px;
+  padding: 11px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.115), rgba(255, 255, 255, 0.025) 48%, transparent 76%), rgba(13, 19, 36, 0.56);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 14px 34px rgba(0, 0, 0, 0.16), 0 0 28px var(--theme-glow-b, rgba(217, 164, 65, 0.1));
+}
+
+.catalogTools label {
+  gap: 5px;
+  padding: 2px;
+}
+
+.catalogTools label > span {
+  padding-left: 3px;
+  font-size: 0.76rem;
+  font-weight: 850;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.catalogTools label:focus-within > span {
+  color: #8cc8ff;
+  transform: translateX(2px);
+}
+
+.catalogTools select {
+  min-height: 46px;
+  border-radius: 13px;
+  background-color: rgba(7, 11, 21, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075);
+  transition: border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.catalogTools select:hover {
+  border-color: rgba(247, 234, 210, 0.34);
+  background-color: rgba(7, 11, 21, 0.6);
+}
+
+.catalogTools select:focus-visible {
+  border-color: rgba(140, 200, 255, 0.72);
+  background-color: rgba(7, 11, 21, 0.68);
+  box-shadow: inset 0 0 0 1px rgba(140, 200, 255, 0.14), 0 0 0 3px rgba(121, 185, 255, 0.1), 0 8px 22px rgba(0, 0, 0, 0.16);
+  transform: translateY(-1px);
+}
+
+.searchGlassShell {
+  padding: 8px;
+  border-radius: 28px;
+}
+
+.searchGlassShell::after {
+  content: "";
+  position: absolute;
+  inset: 1px 12% auto;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.56), transparent);
+  opacity: 0.72;
+}
+
+.globalSearchPanel {
+  gap: 7px;
+}
+
+.globalSearchPanel input,
+.globalSearchPanel select {
+  min-height: 50px;
+  border-radius: 22px;
+  background-color: rgba(7, 11, 21, 0.42);
+}
+
+.globalSearchPanel input::placeholder {
+  color: rgba(247, 234, 210, 0.52);
+}
+
+.globalSearchBox:focus-within .globalSearchIcon {
+  transform: scale(1.12) rotate(-6deg);
+  filter: drop-shadow(0 0 7px rgba(121, 185, 255, 0.44));
+}
+
+.bottomNav {
+  bottom: max(12px, env(safe-area-inset-bottom));
+  padding: 6px;
+  border-color: rgba(247, 234, 210, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 18px 48px rgba(0, 0, 0, 0.32), 0 0 38px var(--theme-glow-b, rgba(217, 164, 65, 0.13));
+}
+
+.bottomNav__indicator {
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: calc((100% - 12px) / 5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), inset 0 -1px 0 rgba(255, 255, 255, 0.08), 0 7px 20px rgba(0, 0, 0, 0.2), 0 0 26px rgba(121, 185, 255, 0.15);
+}
+
+.bottomNav button {
+  min-height: 60px;
+  gap: 4px;
+  transition: color 240ms ease, transform 180ms ease, opacity 240ms ease;
+}
+
+.bottomNav button:active {
+  transform: translateY(1px) scale(0.94);
+}
+
+.bottomNav button:focus-visible {
+  outline: 2px solid rgba(140, 200, 255, 0.74);
+  outline-offset: -4px;
+}
+
+.bottomNav button:not(.is-active) {
+  opacity: 0.82;
+}
+
+.bottomNav button.is-active {
+  opacity: 1;
+  text-shadow: 0 0 14px rgba(121, 185, 255, 0.34);
+}
+
+.bottomNav button.is-active .navIcon {
+  filter: drop-shadow(0 0 7px rgba(121, 185, 255, 0.42));
+}
+
+body.theme-light .catalogTools {
+  border-color: rgba(83, 64, 126, 0.16);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.42) 52%, transparent 78%), rgba(244, 239, 252, 0.68);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), 0 15px 34px rgba(91, 70, 125, 0.12), 0 0 28px rgba(150, 118, 205, 0.08);
+}
+
+body.theme-light .catalogTools label > span,
+body.theme-light .catalogTools label:focus-within > span {
+  color: #6d4aa0;
+}
+
+body.theme-light .catalogTools select,
+body.theme-light .globalSearchPanel input,
+body.theme-light .globalSearchPanel select {
+  color: #241a39;
+  border-color: rgba(83, 64, 126, 0.2);
+  background-color: rgba(255, 255, 255, 0.64);
+}
+
+body.theme-light .catalogTools select:hover,
+body.theme-light .catalogTools select:focus-visible,
+body.theme-light .globalSearchPanel input:focus,
+body.theme-light .globalSearchPanel select:focus {
+  border-color: rgba(111, 75, 166, 0.48);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 3px rgba(111, 75, 166, 0.08), 0 9px 22px rgba(91, 70, 125, 0.1);
+}
+
+body.theme-light .globalSearchPanel input::placeholder {
+  color: rgba(71, 51, 103, 0.52);
+}
+
+@media (max-width: 720px) {
+  .catalogTools {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 7px;
+    padding: 9px;
+    border-radius: 16px;
+  }
+
+  .catalogTools label:first-child,
+  .catalogTools label:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .catalogTools label > span {
+    font-size: 0.72rem;
+  }
+
+  .catalogTools select {
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 0.82rem;
+  }
+
+  .searchGlassShell {
+    padding: 7px;
+    border-radius: 23px;
+  }
+
+  .searchGlassShell:focus-within,
+  .searchPage.has-search .searchGlassShell {
+    border-radius: 18px;
+    transform: translateY(-1px);
+  }
+
+  .globalSearchPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .globalSearchPanel input,
+  .globalSearchPanel select {
+    min-height: 48px;
+    border-radius: 17px;
+  }
+
+  .bottomNav {
+    width: min(430px, calc(100% - 14px));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    padding: 5px;
+  }
+
+  .bottomNav__indicator {
+    left: 5px;
+    top: 5px;
+    bottom: 5px;
+    width: calc((100% - 10px) / 5);
+  }
+
+  .bottomNav button {
+    min-height: 55px;
+    padding-inline: 2px;
+    font-size: clamp(0.56rem, 2.55vw, 0.66rem);
+  }
+
+  .navIcon {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media (max-width: 350px) {
+  .catalogTools {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  }
+
+  .bottomNav button {
+    min-height: 52px;
+    font-size: 0.55rem;
+  }
+
+  .navIcon {
+    width: 20px;
+    height: 20px;
   }
 }

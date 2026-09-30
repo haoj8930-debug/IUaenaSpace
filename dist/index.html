@@ -13,7 +13,8 @@
       type="image/svg+xml"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1324'/%3E%3Cpath d='M18 14h19c6 0 10 4 10 10v26c-3-3-7-5-12-5H18z' fill='%23f7ead2'/%3E%3Cpath d='M18 14v31c5 0 9 2 13 5V20c-4-4-8-6-13-6z' fill='%23d6414f'/%3E%3Ccircle cx='44' cy='18' r='5' fill='%23d9a441'/%3E%3C/svg%3E"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260928-2" />
+    <link rel="stylesheet" href="./styles.css?v=20260929-3" />
+    <link rel="stylesheet" href="./themes.css?v=20260930-2" />
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
@@ -330,21 +331,33 @@
           <h2 id="profile-title">设置与个性化</h2>
         </div>
         <div class="profileLayout">
-          <article class="profileHero">
-            <span>UAENA</span>
-            <h3>UAENA小窝</h3>
-            <a
-              class="profileHero__planetLink"
-              href="https://www.unknownpla.net/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="打开 Unknown Planet 官网"
-              title="Unknown Planet"
-            >
-              <img class="profileHero__planetIcon profileHero__planetIcon--light" src="./assets/unknown-planet-light.png" alt="" />
-              <img class="profileHero__planetIcon profileHero__planetIcon--dark" src="./assets/unknown-planet-dark.png" alt="" />
-            </a>
-          </article>
+          <div class="profileIntroStack">
+            <article class="profileHero">
+              <span>UAENA</span>
+              <h3>UAENA小窝</h3>
+              <a
+                class="profileHero__planetLink"
+                href="https://www.unknownpla.net/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="打开 Unknown Planet 官网"
+                title="Unknown Planet"
+              >
+                <img class="profileHero__planetIcon profileHero__planetIcon--light" src="./assets/unknown-planet-light.png" alt="" />
+                <img class="profileHero__planetIcon profileHero__planetIcon--dark" src="./assets/unknown-planet-dark.png" alt="" />
+              </a>
+            </article>
+            <article class="settingsCard feedbackCard">
+              <div>
+                <span class="feedbackCard__eyebrow">FEEDBACK</span>
+                <h3>反馈和建议</h3>
+              </div>
+              <a class="feedbackCard__mail" href="mailto:haoj8930@gmail.com">
+                <span aria-hidden="true">@</span>
+                <strong>haoj8930@gmail.com</strong>
+              </a>
+            </article>
+          </div>
           <article class="settingsCard">
             <h3>界面主题</h3>
             <div class="segmentedControl" id="themeControl" aria-label="主题设置">
@@ -354,19 +367,23 @@
             </div>
           </article>
           <article class="settingsCard settingsCard--wide">
-            <h3>个性化主题</h3>
-            <div class="themePresetGrid" id="themePresetControl" aria-label="个性化主题">
-              <button type="button" data-preset="midnight">
-                <span>Midnight Glass</span>
-                <small>夜色玻璃</small>
+            <h3>场景主题</h3>
+            <div class="themePresetGrid" id="themePresetControl" aria-label="场景主题">
+              <button type="button" data-preset="cosmic">
+                <span>Cosmic Archive</span>
+                <small>星轨档案</small>
               </button>
-              <button type="button" data-preset="lilac">
-                <span>Lilac Bloom</span>
-                <small>丁香花影</small>
+              <button type="button" data-preset="cinema">
+                <span>Analog Cinema</span>
+                <small>胶片影院</small>
               </button>
-              <button type="button" data-preset="golden">
-                <span>Golden Hour</span>
-                <small>金色舞台</small>
+              <button type="button" data-preset="neon">
+                <span>Neon Stage</span>
+                <small>霓虹舞台</small>
+              </button>
+              <button type="button" data-preset="letter">
+                <span>Dream Letter</span>
+                <small>梦境信笺</small>
               </button>
             </div>
           </article>
@@ -432,11 +449,13 @@
       </div>
       <div class="lyricsDialog__body" id="screenDetailBody"></div>
     </dialog>
-    <script src="./data/catalog.js?v=20260928-2"></script>
+    <script src="./data/catalog.js?v=20260928-4"></script>
     <script src="./data/netease.js"></script>
-    <script src="./data/merch.js?v=20260928-2"></script>
-    <script src="./data/youtube-official.js?v=20260928-2"></script>
-    <script src="./data/lyrics.js?v=20260928-1"></script>
-    <script src="./script.js?v=20260928-3"></script>
+    <script src="./data/merch.js?v=20260928-4"></script>
+    <script src="./data/youtube-official.js?v=20260928-4"></script>
+    <script src="./data/lyrics.js?v=20260928-4"></script>
+    <script src="./data/lyrics-manifest.js?v=20260929-3"></script>
+    <script src="./data/screen-covers.js?v=20260929-3"></script>
+    <script src="./script.js?v=20260930-3"></script>
   </body>
 </html>

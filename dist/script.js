@@ -511,6 +511,29 @@ function applyNeteaseAlbumCovers() {
     ["밤편지", "Through the Night"],
   ]);
   const normalized = (value) => String(value || "").toLowerCase().replace(/[\s·'’“”"!?,.\-–—+□()]/g, "");
+  const titleVariants = (value) => {
+    const text = String(value || "").trim();
+    const variants = new Set([normalized(text)]);
+    const withoutGroups = text.replace(/\([^)]*\)|\[[^\]]*\]/g, " ").trim();
+    if (withoutGroups) variants.add(normalized(withoutGroups));
+    for (const group of text.matchAll(/\(([^)]*)\)|\[([^\]]*)\]/g)) {
+      String(group[1] || group[2] || "")
+        .split(/[;,/]/)
+        .map((part) => part.replace(/\b(feat(?:uring)?|with|narration by|lit\.)\b.*$/i, "").trim())
+        .filter(Boolean)
+        .forEach((part) => variants.add(normalized(part)));
+    }
+    return [...variants].filter(Boolean);
+  };
+  const versionFlags = (value) => ({
+    instrumental: /\b(inst(?:rumental)?\.?)\b|伴奏/i.test(String(value || "")),
+    live: /\blive\b|现场|라이브/i.test(String(value || "")),
+  });
+  const versionsCompatible = (left, right) => {
+    const a = versionFlags(left);
+    const b = versionFlags(right);
+    return a.instrumental === b.instrumental && a.live === b.live;
+  };
   const releaseByKey = new Map(catalog.releases.map((release) => [normalized(release.title), release]));
   const assignedAlbumIds = new Set();
   const usedReleaseTitles = new Set(catalog.releases.map((release) => release.title));
@@ -570,14 +593,28 @@ function applyNeteaseAlbumCovers() {
     assignedAlbumIds.add(album.id);
 
     const existingForRelease = catalog.tracks.filter((track) => track.release === release.title);
+    const assignedTrackIds = new Set();
     (album.songs || []).forEach((song, index) => {
       const aliasesForSong = [...(song.alia || []), ...(song.tns || [])].filter(Boolean);
       const englishTitle = aliasesForSong.find((value) => /[A-Za-z]/.test(value) && !hangul.test(value) && !cjk.test(value));
       const chineseTitle = aliasesForSong.find((value) => cjk.test(value) && !hangul.test(value)) || "";
       const displayTitle = englishTitle || song.name;
-      const candidates = [song.name, displayTitle, ...aliasesForSong].map(normalized).filter(Boolean);
-      const existing = existingForRelease.find((track) => candidates.includes(normalized(track.title)) || candidates.includes(normalized(track.originalTitle)));
+      const candidateKeys = new Set([song.name, displayTitle, ...aliasesForSong].flatMap(titleVariants));
+      const songDescriptor = [song.name, displayTitle, ...aliasesForSong].join(" ");
+      let existing = existingForRelease.find((track) => {
+        if (assignedTrackIds.has(track.id) || !versionsCompatible(`${track.title} ${track.originalTitle || ""}`, songDescriptor)) return false;
+        const trackKeys = [track.title, track.originalTitle].flatMap(titleVariants);
+        return trackKeys.some((key) => candidateKeys.has(key));
+      });
+      if (!existing && song.no) {
+        existing = existingForRelease.find((track) =>
+          !assignedTrackIds.has(track.id) &&
+          Number(track.trackNo) === Number(song.no) &&
+          versionsCompatible(`${track.title} ${track.originalTitle || ""}`, songDescriptor),
+        );
+      }
       if (existing) {
+        assignedTrackIds.add(existing.id);
         existing.neteaseSongId = song.id;
         existing.zh = existing.zh || chineseTitle;
         existing.cover = release.cover;
@@ -675,11 +712,13 @@ let entries = loadEntries();
 let lyricLibrary = loadLyricLibrary();
 const bundledLyricLibrary = window.IU_LYRICS_BY_NETEASE_ID || {};
 let themeMode = localStorage.getItem(themeStorageKey) || "system";
-let themePreset = localStorage.getItem(presetStorageKey) || "midnight";
+const legacyPresetMap = { midnight: "cosmic", lilac: "letter", golden: "cinema" };
+let themePreset = legacyPresetMap[localStorage.getItem(presetStorageKey)] || localStorage.getItem(presetStorageKey) || "cosmic";
 let catalogVisibleRows = 3;
 let screenVisibleRows = 3;
 let searchVisibleRows = 3;
 let merchVisibleRows = 3;
+let albumPreviewRelease = "";
 
 const sectionTabConfig = {
   music: [],
@@ -1099,13 +1138,65 @@ function saveLyricLibrary() {
   localStorage.setItem(lyricStorageKey, JSON.stringify(lyricLibrary));
 }
 
-function lyricForTrack(track) {
-  return (
-    lyricLibrary[trackLyricKey(track)] ||
-    lyricLibrary[normalizeKey(track.title)] ||
-    (track.neteaseSongId ? bundledLyricLibrary[String(track.neteaseSongId)] : null) ||
-    null
+function lyricsHaveContent(payload) {
+  return Boolean(
+    String(payload?.lyrics || "").trim() ||
+    (Array.isArray(payload?.lines) && payload.lines.some((line) => String(line?.original || "").trim())),
   );
+}
+
+function lyricTitleVariants(value) {
+  const text = String(value || "").trim();
+  const variants = new Set([normalizeKey(text)]);
+  const withoutGroups = text.replace(/\([^)]*\)|\[[^\]]*\]/g, " ").trim();
+  if (withoutGroups) variants.add(normalizeKey(withoutGroups));
+  for (const group of text.matchAll(/\(([^)]*)\)|\[([^\]]*)\]/g)) {
+    String(group[1] || group[2] || "")
+      .split(/[;,/]/)
+      .map((part) => part.replace(/\b(feat(?:uring)?|with|narration by|lit\.)\b.*$/i, "").trim())
+      .filter(Boolean)
+      .forEach((part) => variants.add(normalizeKey(part)));
+  }
+  return [...variants].filter(Boolean);
+}
+
+function lyricVersionFlags(value) {
+  const text = String(value || "");
+  return {
+    instrumental: /\b(inst(?:rumental)?\.?)\b|伴奏/i.test(text),
+    live: /\blive\b|现场|라이브/i.test(text),
+  };
+}
+
+function bundledLyricRecordForTrack(track) {
+  if (track.neteaseSongId) {
+    const direct = bundledLyricLibrary[String(track.neteaseSongId)];
+    if (lyricsHaveContent(direct)) return { id: String(track.neteaseSongId), payload: direct };
+  }
+
+  const trackVariants = new Set([track.title, track.originalTitle].flatMap(lyricTitleVariants));
+  const trackFlags = lyricVersionFlags(`${track.title} ${track.originalTitle || ""}`);
+  const releaseKey = normalizeKey(track.release);
+  const candidates = Object.entries(bundledLyricLibrary)
+    .filter(([, payload]) => {
+      if (!lyricsHaveContent(payload)) return false;
+      const flags = lyricVersionFlags(payload.title);
+      if (flags.instrumental !== trackFlags.instrumental || flags.live !== trackFlags.live) return false;
+      return lyricTitleVariants(payload.title).some((key) => trackVariants.has(key));
+    })
+    .map(([id, payload]) => ({
+      id,
+      payload,
+      score: normalizeKey(payload.release) === releaseKey ? 2 : normalizeKey(payload.title) === normalizeKey(track.title) ? 1 : 0,
+    }))
+    .sort((a, b) => b.score - a.score);
+  return candidates[0] || null;
+}
+
+function lyricForTrack(track) {
+  const localEntry = lyricLibrary[trackLyricKey(track)] || lyricLibrary[normalizeKey(track.title)];
+  if (lyricsHaveContent(localEntry)) return localEntry;
+  return bundledLyricRecordForTrack(track)?.payload || null;
 }
 
 function normalizeLyricPayload(payload) {
@@ -1554,13 +1645,13 @@ function screenCoverStyle(item) {
   const colors = item.meta?.palette || ["#172033", "#d6414f", "#fff5e3"];
   const image = screenCoverImage(item);
   if (image) {
-    return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); background-image: url('${image}'); background-size: contain; background-repeat: no-repeat; background-position: center; color: ${colors[2]};`;
+    return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); background-image: url('${image}'); background-size: cover; background-repeat: no-repeat; background-position: center; color: ${colors[2]};`;
   }
   return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); color: ${colors[2]};`;
 }
 
 function screenCoverImage(item) {
-  return item.meta?.image || item.episodeImage || item.image || "";
+  return window.IU_SCREEN_COVERS?.[item.title] || item.meta?.image || item.episodeImage || item.image || "";
 }
 
 function screenCardLayout(item) {
@@ -1818,11 +1909,12 @@ function applyTheme(mode = themeMode) {
 }
 
 function applyPreset(preset = themePreset) {
-  themePreset = preset;
-  localStorage.setItem(presetStorageKey, preset);
-  document.body.dataset.themePreset = preset;
+  themePreset = legacyPresetMap[preset] || preset;
+  if (!["cosmic", "cinema", "neon", "letter"].includes(themePreset)) themePreset = "cosmic";
+  localStorage.setItem(presetStorageKey, themePreset);
+  document.body.dataset.themePreset = themePreset;
   themePresetControl?.querySelectorAll("[data-preset]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.preset === preset);
+    button.classList.toggle("is-active", button.dataset.preset === themePreset);
   });
 }
 
@@ -1854,7 +1946,7 @@ function renderReleaseShelf() {
     .sort((a, b) => yearRank(b.year) - yearRank(a.year) || String(a.title).localeCompare(String(b.title), "zh-Hans-CN"))
     .map(
       (release) => `
-      <button class="releaseCard ${release.cover?.image ? "hasImage" : ""}" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}">
+      <button class="releaseCard ${release.cover?.image ? "hasImage" : ""} ${albumPreviewRelease === release.title ? "is-selected" : ""}" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}" aria-pressed="${albumPreviewRelease === release.title}">
         <span class="releaseCard__meta">
           <strong>${escapeHtml(release.title)}</strong>
           <small>${release.year} · ${escapeHtml(release.type)} · ${release.track_count} 首</small>
@@ -1885,15 +1977,17 @@ function renderCatalog() {
   const releaseTypeValue = releaseTypeFilter.value;
   const mediaValue = mediaFilter.value;
   const hasActiveFilters = [releaseValue, yearValue, releaseTypeValue, mediaValue].some((value) => value && value !== "all");
+  const hasAlbumPreview = Boolean(albumPreviewRelease);
   catalogReset.hidden = !hasActiveFilters;
   renderReleaseShelf();
-  if (!hasActiveFilters) {
+  if (!hasActiveFilters && !hasAlbumPreview) {
     catalogCount.textContent = "请筛选";
     trackGrid.innerHTML = `<div class="empty selectionPrompt">请选择专辑、年份、发行类型或歌曲类型。</div>`;
     catalogMore.hidden = true;
     return;
   }
-  const filtered = catalog.tracks.filter((track) => musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeValue, mediaValue)).sort((a, b) => {
+  const effectiveRelease = albumPreviewRelease || releaseValue;
+  const filtered = catalog.tracks.filter((track) => musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue)).sort((a, b) => {
     const byYear = yearRank(b.year) - yearRank(a.year);
     if (byYear) return byYear;
     if (a.release !== b.release) return String(a.release).localeCompare(String(b.release), "zh-Hans-CN");
@@ -1903,7 +1997,9 @@ function renderCatalog() {
   });
 
   const visible = filtered.slice(0, visibleCardLimit(trackGrid, catalogVisibleRows, 3));
-  catalogCount.textContent = `${filtered.length} / ${catalog.tracks.length} tracks`;
+  catalogCount.textContent = albumPreviewRelease
+    ? `${albumPreviewRelease} · ${filtered.length} tracks`
+    : `${filtered.length} / ${catalog.tracks.length} tracks`;
   trackGrid.innerHTML =
     visible
       .map((track) => {
@@ -1924,7 +2020,7 @@ function renderCatalog() {
               </div>
               <div class="trackCardActions">
                 <button class="trackLinkButton trackLinkButton--primary" type="button" data-detail-key="${escapeHtml(track.id)}">详情</button>
-                <button class="trackLinkButton" type="button" data-lyrics-key="${escapeHtml(trackLyricKey(track))}">歌词页</button>
+                <button class="trackLinkButton" type="button" data-lyrics-id="${escapeHtml(track.id)}">歌词页</button>
               </div>
             </div>
             <p>${track.year} · ${escapeHtml(track.type)} · ${escapeHtml(track.language)}${track.length ? ` · ${escapeHtml(track.length)}` : ""}</p>
@@ -2132,26 +2228,70 @@ function showDialogSafely(dialog) {
   }
 }
 
-function openLyricsPage(track) {
+function fallbackLyricLines(savedLyrics) {
+  const creditPattern = /^(作词|作曲|编曲|制作人|监制|混音|母带|和声|录音|吉他|贝斯|鼓|钢琴|键盘|弦乐|Programmed|Lyrics|Composed|Arranged)\s*[:：]/i;
+  const original = String(savedLyrics?.lyrics || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  const credits = original.filter((line) => creditPattern.test(line));
+  const lyricLines = original.filter((line) => !creditPattern.test(line));
+  const translations = String(savedLyrics?.translation || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  return {
+    credits,
+    lines: lyricLines.map((line, index) => ({ original: line, translation: translations[index] || "" })),
+  };
+}
+
+function renderPairedLyrics(track, payload) {
+  const fallback = fallbackLyricLines(payload);
+  const lines = Array.isArray(payload?.lines) && payload.lines.length ? payload.lines : fallback.lines;
+  const credits = Array.isArray(payload?.credits) && payload.credits.length ? payload.credits : fallback.credits;
+  lyricsDialogBody.innerHTML = `
+    <div class="lyricsMeta">
+      <span>${escapeHtml(track.release)}</span>
+      <span>${track.year}</span>
+      <span>${escapeHtml(track.language)}</span>
+    </div>
+    ${credits.length ? `<div class="lyricCredits">${credits.map((credit) => `<span>${escapeHtml(credit)}</span>`).join("")}</div>` : ""}
+    <div class="lyricLines">
+      ${lines.map((line) => `
+        <div class="lyricPair">
+          <p class="lyricOriginal">${escapeHtml(line.original || "")}</p>
+          ${line.translation ? `<p class="lyricTranslation">${escapeHtml(line.translation)}</p>` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+async function openLyricsPage(track) {
   const savedLyrics = lyricForTrack(track);
+  const bundledRecord = bundledLyricRecordForTrack(track);
+  const lyricSourceId = track.neteaseSongId || bundledRecord?.id;
+  const manifestEntry = lyricSourceId ? window.IU_LYRICS_MANIFEST?.[String(lyricSourceId)] : null;
+  const hasLyrics = Boolean(manifestEntry?.path || savedLyrics);
   lyricsDialogTitle.textContent = track.title;
-  lyricsDialogBody.innerHTML = savedLyrics
-    ? `
-      <div class="lyricsMeta">
-        <span>${escapeHtml(track.release)}</span>
-        <span>${track.year}</span>
-        <span>${escapeHtml(track.language)}</span>
-      </div>
-      <pre>${escapeHtml(savedLyrics.lyrics)}</pre>
-      ${savedLyrics.translation ? `<h3>中文理解 / 翻译摘记</h3><pre>${escapeHtml(savedLyrics.translation)}</pre>` : ""}
-      ${savedLyrics.note ? `<p class="lyricsNote">${escapeHtml(savedLyrics.note)}</p>` : ""}
-    `
-    : `
-      <div class="empty">
-        这首歌的歌词与中文翻译暂未收录。
-      </div>
-    `;
+  lyricsDialogBody.innerHTML = hasLyrics ? `<div class="lyricsLoading">正在整理逐句歌词…</div>` : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`;
   showDialogSafely(lyricsDialog);
+  if (!hasLyrics) return;
+
+  if (manifestEntry?.path) {
+    try {
+      const response = await fetch(manifestEntry.path);
+      if (!response.ok) throw new Error(`Lyrics request failed: ${response.status}`);
+      const payload = await response.json();
+      const hasPairedLines = Array.isArray(payload?.lines) && payload.lines.length > 0;
+      const hasPlainLyrics = Boolean(String(payload?.lyrics || "").trim());
+      if (!hasPairedLines && !hasPlainLyrics) throw new Error("Lyrics file is empty");
+      renderPairedLyrics(track, payload);
+      return;
+    } catch {
+      // Keep the bundled plain-text lyrics as an offline fallback.
+    }
+  }
+  if (savedLyrics) {
+    renderPairedLyrics(track, savedLyrics);
+  } else {
+    lyricsDialogBody.innerHTML = `<div class="empty">歌词文件暂时无法读取，请稍后再试。</div>`;
+  }
 }
 
 function detailRow(label, value) {
@@ -2290,7 +2430,7 @@ chips.forEach((chip) => {
 releaseShelf.addEventListener("click", (event) => {
   const button = event.target.closest("[data-release-name]");
   if (!button) return;
-  releaseFilter.value = button.dataset.releaseName;
+  albumPreviewRelease = albumPreviewRelease === button.dataset.releaseName ? "" : button.dataset.releaseName;
   catalogVisibleRows = 3;
   renderCatalog();
   document.querySelector("#catalog").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2298,12 +2438,14 @@ releaseShelf.addEventListener("click", (event) => {
 
 [releaseFilter, yearFilter, releaseTypeFilter, mediaFilter].forEach((control) => {
   control.addEventListener("change", () => {
+    albumPreviewRelease = "";
     catalogVisibleRows = 3;
     renderCatalog();
   });
 });
 
 catalogReset?.addEventListener("click", () => {
+  albumPreviewRelease = "";
   releaseFilter.value = "all";
   yearFilter.value = "all";
   releaseTypeFilter.value = "all";
@@ -2335,6 +2477,7 @@ globalSearchResults?.addEventListener("click", (event) => {
   }
   if (releaseButton) {
     setView("music");
+    albumPreviewRelease = "";
     releaseFilter.value = releaseButton.dataset.searchRelease;
     yearFilter.value = "all";
     releaseTypeFilter.value = "all";
@@ -2363,6 +2506,7 @@ sectionTabs.addEventListener("click", (event) => {
   const button = event.target.closest("[data-section-filter]");
   if (!button) return;
   if (activeView === "music") {
+    albumPreviewRelease = "";
     mediaFilter.value = button.dataset.sectionFilter;
     catalogVisibleRows = 3;
     renderCatalog();
@@ -2458,10 +2602,10 @@ window.matchMedia?.("(prefers-color-scheme: light)").addEventListener("change", 
 });
 
 trackGrid.addEventListener("click", (event) => {
-  const lyricButton = event.target.closest("[data-lyrics-key]");
+  const lyricButton = event.target.closest("[data-lyrics-id]");
   const detailButton = event.target.closest("[data-detail-key]");
   if (lyricButton) {
-    const track = catalog.tracks.find((item) => trackLyricKey(item) === lyricButton.dataset.lyricsKey);
+    const track = catalog.tracks.find((item) => String(item.id) === lyricButton.dataset.lyricsId);
     if (track) openLyricsPage(track);
   }
   if (detailButton) {
