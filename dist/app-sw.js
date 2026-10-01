@@ -1,4 +1,4 @@
-const CACHE_NAME = "uaena-app-preview-v6";
+const CACHE_NAME = "uaena-app-preview-v7";
 const ASSETS = [
   "app-preview.html",
   "app.webmanifest",
@@ -38,6 +38,16 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  if (['document', 'script', 'style'].includes(event.request.destination)) {
+    event.respondWith(fetch(event.request).then(response => {
+      if (response.ok && new URL(event.request.url).origin === location.origin) {
+        const copy = response.clone();
+        event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)));
+      }
+      return response;
+    }).catch(() => caches.match(event.request)));
+    return;
+  }
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
