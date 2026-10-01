@@ -112,6 +112,27 @@ choose(0);
 
 // Both entry points use the same Music UI; only navigation is delegated when embedded.
 const embeddedMusic = window.parent !== window;
+for (const shelf of [$('#shelf'), subShelf]) {
+  const slider = document.createElement('input');
+  slider.type = 'range';
+  slider.min = '0';
+  slider.step = '1';
+  slider.value = '0';
+  slider.className = 'shelf-scrollbar hidden';
+  slider.setAttribute('aria-label', shelf === subShelf ? '滚动子专辑栏' : '滚动专辑分类栏');
+  shelf.after(slider);
+  const sync = () => {
+    const max = Math.max(0, shelf.scrollWidth - shelf.clientWidth);
+    slider.max = String(max);
+    slider.value = String(shelf.scrollLeft);
+    slider.classList.toggle('hidden', shelf.classList.contains('hidden') || max < 1);
+  };
+  slider.oninput = () => { shelf.scrollLeft = Number(slider.value); };
+  shelf.addEventListener('scroll', sync, { passive: true });
+  new ResizeObserver(sync).observe(shelf);
+  new MutationObserver(() => requestAnimationFrame(sync)).observe(shelf, { childList: true, attributes: true });
+  sync();
+}
 const setMusicTheme = light => {
   document.body.classList.toggle('light', light);
   $('.logo').src = `assets/uaena-symbol-${light ? 'light' : 'dark'}.png`;

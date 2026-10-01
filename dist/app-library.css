@@ -4,4 +4,58 @@
 .shelf small { font-size: 12px; }
 .library-more { display: block; margin: 28px auto 0; min-height: 42px; padding: 8px 30px; border-radius: 999px; color: var(--text); background: var(--sheet); box-shadow: var(--shadow); }
 .side.library-blank { visibility: hidden; }
+.audio-dot { display: none; }
+.shelf-scrollbar { display: none; }
+.grid { align-items: start; }
+.card { width: 100%; }
+.art { width: 100%; aspect-ratio: 1; }
+.art img { position: absolute; inset: 0; width: 100%; height: 100%; }
+@media (max-width: 740px) {
+  .shelf { scrollbar-width: none; margin-bottom: 4px; }
+  .shelf::-webkit-scrollbar { display: none; }
+  .shelf-scrollbar {
+    display: block;
+    appearance: none;
+    width: 100%;
+    height: 24px;
+    margin: 0 0 18px;
+    background: transparent;
+    cursor: pointer;
+    accent-color: #aa85dd;
+  }
+  .shelf-scrollbar::-webkit-slider-runnable-track { height: 5px; border-radius: 99px; background: rgba(170, 133, 221, .32); }
+  .shelf-scrollbar::-webkit-slider-thumb { appearance: none; width: 38px; height: 9px; margin-top: -2px; border: 0; border-radius: 99px; background: #aa85dd; }
+  .shelf-scrollbar::-moz-range-track { height: 5px; border-radius: 99px; background: rgba(170, 133, 221, .32); }
+  .shelf-scrollbar::-moz-range-thumb { width: 38px; height: 9px; border: 0; border-radius: 99px; background: #aa85dd; }
+  .card small { height: 32px; overflow: hidden; line-height: 16px; }
+  .side.open {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    inset: max(10px, env(safe-area-inset-top)) 10px max(18px, env(safe-area-inset-bottom));
+    height: calc(100dvh - max(10px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)));
+    padding: 24px 18px 20px;
+  }
+  .side.open .eyebrow { flex: 0 0 auto; margin: 4px 48px 16px 0; }
+  .side.open .maincover {
+    flex: 0 0 auto;
+    width: min(180px, 55%);
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+  .side.open .songhead { flex: 0 0 auto; margin: 18px 0; }
+  .side.open .songhead h2 { font-size: 22px; }
+  .side.open .lyrics {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 24px;
+  }
+}
 @media (max-width: 740px) { .shelf button { flex-basis: 86px; }.side.open.library-blank { visibility: visible; } }

@@ -30,7 +30,31 @@ const base = process.argv[2] || 'http://127.0.0.1:4174';
     await preview.goto(`${base}/app-preview.html`);
     await preview.locator('#grid .card').first().waitFor();
     assert.deepEqual(await preview.evaluate(signature), web);
+    assert.equal(await app.locator('.audio-dot').first().isVisible(), false);
+    if (width === 390) {
+      const sizes = await frame.evaluate(() => [...document.querySelectorAll('.art')].map(el => {
+        const rect = el.getBoundingClientRect();
+        return [Math.round(rect.width), Math.round(rect.height)];
+      }));
+      assert.ok(sizes.every(([w, h]) => w === h && w === sizes[0][0]));
+      await app.locator('#grid .card').first().dblclick();
+      assert.equal(await app.locator('#side').evaluate(el => el.classList.contains('open')), true);
+      const box = await app.locator('#lyrics').boundingBox();
+      assert.ok(box.height > 200);
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.wheel(0, 500);
+      await frame.waitForFunction(() => document.querySelector('#lyrics').scrollTop > 0);
+      assert.ok(await app.locator('.maincover').evaluate(el => el.clientWidth <= 180));
+      await page.screenshot({ path: 'work/mobile-lyrics-scroll.png' });
+      await app.locator('#side .close').click();
+    }
     await app.locator('[data-tab="albums"]').click();
+    if (width === 390) {
+      const slider = app.locator('.shelf-scrollbar').first();
+      assert.equal(await slider.isVisible(), true);
+      await slider.evaluate(el => { el.value = el.max; el.dispatchEvent(new Event('input')); });
+      assert.ok(await app.locator('#shelf').evaluate(el => el.scrollLeft > 0));
+    }
     assert.equal(await app.locator('#grid .card').count(), 0);
     await frame.evaluate(async () => {
       await Promise.all([...document.querySelectorAll('#shelf img')].map(img => img.decode()));
@@ -44,9 +68,15 @@ const base = process.argv[2] || 'http://127.0.0.1:4174';
     assert.ok(await app.locator('#grid .card').count() > 0);
     await app.locator('[data-tab="songs"]').click();
     await page.screenshot({ path: `work/shared-music-${width}.png` });
+    const musicNav = await app.locator('.nav').boundingBox();
     await app.locator('[data-nav="Tv"]').click();
     await page.waitForFunction(() => document.body.dataset.activeView === 'screen');
     assert.equal(await page.locator('body').getAttribute('data-active-view'), 'screen');
+    for (const view of ['screen', 'merch', 'search', 'profile']) {
+      await page.locator(`#bottomNav [data-app-view="${view}"]`).click();
+      const nav = await page.locator('#bottomNav').boundingBox();
+      for (const key of ['x', 'y', 'width', 'height']) assert.ok(Math.abs(nav[key] - musicNav[key]) < 1, `${view} nav ${key}`);
+    }
     await page.locator('#bottomNav [data-app-view="music"]').click();
     await app.locator('#grid .card').first().waitFor();
     assert.deepEqual(errors, []);
