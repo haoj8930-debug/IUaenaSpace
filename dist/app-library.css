@@ -1,0 +1,7 @@
+.shelf button { flex: 0 0 112px; min-width: 0; }
+.shelf img { object-fit: cover; }
+.shelf button.active img { outline: 2px solid var(--accent); outline-offset: 2px; }
+.shelf small { font-size: 12px; }
+.library-more { display: block; margin: 28px auto 0; min-height: 42px; padding: 8px 30px; border-radius: 999px; color: var(--text); background: var(--sheet); box-shadow: var(--shadow); }
+.side.library-blank { visibility: hidden; }
+@media (max-width: 740px) { .shelf button { flex-basis: 86px; }.side.open.library-blank { visibility: visible; } }

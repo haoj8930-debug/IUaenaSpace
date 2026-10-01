@@ -714,11 +714,23 @@ const bundledLyricLibrary = window.IU_LYRICS_BY_NETEASE_ID || {};
 let themeMode = localStorage.getItem(themeStorageKey) || "system";
 const legacyPresetMap = { midnight: "cosmic", lilac: "letter", golden: "cinema" };
 let themePreset = legacyPresetMap[localStorage.getItem(presetStorageKey)] || localStorage.getItem(presetStorageKey) || "cosmic";
-let catalogVisibleRows = 3;
+let catalogVisibleRows = 4;
 let screenVisibleRows = 3;
 let searchVisibleRows = 3;
 let merchVisibleRows = 3;
 let albumPreviewRelease = "";
+let musicLibraryMode = "songs";
+let musicLibraryCategory = "";
+let musicLibraryAlbum = "";
+const musicNestedCategories = new Set(["正规专辑", "迷你专辑", "日专", "花书签"]);
+const musicLibraryTabs = document.createElement("div");
+musicLibraryTabs.className = "musicLibraryTabs";
+musicLibraryTabs.innerHTML = '<button type="button" data-library-tab="songs" class="active">歌曲</button><button type="button" data-library-tab="albums">专辑</button><button type="button" data-library-tab="favorites">收藏</button>';
+releaseShelf.before(musicLibraryTabs);
+const musicSubShelf = document.createElement("div");
+musicSubShelf.className = "releaseShelf musicSubShelf";
+releaseShelf.after(musicSubShelf);
+const musicNewest = (a, b) => (b.publishTime || 0) - (a.publishTime || 0) || (a.trackNo || 0) - (b.trackNo || 0) || String(a.title).localeCompare(String(b.title));
 let lastMobileMusicTap = { id: "", time: 0 };
 
 const sectionTabConfig = {
@@ -1195,6 +1207,7 @@ function bundledLyricRecordForTrack(track) {
 }
 
 function lyricForTrack(track) {
+  if (window.IU_LOCAL_LYRICS?.[track.id]?.lines?.length) return window.IU_LOCAL_LYRICS[track.id];
   const localEntry = lyricLibrary[trackLyricKey(track)] || lyricLibrary[normalizeKey(track.title)];
   if (lyricsHaveContent(localEntry)) return localEntry;
   return bundledLyricRecordForTrack(track)?.payload || null;
@@ -1961,6 +1974,16 @@ function activeMusicTracks() {
 }
 
 function renderReleaseShelf() {
+  if (window.IU_LOCAL_ALBUMS?.length) {
+    const albums = window.IU_LOCAL_ALBUMS.slice().sort(musicNewest);
+    const categories = [...new Set(albums.map(a => a.category))];
+    releaseShelf.hidden = musicLibraryMode !== "albums";
+    const card = (item, attribute, active) => `<button type="button" class="releaseCard hasImage ${active ? "is-selected" : ""}" style="${coverStyle({ image: item.cover })}" ${attribute} aria-pressed="${active}"><span class="releaseCard__meta"><strong>${escapeHtml(item.title)}</strong></span></button>`;
+    releaseShelf.innerHTML = categories.map(category => card({ title: category, cover: albums.find(a => a.category === category && a.cover)?.cover }, `data-library-category="${escapeHtml(category)}"`, musicLibraryCategory === category)).join("");
+    musicSubShelf.hidden = musicLibraryMode !== "albums" || !musicNestedCategories.has(musicLibraryCategory);
+    musicSubShelf.innerHTML = musicSubShelf.hidden ? "" : albums.filter(a => a.category === musicLibraryCategory).map(a => card(a, `data-library-album="${escapeHtml(a.id)}"`, musicLibraryAlbum === a.id)).join("");
+    return;
+  }
   const releaseValue = releaseFilter.value || "all";
   const yearValue = yearFilter.value || "all";
   const releaseTypeValue = releaseTypeFilter.value || "all";
@@ -2027,15 +2050,23 @@ function renderCatalog() {
   const hasAlbumPreview = Boolean(albumPreviewRelease);
   catalogReset.hidden = !hasActiveFilters;
   renderReleaseShelf();
-  if (!hasActiveFilters && !hasAlbumPreview) {
-    catalogCount.textContent = "请筛选";
-    trackGrid.innerHTML = `<div class="empty selectionPrompt">请选择专辑、年份、发行类型或歌曲类型。</div>`;
+  if (musicLibraryMode === "albums" && (!musicLibraryCategory || (musicNestedCategories.has(musicLibraryCategory) && !musicLibraryAlbum))) {
+    catalogCount.textContent = "";
+    trackGrid.innerHTML = "";
     catalogMore.hidden = true;
     return;
   }
   const effectiveRelease = albumPreviewRelease || releaseValue;
   const sourceTracks = activeMusicTracks();
-  const filtered = sourceTracks.filter((track) => musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue)).sort((a, b) => {
+  let musicFavorites = [];
+  try { musicFavorites = JSON.parse(localStorage.getItem("uaena-app-preview-v2") || "{}").favorites || []; } catch {}
+  const filtered = sourceTracks.filter((track) =>
+    musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue) &&
+    (musicLibraryMode !== "favorites" || musicFavorites.includes(track.id)) &&
+    (musicLibraryMode !== "albums" || (track.category === musicLibraryCategory && (!musicLibraryAlbum || track.releaseId === musicLibraryAlbum)))
+  ).sort((a, b) => {
+    const byDate = (b.publishTime || 0) - (a.publishTime || 0);
+    if (byDate) return byDate;
     const byYear = yearRank(b.year) - yearRank(a.year);
     if (byYear) return byYear;
     if (a.release !== b.release) return String(a.release).localeCompare(String(b.release), "zh-Hans-CN");
@@ -2291,13 +2322,17 @@ function renderPairedLyrics(track, payload) {
 async function openLyricsPage(track) {
   const savedLyrics = lyricForTrack(track);
   const bundledRecord = bundledLyricRecordForTrack(track);
-  const lyricSourceId = track.neteaseSongId || bundledRecord?.id;
+  const lyricSourceId = track.neteaseId || track.neteaseSongId || bundledRecord?.id;
   const manifestEntry = lyricSourceId ? window.IU_LYRICS_MANIFEST?.[String(lyricSourceId)] : null;
   const hasLyrics = Boolean(manifestEntry?.path || savedLyrics);
   lyricsDialogTitle.textContent = track.title;
   lyricsDialogBody.innerHTML = hasLyrics ? `<div class="lyricsLoading">正在整理逐句歌词…</div>` : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`;
   showDialogSafely(lyricsDialog);
   if (!hasLyrics) return;
+  if (window.IU_LOCAL_LYRICS?.[track.id]?.lines?.length) {
+    renderPairedLyrics(track, window.IU_LOCAL_LYRICS[track.id]);
+    return;
+  }
 
   if (manifestEntry?.path) {
     try {
@@ -2427,18 +2462,44 @@ chips.forEach((chip) => {
 });
 
 releaseShelf.addEventListener("click", (event) => {
+  const categoryButton = event.target.closest("[data-library-category]");
+  if (categoryButton) {
+    musicLibraryCategory = categoryButton.dataset.libraryCategory;
+    musicLibraryAlbum = "";
+    catalogVisibleRows = 4;
+    renderCatalog();
+    return;
+  }
   const button = event.target.closest("[data-release-name]");
   if (!button) return;
   albumPreviewRelease = albumPreviewRelease === button.dataset.releaseName ? "" : button.dataset.releaseName;
-  catalogVisibleRows = 3;
+  catalogVisibleRows = 4;
   renderCatalog();
   document.querySelector("#catalog").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
+musicLibraryTabs.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-library-tab]");
+  if (!button) return;
+  musicLibraryMode = button.dataset.libraryTab;
+  musicLibraryCategory = "";
+  musicLibraryAlbum = "";
+  albumPreviewRelease = "";
+  catalogVisibleRows = 4;
+  musicLibraryTabs.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === button));
+  renderCatalog();
+});
+musicSubShelf.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-library-album]");
+  if (!button) return;
+  musicLibraryAlbum = button.dataset.libraryAlbum;
+  catalogVisibleRows = 4;
+  renderCatalog();
+});
 [releaseFilter, yearFilter, releaseTypeFilter, mediaFilter].forEach((control) => {
   control.addEventListener("change", () => {
     albumPreviewRelease = "";
-    catalogVisibleRows = 3;
+    catalogVisibleRows = 4;
     renderCatalog();
   });
 });
@@ -2449,7 +2510,7 @@ catalogReset?.addEventListener("click", () => {
   yearFilter.value = "all";
   releaseTypeFilter.value = "all";
   mediaFilter.value = "all";
-  catalogVisibleRows = 3;
+  catalogVisibleRows = 4;
   renderCatalog();
 });
 
@@ -2507,7 +2568,7 @@ sectionTabs.addEventListener("click", (event) => {
   if (activeView === "music") {
     albumPreviewRelease = "";
     mediaFilter.value = button.dataset.sectionFilter;
-    catalogVisibleRows = 3;
+    catalogVisibleRows = 4;
     renderCatalog();
     document.querySelector("#catalog").scrollIntoView({ behavior: "smooth", block: "start" });
     return;
@@ -2561,7 +2622,7 @@ screenGrid.addEventListener("click", (event) => {
 });
 
 catalogMore?.addEventListener("click", () => {
-  catalogVisibleRows += 3;
+  catalogVisibleRows += 4;
   renderCatalog();
 });
 

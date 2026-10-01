@@ -1233,6 +1233,11 @@ body[data-active-view="music"] .sectionTabs {
   white-space: nowrap;
 }
 
+.musicLibraryTabs { display: flex; gap: 12px; margin: 16px 0 22px; }
+.musicLibraryTabs button { border: 0; padding: 10px 20px; border-radius: 999px; background: transparent; color: var(--muted); }
+.musicLibraryTabs button.active { background: rgba(150,127,212,.18); color: #aa85df; }
+body[data-theme="light"] .musicLibraryTabs button.active { color: #704c9a; }
+.releaseShelf[hidden] { display: none !important; }
 .releaseShelf {
   display: grid;
   grid-auto-flow: column;
