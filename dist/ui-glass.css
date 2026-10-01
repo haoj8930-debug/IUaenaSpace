@@ -18,6 +18,7 @@ body::before {
 }
 body.theme-light::before, body.light::before { background-image: url('assets/bg-uaena-light-landscape.png') !important; opacity: .5 !important; }
 body::after { display: none !important; }
+body[data-active-view]::before { display: none !important; }
 body.theme-light :is(.settingsCard,.profileHero,.screenCard,.merchCard,.officialVideoCard,.globalResult,.searchGlassShell,.globalSearchTools,.sectionTabs) {
   background-color: rgba(255,255,255,.76) !important;
   color: #3b245f;
@@ -36,7 +37,10 @@ body.theme-light :is(.settingsCard,.profileHero,.screenCard,.merchCard,.globalRe
 #bottomNav { width: min(680px,calc(100% - 24px)) !important; bottom: 14px !important; }
 .dock { width: min(680px,calc(100% - 24px)); bottom: 14px; }
 :is(body.light,body.theme-light) :is(.nav,#bottomNav) { background: rgba(255,255,255,.78) !important; color: #81768d; }
-#bottomNav button { color: #aca5b7 !important; }
+#bottomNav button {
+  color: #aca5b7 !important; background: transparent !important; border: 0 !important;
+  box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+}
 body.theme-light #bottomNav button { color: #81768d !important; }
 #bottomNav button.is-active { color: #82b9ef !important; }
 body.theme-light #bottomNav button.is-active { color: #477fca !important; }

@@ -23,6 +23,7 @@ const base = process.argv[2] || 'http://127.0.0.1:4174';
     assert.equal(await page.locator('[data-preset]').count(), 0);
     assert.equal(await page.locator('#themeControl button').count(), 2);
     await page.locator('[data-theme="light"]').click();
+    assert.ok(await page.locator('#bottomNav button').evaluateAll(buttons => buttons.every(button => getComputedStyle(button).backgroundColor === 'rgba(0, 0, 0, 0)' && getComputedStyle(button).backgroundImage === 'none')));
     assert.equal(await page.locator('body').evaluate(el => el.dataset.themePreset || ''), '');
     assert.equal(await page.locator('body').evaluate(el => getComputedStyle(el).color), 'rgb(59, 36, 95)');
     await page.locator('#bottomNav [data-app-view="screen"]').click();
