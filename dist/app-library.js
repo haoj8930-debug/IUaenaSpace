@@ -109,3 +109,30 @@ let resizeFrame;
 addEventListener('resize', () => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(render); });
 renderShelf();
 choose(0);
+
+// Both entry points use the same Music UI; only navigation is delegated when embedded.
+const embeddedMusic = window.parent !== window;
+const setMusicTheme = light => {
+  document.body.classList.toggle('light', light);
+  $('.logo').src = `assets/uaena-symbol-${light ? 'light' : 'dark'}.png`;
+};
+setMusicTheme(localStorage.getItem('uaena-music-light') === 'true');
+$('.theme').onclick = () => {
+  const light = !document.body.classList.contains('light');
+  setMusicTheme(light);
+  localStorage.setItem('uaena-music-light', String(light));
+  if (embeddedMusic) parent.postMessage({ type: 'uaena-theme-change', light }, location.origin);
+};
+if (embeddedMusic) {
+  const views = { Tv: 'screen', Present: 'merch', Search: 'search', Profile: 'profile' };
+  document.querySelectorAll('[data-nav]').forEach(button => button.onclick = () => {
+    const view = views[button.dataset.nav];
+    if (view) parent.postMessage({ type: 'uaena-navigate', view }, location.origin);
+  });
+  addEventListener('message', event => {
+    if (event.origin === location.origin && event.source === parent && event.data?.type === 'uaena-theme') {
+      setMusicTheme(event.data.light);
+      localStorage.setItem('uaena-music-light', String(event.data.light));
+    }
+  });
+}
