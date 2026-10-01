@@ -1,0 +1,25 @@
+{
+  "name": "UAENA小窝",
+  "short_name": "UAENA",
+  "description": "IU 音乐、歌词与本地播放 App 预览。",
+  "start_url": "/app-preview.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#121218",
+  "theme_color": "#121218",
+  "icons": [
+    {
+      "src": "assets/uaena-symbol-dark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/uaena-symbol-light.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
