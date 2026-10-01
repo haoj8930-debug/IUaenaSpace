@@ -69,11 +69,18 @@
         <div class="sectionHead catalog__head">
           <div>
             <p class="eyebrow">Full catalog</p>
-            <h2 id="catalog-title">完整歌库、音源与 MV</h2>
+            <h2 id="catalog-title">我的音乐</h2>
           </div>
           <strong id="catalogCount">205 tracks</strong>
         </div>
-        <div class="catalogTools" aria-label="歌库筛选">
+        <label class="catalogSearchBar" aria-label="搜索歌曲和专辑">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m16.5 16.5 4 4"></path>
+          </svg>
+          <input id="catalogSearch" autocomplete="off" />
+        </label>
+        <div class="catalogTools catalogTools--legacy" aria-label="歌库筛选">
           <label>
             <span>发行</span>
             <select id="releaseFilter"></select>
@@ -114,6 +121,7 @@
         <div class="releaseShelf" id="releaseShelf" aria-label="发行封面"></div>
         <div class="trackGrid" id="trackGrid"></div>
         <button class="listMoreButton" id="catalogMore" type="button">显示更多</button>
+        <aside class="musicSidePanel" id="musicSidePanel" aria-label="当前歌曲歌词预览"></aside>
       </section>
 
       <section class="notebook retiredSection" data-view="music" aria-labelledby="notebook-title">

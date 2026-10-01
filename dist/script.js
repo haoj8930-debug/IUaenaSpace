@@ -663,11 +663,13 @@ ensureTrackMediaLinks();
 
 const releaseShelf = document.querySelector("#releaseShelf");
 const trackGrid = document.querySelector("#trackGrid");
+const musicSidePanel = document.querySelector("#musicSidePanel");
 const releaseFilter = document.querySelector("#releaseFilter");
 const yearFilter = document.querySelector("#yearFilter");
 const releaseTypeFilter = document.querySelector("#releaseTypeFilter");
 const mediaFilter = document.querySelector("#mediaFilter");
 const catalogCount = document.querySelector("#catalogCount");
+const catalogSearch = document.querySelector("#catalogSearch");
 const catalogReset = document.querySelector("#catalogReset");
 const globalSearchInput = document.querySelector("#globalSearchInput");
 const globalSearchType = document.querySelector("#globalSearchType");
@@ -722,6 +724,7 @@ let albumPreviewRelease = "";
 let musicLibraryMode = "songs";
 let musicLibraryCategory = "";
 let musicLibraryAlbum = "";
+let activeMusicTrackId = "";
 const musicNestedCategories = new Set(["正规专辑", "迷你专辑", "日专", "花书签"]);
 const musicLibraryTabs = document.createElement("div");
 musicLibraryTabs.className = "musicLibraryTabs";
@@ -2041,18 +2044,19 @@ function fillCatalogFilters() {
 }
 
 function renderCatalog() {
-  const query = "";
+  const query = (catalogSearch?.value || "").trim().toLowerCase();
   const releaseValue = releaseFilter.value;
   const yearValue = yearFilter.value;
   const releaseTypeValue = releaseTypeFilter.value;
   const mediaValue = mediaFilter.value;
-  const hasActiveFilters = [releaseValue, yearValue, releaseTypeValue, mediaValue].some((value) => value && value !== "all");
+  const hasActiveFilters = Boolean(query) || [releaseValue, yearValue, releaseTypeValue, mediaValue].some((value) => value && value !== "all");
   const hasAlbumPreview = Boolean(albumPreviewRelease);
   catalogReset.hidden = !hasActiveFilters;
   renderReleaseShelf();
   if (musicLibraryMode === "albums" && (!musicLibraryCategory || (musicNestedCategories.has(musicLibraryCategory) && !musicLibraryAlbum))) {
     catalogCount.textContent = "";
     trackGrid.innerHTML = "";
+    if (musicSidePanel) musicSidePanel.innerHTML = "";
     catalogMore.hidden = true;
     return;
   }
@@ -2061,6 +2065,7 @@ function renderCatalog() {
   let musicFavorites = [];
   try { musicFavorites = JSON.parse(localStorage.getItem("uaena-app-preview-v2") || "{}").favorites || []; } catch {}
   const filtered = sourceTracks.filter((track) =>
+    (!query || [track.title, track.originalTitle, track.zh, track.release, track.category, track.type].some((value) => String(value || "").toLowerCase().includes(query))) &&
     musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue) &&
     (musicLibraryMode !== "favorites" || musicFavorites.includes(track.id)) &&
     (musicLibraryMode !== "albums" || (track.category === musicLibraryCategory && (!musicLibraryAlbum || track.releaseId === musicLibraryAlbum)))
@@ -2076,6 +2081,10 @@ function renderCatalog() {
   });
 
   const visible = filtered.slice(0, visibleCardLimit(trackGrid, catalogVisibleRows, 3));
+  if (!activeMusicTrackId || !filtered.some((track) => track.id === activeMusicTrackId)) {
+    activeMusicTrackId = filtered[0]?.id || "";
+  }
+  renderMusicSidePanel(filtered.find((track) => track.id === activeMusicTrackId) || filtered[0]);
   catalogCount.textContent = albumPreviewRelease
     ? `${albumPreviewRelease} · ${filtered.length} tracks`
     : `${filtered.length} / ${sourceTracks.length} tracks`;
@@ -2085,7 +2094,7 @@ function renderCatalog() {
         const savedLyrics = lyricForTrack(track);
         const category = trackCategory(track);
         return `
-          <article class="trackCard ${trackCardLayout(track)} ${cardTextClass(trackDisplayTitle(track))}">
+          <article class="trackCard ${track.id === activeMusicTrackId ? "is-selected" : ""} ${trackCardLayout(track)} ${cardTextClass(trackDisplayTitle(track))}">
           <div class="miniCover ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}">
           </div>
           <div class="trackBody">
@@ -2319,6 +2328,39 @@ function renderPairedLyrics(track, payload) {
   `;
 }
 
+function pairedLyricsHtml(track, payload, limit = 8) {
+  const fallback = fallbackLyricLines(payload);
+  const lines = Array.isArray(payload?.lines) && payload.lines.length ? payload.lines : fallback.lines;
+  const shown = lines.slice(0, limit);
+  return shown.length
+    ? `<div class="musicSideLyrics">${shown.map((line) => `
+        <div class="musicSideLine">
+          <p>${escapeHtml(line.original || "")}</p>
+          ${line.translation ? `<small>${escapeHtml(line.translation)}</small>` : ""}
+        </div>
+      `).join("")}</div>`
+    : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`;
+}
+
+function renderMusicSidePanel(track) {
+  if (!musicSidePanel || !track) return;
+  const localPayload = window.IU_LOCAL_LYRICS?.[track.id];
+  const savedLyrics = lyricForTrack(track);
+  const payload = localPayload?.lines?.length ? localPayload : savedLyrics;
+  musicSidePanel.innerHTML = `
+    <p class="eyebrow">LYRICS / 歌词</p>
+    <div class="musicSideCover ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}"></div>
+    <div class="musicSideHead">
+      <div>
+        <h3>${escapeHtml(trackDisplayTitle(track))}</h3>
+        ${trackChineseTitle(track) ? `<small>${escapeHtml(trackChineseTitle(track))}</small>` : ""}
+      </div>
+      <button type="button" aria-label="收藏歌曲">♡</button>
+    </div>
+    ${payload ? pairedLyricsHtml(track, payload, 8) : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`}
+  `;
+}
+
 async function openLyricsPage(track) {
   const savedLyrics = lyricForTrack(track);
   const bundledRecord = bundledLyricRecordForTrack(track);
@@ -2503,9 +2545,14 @@ musicSubShelf.addEventListener("click", (event) => {
     renderCatalog();
   });
 });
+catalogSearch?.addEventListener("input", () => {
+  catalogVisibleRows = 4;
+  renderCatalog();
+});
 
 catalogReset?.addEventListener("click", () => {
   albumPreviewRelease = "";
+  if (catalogSearch) catalogSearch.value = "";
   releaseFilter.value = "all";
   yearFilter.value = "all";
   releaseTypeFilter.value = "all";
@@ -2676,14 +2723,26 @@ trackGrid.addEventListener("click", (event) => {
     if (track) openTrackDetail(track);
     return;
   }
+  if (cardButton && !window.matchMedia("(max-width: 640px)").matches) {
+    const key = cardButton.querySelector("[data-detail-key]")?.dataset.detailKey;
+    const track = musicTracks.find((item) => String(item.id) === key);
+    if (track) {
+      activeMusicTrackId = track.id;
+      renderCatalog();
+    }
+    return;
+  }
   if (cardButton && window.matchMedia("(max-width: 640px)").matches) {
     const key = cardButton.querySelector("[data-detail-key]")?.dataset.detailKey;
+    const track = musicTracks.find((item) => String(item.id) === key);
+    if (track) activeMusicTrackId = track.id;
     const now = Date.now();
     const isSecondTap = key && lastMobileMusicTap.id === key && now - lastMobileMusicTap.time < 650;
     lastMobileMusicTap = { id: key || "", time: now };
     if (isSecondTap) {
-      const track = musicTracks.find((item) => String(item.id) === key);
       if (track) openLyricsPage(track);
+    } else {
+      renderCatalog();
     }
   }
 });

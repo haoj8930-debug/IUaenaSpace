@@ -46,7 +46,7 @@ const assert = require('node:assert/strict');
   assert.equal(await page.locator('#trackGrid .trackCard').count(), 0);
   await page.locator('[data-library-album]').first().click();
   assert.ok(await page.locator('#trackGrid .trackCard').count() > 0);
-  await page.locator('[data-lyrics-id]').first().click();
+  await page.locator('#trackGrid .trackCard').first().dblclick();
   assert.ok(await page.locator('#lyricsDialog').isVisible());
   assert.deepEqual(errors, []);
   console.log(JSON.stringify({ main: 'passed', errors }));
