@@ -719,6 +719,7 @@ let screenVisibleRows = 3;
 let searchVisibleRows = 3;
 let merchVisibleRows = 3;
 let albumPreviewRelease = "";
+let lastMobileMusicTap = { id: "", time: 0 };
 
 const sectionTabConfig = {
   music: [],
@@ -1086,7 +1087,7 @@ function categoryLabel(value) {
 }
 
 function releaseForTrack(track) {
-  return catalog.releases.find((release) => release.title === track.release);
+  return catalog.releases.find((release) => release.title === track.release) || { type: track.type || track.category || "", title: track.release };
 }
 
 function releaseTypeCategory(track) {
@@ -1910,7 +1911,7 @@ function applyTheme(mode = themeMode) {
 
 function applyPreset(preset = themePreset) {
   themePreset = legacyPresetMap[preset] || preset;
-  if (!["cosmic", "cinema", "neon", "letter"].includes(themePreset)) themePreset = "cosmic";
+  if (!["cosmic", "cinema", "neon", "letter", "app"].includes(themePreset)) themePreset = "cosmic";
   localStorage.setItem(presetStorageKey, themePreset);
   document.body.dataset.themePreset = themePreset;
   themePresetControl?.querySelectorAll("[data-preset]").forEach((button) => {
@@ -1931,19 +1932,61 @@ function musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeVal
   return true;
 }
 
+function localMusicTracks() {
+  const localTracks = Array.isArray(window.IU_LOCAL_TRACKS) ? window.IU_LOCAL_TRACKS : [];
+  return localTracks.map((track) => ({
+    ...track,
+    year: track.year || track.category || "本地",
+    type: track.type || track.category || "本地专辑",
+    language: track.language || "资料待补",
+    length: "",
+    version: "",
+    mv: [],
+    lyrics: "",
+    music: "",
+    arrangement: "",
+    iuCreationRole: "",
+    source: "",
+    cover: {
+      image: track.cover,
+      colors: ["#efe8ff", "#d7c7f7", "#3b245f"],
+      initials: "IU",
+    },
+  }));
+}
+
+function activeMusicTracks() {
+  const localTracks = localMusicTracks();
+  return localTracks.length ? localTracks : catalog.tracks;
+}
+
 function renderReleaseShelf() {
   const releaseValue = releaseFilter.value || "all";
   const yearValue = yearFilter.value || "all";
   const releaseTypeValue = releaseTypeFilter.value || "all";
   const mediaValue = mediaFilter.value || "all";
-  const visibleReleases = catalog.releases.filter((release) => {
-    if (release.title === "Collaborations, Covers & Specials") return false;
-    if (!release.cover?.image) return false;
-    return catalog.tracks.some((track) => track.release === release.title && musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeValue, mediaValue));
-  });
+  const localAlbums = Array.isArray(window.IU_LOCAL_ALBUMS) ? window.IU_LOCAL_ALBUMS : [];
+  const visibleReleases = localAlbums.length
+    ? localAlbums.map((album) => ({
+        id: album.id,
+        title: album.title,
+        year: album.category,
+        type: album.category,
+        track_count: album.audioCount || 0,
+        cover: {
+          image: album.cover,
+          colors: ["#efe8ff", "#d7c7f7", "#3b245f"],
+          initials: "IU",
+        },
+      }))
+    : catalog.releases.filter((release) => {
+        if (release.title === "Collaborations, Covers & Specials") return false;
+        if (!release.cover?.image) return false;
+        return catalog.tracks.some((track) => track.release === release.title && musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeValue, mediaValue));
+      });
   releaseShelf.innerHTML = visibleReleases
     .slice()
-    .sort((a, b) => yearRank(b.year) - yearRank(a.year) || String(a.title).localeCompare(String(b.title), "zh-Hans-CN"))
+    .sort((a, b) => yearRank(b.year) - yearRank(a.year) || String(a.type).localeCompare(String(b.type), "zh-Hans-CN") || String(a.title).localeCompare(String(b.title), "zh-Hans-CN"))
     .map(
       (release) => `
       <button class="releaseCard ${release.cover?.image ? "hasImage" : ""} ${albumPreviewRelease === release.title ? "is-selected" : ""}" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}" aria-pressed="${albumPreviewRelease === release.title}">
@@ -1958,13 +2001,17 @@ function renderReleaseShelf() {
 }
 
 function fillCatalogFilters() {
-  const visibleReleases = catalog.releases.filter((release) => catalog.tracks.some((track) => track.release === release.title));
+  const localAlbums = Array.isArray(window.IU_LOCAL_ALBUMS) ? window.IU_LOCAL_ALBUMS : [];
+  const musicTracks = activeMusicTracks();
+  const visibleReleases = localAlbums.length
+    ? localAlbums.map((album) => ({ title: album.title }))
+    : catalog.releases.filter((release) => musicTracks.some((track) => track.release === release.title));
   releaseFilter.innerHTML = `<option value="all">全部发行</option>${visibleReleases
     .slice()
     .sort((a, b) => yearRank(b.year) - yearRank(a.year) || String(a.title).localeCompare(String(b.title), "zh-Hans-CN"))
     .map((release) => `<option value="${escapeHtml(release.title)}">${escapeHtml(release.title)}</option>`)
     .join("")}`;
-  const years = [...new Set(catalog.tracks.map((track) => track.year))].sort((a, b) => b - a);
+  const years = [...new Set(musicTracks.map((track) => track.year))].sort((a, b) => yearRank(b) - yearRank(a) || String(a).localeCompare(String(b), "zh-Hans-CN"));
   yearFilter.innerHTML = `<option value="all">全部年份</option>${years
     .map((year) => `<option value="${year}">${year}</option>`)
     .join("")}`;
@@ -1987,7 +2034,8 @@ function renderCatalog() {
     return;
   }
   const effectiveRelease = albumPreviewRelease || releaseValue;
-  const filtered = catalog.tracks.filter((track) => musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue)).sort((a, b) => {
+  const sourceTracks = activeMusicTracks();
+  const filtered = sourceTracks.filter((track) => musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue)).sort((a, b) => {
     const byYear = yearRank(b.year) - yearRank(a.year);
     if (byYear) return byYear;
     if (a.release !== b.release) return String(a.release).localeCompare(String(b.release), "zh-Hans-CN");
@@ -1999,14 +2047,11 @@ function renderCatalog() {
   const visible = filtered.slice(0, visibleCardLimit(trackGrid, catalogVisibleRows, 3));
   catalogCount.textContent = albumPreviewRelease
     ? `${albumPreviewRelease} · ${filtered.length} tracks`
-    : `${filtered.length} / ${catalog.tracks.length} tracks`;
+    : `${filtered.length} / ${sourceTracks.length} tracks`;
   trackGrid.innerHTML =
     visible
       .map((track) => {
-        const videoLinks = track.mv.slice(0, 3);
         const savedLyrics = lyricForTrack(track);
-        const domesticLinks = domesticLinksForTrack(track);
-        const internationalLinks = internationalLinksForTrack(track);
         const category = trackCategory(track);
         return `
           <article class="trackCard ${trackCardLayout(track)} ${cardTextClass(trackDisplayTitle(track))}">
@@ -2030,25 +2075,6 @@ function renderCatalog() {
               ${track.version ? `<span>${escapeHtml(track.version)}</span>` : ""}
               ${track.mv.length ? `<span>${track.mv.length} 条影像</span>` : ""}
               ${savedLyrics ? `<span class="isSaved">已收录歌词</span>` : `<span>待补歌词</span>`}
-            </div>
-            <div class="trackLinkBlock trackLinkBlock--domestic">
-              <strong>国内</strong>
-              <div class="trackLinks">
-                ${domesticLinks.map((link) => `<a href="${link.url}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("")}
-              </div>
-            </div>
-            <div class="trackLinkBlock">
-              <strong>海外音源</strong>
-              <div class="trackLinks">
-                ${internationalLinks.map((link) => `<a href="${link.url}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("")}
-              </div>
-            </div>
-            <div class="trackLinkBlock">
-              <strong>官方视频 / 舞台</strong>
-              <div class="trackLinks">
-                ${videoLinks.map((video) => `<a href="${video.youtube}" target="_blank" rel="noreferrer">${escapeHtml(video.type)}</a>`).join("")}
-                <a href="${track.source}" target="_blank" rel="noreferrer">来源</a>
-              </div>
             </div>
           </div>
         </article>
@@ -2343,11 +2369,6 @@ function openScreenDetail(item) {
 
 function openTrackDetail(track) {
   const category = trackCategory(track);
-  const domesticLinks = domesticLinksForTrack(track);
-  const globalLinks = [
-    ...internationalLinksForTrack(track),
-    { label: "资料来源", url: track.source },
-  ];
   trackDetailTitle.textContent = track.title;
   trackDetailBody.innerHTML = `
     <div class="detailHero ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}">
@@ -2370,28 +2391,6 @@ function openTrackDetail(track) {
       ${detailRow("编曲", track.arrangement || "资料待补")}
       ${detailRow("IU 参与", track.iuCreationRole)}
     </div>
-    ${renderDetailLinks("国内音源搜索", domesticLinks)}
-    ${renderDetailLinks("海外音源 / 档案来源", globalLinks)}
-    ${
-      track.mv.length
-        ? `<div class="detailMv"><h3>MV / 影像</h3>${track.mv
-            .map(
-              (video) => `
-                <article>
-                  <strong>${escapeHtml(video.title)}</strong>
-                  <span>${escapeHtml(video.year || "")} ${escapeHtml(video.type || "")}</span>
-                  ${video.director ? `<span>导演：${escapeHtml(video.director)}</span>` : ""}
-                  ${video.notes ? `<p>${escapeHtml(video.notes)}</p>` : ""}
-                  <div class="trackLinks">
-                    <a href="${video.youtube}" target="_blank" rel="noreferrer">YouTube</a>
-                    ${video.bilibili ? `<a href="${video.bilibili}" target="_blank" rel="noreferrer">Bilibili</a>` : ""}
-                  </div>
-                </article>
-              `,
-            )
-            .join("")}</div>`
-        : `<div class="empty">当前档案还没有匹配到 MV / 影像，后面补全时会继续加。</div>`
-    }
   `;
   showDialogSafely(trackDetailDialog);
 }
@@ -2604,13 +2603,27 @@ window.matchMedia?.("(prefers-color-scheme: light)").addEventListener("change", 
 trackGrid.addEventListener("click", (event) => {
   const lyricButton = event.target.closest("[data-lyrics-id]");
   const detailButton = event.target.closest("[data-detail-key]");
+  const cardButton = event.target.closest(".trackCard");
+  const musicTracks = activeMusicTracks();
   if (lyricButton) {
-    const track = catalog.tracks.find((item) => String(item.id) === lyricButton.dataset.lyricsId);
+    const track = musicTracks.find((item) => String(item.id) === lyricButton.dataset.lyricsId);
     if (track) openLyricsPage(track);
+    return;
   }
   if (detailButton) {
-    const track = catalog.tracks.find((item) => String(item.id) === detailButton.dataset.detailKey);
+    const track = musicTracks.find((item) => String(item.id) === detailButton.dataset.detailKey);
     if (track) openTrackDetail(track);
+    return;
+  }
+  if (cardButton && window.matchMedia("(max-width: 640px)").matches) {
+    const key = cardButton.querySelector("[data-detail-key]")?.dataset.detailKey;
+    const now = Date.now();
+    const isSecondTap = key && lastMobileMusicTap.id === key && now - lastMobileMusicTap.time < 650;
+    lastMobileMusicTap = { id: key || "", time: now };
+    if (isSecondTap) {
+      const track = musicTracks.find((item) => String(item.id) === key);
+      if (track) openLyricsPage(track);
+    }
   }
 });
 
