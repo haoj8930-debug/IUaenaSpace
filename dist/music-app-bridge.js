@@ -1,4 +1,6 @@
 const musicAppFrame = document.querySelector('#musicAppFrame');
+const requestedView = new URLSearchParams(location.search).get('view');
+if (['screen', 'merch', 'search', 'profile'].includes(requestedView)) setView(requestedView);
 function syncMusicAppTheme() {
   musicAppFrame.contentWindow?.postMessage({ type: 'uaena-theme', light: document.body.classList.contains('theme-light') }, location.origin);
 }

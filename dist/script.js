@@ -713,7 +713,8 @@ let officialCategoryFilter = "";
 let entries = loadEntries();
 let lyricLibrary = loadLyricLibrary();
 const bundledLyricLibrary = window.IU_LYRICS_BY_NETEASE_ID || {};
-let themeMode = localStorage.getItem(themeStorageKey) || "system";
+let themeMode = localStorage.getItem(themeStorageKey);
+if (!['light', 'dark'].includes(themeMode)) themeMode = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 const legacyPresetMap = { midnight: "cosmic", lilac: "letter", golden: "cinema" };
 let themePreset = legacyPresetMap[localStorage.getItem(presetStorageKey)] || localStorage.getItem(presetStorageKey) || "cosmic";
 let catalogVisibleRows = 4;
@@ -1696,7 +1697,11 @@ function updateMoreButton(button, visibleCount, totalCount) {
 }
 
 function officialCategories() {
-  return window.IU_YOUTUBE_OFFICIAL?.categories || [];
+  return (window.IU_YOUTUBE_OFFICIAL?.categories || []).map(category => ({
+    ...category,
+    cover: window.IU_OFFICIAL_COVERS?.[category.cover] || category.cover,
+    videos: category.videos.map(video => ({ ...video, thumbnail: window.IU_OFFICIAL_COVERS ? (window.IU_OFFICIAL_COVERS[video.thumbnail] || 'assets/icons/tv.svg') : video.thumbnail })),
+  }));
 }
 
 function formatVideoDuration(seconds) {
@@ -1926,13 +1931,8 @@ function applyTheme(mode = themeMode) {
 }
 
 function applyPreset(preset = themePreset) {
-  themePreset = legacyPresetMap[preset] || preset;
-  if (!["cosmic", "cinema", "neon", "letter", "app"].includes(themePreset)) themePreset = "cosmic";
-  localStorage.setItem(presetStorageKey, themePreset);
-  document.body.dataset.themePreset = themePreset;
-  themePresetControl?.querySelectorAll("[data-preset]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.preset === themePreset);
-  });
+  localStorage.removeItem(presetStorageKey);
+  delete document.body.dataset.themePreset;
 }
 
 function musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeValue, mediaValue) {
@@ -2125,8 +2125,10 @@ function renderCatalog() {
   renderSectionTabs();
 }
 
+let globalSearchIndex;
 function globalSearchItems() {
-  const trackItems = catalog.tracks.map((track) => ({
+  if (globalSearchIndex) return globalSearchIndex;
+  const trackItems = activeMusicTracks().map((track) => ({
     id: `track-${track.id}`,
     kind: "music",
     title: track.title,
@@ -2148,10 +2150,14 @@ function globalSearchItems() {
     ].join(" "),
     trackId: track.id,
   }));
-  const releaseItems = catalog.releases
-    .filter((release) => release.title !== "Collaborations, Covers & Specials" && catalog.tracks.some((track) => track.release === release.title))
+  const releases = window.IU_LOCAL_ALBUMS?.length ? window.IU_LOCAL_ALBUMS.map(album => ({
+    ...album, year: album.publishTime ? new Date(album.publishTime).getUTCFullYear() : '',
+    type: album.category, track_count: album.audioCount, cover: { image: album.cover },
+  })) : catalog.releases;
+  const releaseItems = releases
+    .filter((release) => release.title !== "Collaborations, Covers & Specials")
     .map((release) => ({
-      id: `release-${release.title}`,
+      id: `release-${release.id || release.title}`,
       kind: "release",
       title: release.title,
       zh: "",
@@ -2160,6 +2166,7 @@ function globalSearchItems() {
       image: release.cover?.image,
       searchText: [release.title, release.year, release.type, release.language, release.cover?.provider].join(" "),
       releaseTitle: release.title,
+      albumId: release.id,
     }));
   const screenSearchItems = screenItems().map((item) => ({
     id: `screen-${item.id || item.title}`,
@@ -2208,7 +2215,10 @@ function globalSearchItems() {
       url: video.url,
     })),
   );
-  return [...trackItems, ...releaseItems, ...screenSearchItems, ...officialVideoItems, ...merchSearchItems];
+  globalSearchIndex = [...trackItems, ...releaseItems, ...screenSearchItems, ...officialVideoItems, ...merchSearchItems].map(item => ({
+    ...item, normalizedSearch: normalizeKey(item.searchText), normalizedTitle: normalizeKey(item.title),
+  }));
+  return globalSearchIndex;
 }
 
 function globalKindLabel(kind) {
@@ -2234,8 +2244,8 @@ function renderGlobalSearch() {
   const items = globalSearchItems().filter((item) => {
     if (type !== "all" && item.kind !== type) return false;
     if (!query) return true;
-    return normalizeKey(item.searchText).includes(query);
-  });
+    return query.split(/\s+/).filter(Boolean).every(term => item.normalizedSearch.includes(term));
+  }).sort((a, b) => Number(b.normalizedTitle === query) - Number(a.normalizedTitle === query) || Number(b.normalizedTitle.startsWith(query)) - Number(a.normalizedTitle.startsWith(query)));
   const visible = items.slice(0, visibleCardLimit(globalSearchResults, searchVisibleRows, 3));
   globalSearchCount.textContent = `${items.length} results`;
   globalSearchResults.innerHTML =
@@ -2259,7 +2269,7 @@ function renderGlobalSearch() {
               }
               ${
                 item.kind === "release"
-                  ? `<button class="trackLinkButton trackLinkButton--primary" type="button" data-search-release="${escapeHtml(item.releaseTitle)}">查看发行</button>`
+                  ? `<button class="trackLinkButton trackLinkButton--primary" type="button" data-search-release="${escapeHtml(item.releaseTitle)}" data-album-id="${escapeHtml(item.albumId || '')}">查看专辑</button>`
                   : ""
               }
               ${
@@ -2561,12 +2571,16 @@ catalogReset?.addEventListener("click", () => {
   renderCatalog();
 });
 
+let searchInputTimer;
 [globalSearchInput, globalSearchType].forEach((control) => {
   control?.addEventListener("input", () => {
     searchVisibleRows = 3;
-    renderGlobalSearch();
+    clearTimeout(searchInputTimer);
+    searchInputTimer = setTimeout(renderGlobalSearch, 120);
   });
   control?.addEventListener("change", () => {
+    if (control === globalSearchInput) return;
+    clearTimeout(searchInputTimer);
     searchVisibleRows = 3;
     renderGlobalSearch();
   });
@@ -2578,18 +2592,16 @@ globalSearchResults?.addEventListener("click", (event) => {
   const screenButton = event.target.closest("[data-search-screen]");
   const merchButton = event.target.closest("[data-search-merch]");
   if (detailButton) {
-    const track = catalog.tracks.find((item) => String(item.id) === detailButton.dataset.detailKey);
-    if (track) openTrackDetail(track);
+    const track = activeMusicTracks().find((item) => String(item.id) === detailButton.dataset.detailKey);
+    if (track) {
+      setView('music');
+      document.querySelector('#musicAppFrame').contentWindow.postMessage({ type: 'uaena-open-track', id: track.id }, location.origin);
+    }
     return;
   }
   if (releaseButton) {
     setView("music");
-    albumPreviewRelease = "";
-    releaseFilter.value = releaseButton.dataset.searchRelease;
-    yearFilter.value = "all";
-    releaseTypeFilter.value = "all";
-    mediaFilter.value = "all";
-    renderCatalog();
+    document.querySelector('#musicAppFrame').contentWindow.postMessage({ type: 'uaena-open-album', id: releaseButton.dataset.albumId, title: releaseButton.dataset.searchRelease }, location.origin);
     return;
   }
   if (screenButton) {

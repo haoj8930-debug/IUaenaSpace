@@ -1,0 +1,90 @@
+body {
+  --paper: #f7f2e8; --paper-soft: #f7f2e8; --muted: #aca5b7;
+  --gold: #c8b2ff; --red: #a88adb; --rose: #c8b2ff;
+  --line: rgba(255,255,255,.09);
+  background: linear-gradient(135deg,rgba(120,184,255,.16),transparent 32%),radial-gradient(circle at 90% 8%,rgba(241,216,95,.16),transparent 28%),#121218 !important;
+}
+body.theme-light, body.light {
+  --paper: #3b245f; --paper-soft: #3b245f; --muted: #755f8c;
+  --gold: #8159bc; --red: #8159bc; --rose: #8159bc;
+  --line: rgba(105,70,150,.13);
+  background: linear-gradient(135deg,rgba(120,184,255,.16),transparent 32%),radial-gradient(circle at 90% 8%,rgba(241,216,95,.16),transparent 28%),#f5f1ff !important;
+  color: #3b245f;
+}
+body::before {
+  background: url('assets/bg-uaena-dark-landscape.png') center/cover no-repeat !important;
+  opacity: .32 !important; animation: none !important; transform: none !important;
+  position: fixed; inset: 0; pointer-events: none; z-index: -1 !important;
+}
+body.theme-light::before, body.light::before { background-image: url('assets/bg-uaena-light-landscape.png') !important; opacity: .5 !important; }
+body::after { display: none !important; }
+body.theme-light :is(.settingsCard,.profileHero,.screenCard,.merchCard,.officialVideoCard,.globalResult,.searchGlassShell,.globalSearchTools,.sectionTabs) {
+  background-color: rgba(255,255,255,.76) !important;
+  color: #3b245f;
+  box-shadow: 0 12px 32px rgba(70,45,120,.1);
+}
+body.theme-light :is(.settingsCard,.profileHero,.screenCard,.merchCard,.globalResult) :is(p,small) { color: #755f8c; }
+:is(.nav,#bottomNav) {
+  box-sizing: border-box; height: 64px !important; min-height: 64px !important;
+  padding: 6px !important; border: 0 !important; border-radius: 999px !important;
+  background: rgba(42,42,54,.82) !important;
+  backdrop-filter: blur(16px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.15) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 10px 28px rgba(0,0,0,.15) !important;
+  color: #aca5b7;
+}
+#bottomNav { width: min(680px,calc(100% - 24px)) !important; bottom: 14px !important; }
+.dock { width: min(680px,calc(100% - 24px)); bottom: 14px; }
+:is(body.light,body.theme-light) :is(.nav,#bottomNav) { background: rgba(255,255,255,.78) !important; color: #81768d; }
+#bottomNav button { color: #aca5b7 !important; }
+body.theme-light #bottomNav button { color: #81768d !important; }
+#bottomNav button.is-active { color: #82b9ef !important; }
+body.theme-light #bottomNav button.is-active { color: #477fca !important; }
+:is(.nav-indicator,#bottomNav .bottomNav__indicator) {
+  top: 6px !important; bottom: 6px !important; left: 6px !important;
+  height: calc(100% - 12px) !important; width: calc((100% - 12px)/5) !important;
+  border: 0 !important; border-radius: 999px !important;
+  background: linear-gradient(135deg,rgba(187,162,236,.3),rgba(123,181,230,.22)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4),0 4px 12px rgba(0,0,0,.08) !important;
+  transition: transform 300ms cubic-bezier(.2,.85,.2,1) !important;
+  will-change: transform;
+}
+:is(body.light,body.theme-light) :is(.nav-indicator,#bottomNav .bottomNav__indicator) { background: linear-gradient(135deg,rgba(230,227,255,.8),rgba(206,232,255,.72)) !important; }
+#bottomNav::after { animation: none !important; }
+#bottomNav .navIcon { animation: none !important; filter: none !important; transform: none !important; }
+.nav img, #bottomNav .navIcon { width: 24px !important; height: 24px !important; }
+body:not(.light) .nav img { filter: invert(1); }
+body.light .nav img { filter: none; }
+.mini {
+  border-radius: 999px; background: rgba(42,42,54,.82); border: 0;
+  padding: 9px 14px; gap: 12px; margin-bottom: 10px;
+  backdrop-filter: blur(16px) saturate(1.15); box-shadow: 0 10px 28px rgba(0,0,0,.12);
+}
+body.light .mini { background: rgba(255,255,255,.78); }
+.mini img { width: 40px; height: 40px; border-radius: 10px; }
+.mini .icon { width: 36px; height: 36px; }
+.search { backdrop-filter: blur(12px); }
+.search::after { animation: none; }
+.art { box-shadow: 0 8px 22px rgba(0,0,0,.14); }
+.art img { transition: none; }
+.card:hover img { transform: none; }
+.side { backdrop-filter: blur(16px); }
+.officialCategoryCard::before { backdrop-filter: none; -webkit-backdrop-filter: none; }
+.officialVideoCard { backdrop-filter: none; }
+.officialVideoCard__cover img[src="assets/icons/tv.svg"] { width: 36px; height: 36px; margin: auto; position: absolute; inset: 0; opacity: .6; filter: invert(1); }
+:is(.screenCard,.merchCard,.globalResult,.settingsCard,.profileHero) { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.globalResult { animation: none; }
+@media (max-width:740px) {
+  body::before { background-image: url('assets/bg-uaena-dark-portrait.png') !important; background-position: center top !important; opacity: .36 !important; }
+  body.theme-light::before,body.light::before { background-image: url('assets/bg-uaena-light-portrait.png') !important; opacity: .55 !important; }
+  :is(.nav,#bottomNav) { height: 56px !important; min-height: 56px !important; padding: 5px !important; }
+  .dock,#bottomNav { bottom: 10px !important; width: calc(100% - 18px) !important; }
+  :is(.nav-indicator,#bottomNav .bottomNav__indicator) { top: 5px !important; bottom: 5px !important; left: 5px !important; width: calc((100% - 10px)/5) !important; height: calc(100% - 10px) !important; }
+  .nav img,#bottomNav .navIcon { width: 22px !important; height: 22px !important; }
+  .mini { padding: 7px 10px; gap: 9px; margin-bottom: 8px; }
+  .mini img { width: 34px; height: 34px; }
+  .mini strong { font-size: 12px; }
+  .mini small { font-size: 10px; }
+  .mini .icon { width: 32px; height: 32px; flex: 0 0 32px; }
+}
+@media(prefers-reduced-motion:reduce) { :is(.nav-indicator,#bottomNav .bottomNav__indicator) { transition: none !important; } }

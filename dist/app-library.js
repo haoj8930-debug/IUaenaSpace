@@ -3,6 +3,9 @@ const nestedCategories = new Set(['正规专辑', '迷你专辑', '日专', '花
 let libraryCategory = '';
 let libraryAlbum = '';
 let libraryRows = 4;
+let libraryGridSignature = '';
+let librarySelectedId = '';
+let musicInteracted = false;
 const byNewest = (a, b) => (b.publishTime || 0) - (a.publishTime || 0) || (a.trackNo || 0) - (b.trackNo || 0) || String(a.title).localeCompare(String(b.title));
 tracks.sort(byNewest);
 const subShelf = document.createElement('div');
@@ -37,17 +40,26 @@ render = function () {
   const shown = visible.slice(0, columns * libraryRows);
   $('#count').textContent = needsSelection ? '' : `${visible.length} 首`;
   $('#empty').classList.toggle('hidden', needsSelection || visible.length > 0);
-  $('#grid').innerHTML = shown.map(t => `<button class="card ${tracks[selected]?.id === t.id ? 'selected' : ''} ${audioMap[t.id] ? 'has-audio' : ''}" data-id="${esc(t.id)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy"><span class="audio-dot" title="${audioMap[t.id] ? '已绑定音频' : '未绑定音频'}"></span></div><strong title="${esc(t.originalTitle || t.title)}">${esc(t.originalTitle || t.title)}</strong><small>${esc(t.zh || t.release)}</small></button>`).join('');
+  const gridSignature = shown.map(t => t.id).join('|');
+  if (gridSignature !== libraryGridSignature) {
+    libraryGridSignature = gridSignature;
+    $('#grid').innerHTML = shown.map(t => `<button class="card" data-id="${esc(t.id)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"></div><strong title="${esc(t.originalTitle || t.title)}">${esc(t.originalTitle || t.title)}</strong><small>${esc(t.zh || t.release)}</small></button>`).join('');
+  }
+  $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === tracks[selected]?.id));
   more.classList.toggle('hidden', shown.length >= visible.length);
   $('.fav').textContent = favorites.has(tracks[selected]?.id) ? '♥' : '♡';
   $('#side').classList.toggle('library-blank', mode === 'albums' && !$('#side').classList.contains('open'));
   updateProfile();
 };
 
-choose = async function (index) {
+choose = async function (index, userAction = true) {
   selected = (index + tracks.length) % tracks.length;
   const t = tracks[selected];
-  $('#cover').src = $('#minicover').src = coverFor(t);
+  if (userAction) musicInteracted = true;
+  $('.mini').classList.toggle('hidden', !musicInteracted);
+  if (librarySelectedId === t.id) { render(); return; }
+  librarySelectedId = t.id;
+  for (const cover of [$('#cover'), $('#minicover')]) if (cover.getAttribute('src') !== coverFor(t)) cover.src = coverFor(t);
   $('#title').textContent = t.originalTitle || t.title;
   $('#subtitle').textContent = t.zh || t.release;
   $('#minititle').textContent = t.title;
@@ -108,7 +120,7 @@ more.onclick = () => { libraryRows += 4; render(); };
 let resizeFrame;
 addEventListener('resize', () => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(render); });
 renderShelf();
-choose(0);
+choose(0, false);
 
 // Both entry points use the same Music UI; only navigation is delegated when embedded.
 const embeddedMusic = window.parent !== window;
@@ -151,9 +163,31 @@ if (embeddedMusic) {
     if (view) parent.postMessage({ type: 'uaena-navigate', view }, location.origin);
   });
   addEventListener('message', event => {
+    if (event.origin !== location.origin || event.source !== parent) return;
+    if (event.data?.type === 'uaena-open-track') {
+      const index = tracks.findIndex(track => track.id === event.data.id);
+      if (index >= 0) { choose(index); $('#side').classList.remove('library-blank'); openLyrics(); }
+    }
+    if (event.data?.type === 'uaena-open-album') {
+      const entry = libraryAlbums.find(a => a.id === event.data.id || a.title === event.data.title);
+      if (entry) {
+        mode = 'albums'; libraryCategory = entry.category; libraryAlbum = entry.id; libraryRows = 4; query = '';
+        $('#searchInput').value = '';
+        document.querySelectorAll('[data-tab]').forEach(button => button.classList.toggle('active', button.dataset.tab === mode));
+        renderShelf(); render();
+      }
+    }
     if (event.origin === location.origin && event.source === parent && event.data?.type === 'uaena-theme') {
       setMusicTheme(event.data.light);
       localStorage.setItem('uaena-music-light', String(event.data.light));
     }
+  });
+} else {
+  const views = { Tv: 'screen', Present: 'merch', Search: 'search', Profile: 'profile' };
+  document.querySelectorAll('[data-nav]').forEach(button => {
+    if (views[button.dataset.nav]) button.onclick = () => {
+      localStorage.setItem('iu-theme-mode-v1', document.body.classList.contains('light') ? 'light' : 'dark');
+      location.href = `./?view=${views[button.dataset.nav]}`;
+    };
   });
 }

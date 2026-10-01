@@ -30,7 +30,8 @@ const base = process.argv[2] || 'http://127.0.0.1:4174';
     await preview.goto(`${base}/app-preview.html`);
     await preview.locator('#grid .card').first().waitFor();
     assert.deepEqual(await preview.evaluate(signature), web);
-    assert.equal(await app.locator('.audio-dot').first().isVisible(), false);
+    assert.equal(await app.locator('.audio-dot').count(), 0);
+    assert.equal(await app.locator('.mini').isVisible(), false);
     if (width === 390) {
       const sizes = await frame.evaluate(() => [...document.querySelectorAll('.art')].map(el => {
         const rect = el.getBoundingClientRect();
