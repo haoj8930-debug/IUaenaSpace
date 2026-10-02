@@ -109,3 +109,168 @@ body.light .mini { background: rgba(255,255,255,.78); }
   #themeControl { width: 100%; display: flex; }
   #themeControl button { flex: 1; min-width: 0; min-height: 44px; }
 }
+
+/* Compact acrylic player: strong album identity, quiet controls, stable geometry. */
+.dock { width: min(680px,calc(100% - 24px)); }
+.mini {
+  position: relative;
+  isolation: isolate;
+  min-height: 68px;
+  padding: 9px 10px;
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  border-radius: 24px;
+  background:
+    linear-gradient(110deg,rgba(188,164,235,.12),transparent 42%,rgba(119,183,230,.09)),
+    rgba(30,30,40,.84);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    0 14px 38px rgba(0,0,0,.2);
+  backdrop-filter: blur(22px) saturate(1.28);
+  -webkit-backdrop-filter: blur(22px) saturate(1.28);
+}
+.mini::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 22px;
+  background: linear-gradient(180deg,rgba(255,255,255,.07),transparent 48%);
+  pointer-events: none;
+}
+body.light .mini {
+  border-color: rgba(104,75,145,.1) !important;
+  background:
+    linear-gradient(110deg,rgba(171,145,226,.1),transparent 42%,rgba(116,181,229,.1)),
+    rgba(255,255,255,.86);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    0 14px 36px rgba(70,45,120,.14);
+}
+.mini > img {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 7px 18px rgba(0,0,0,.2);
+}
+body.light .mini > img {
+  border-color: rgba(105,70,150,.12);
+  box-shadow: 0 7px 17px rgba(75,50,110,.14);
+}
+.mini .meta {
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 0 12px 0 8px;
+}
+.mini strong {
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+.mini small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+  color: #b9b1c6;
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.mini small::before {
+  content: "";
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8bc9ea;
+  box-shadow: 0 0 0 3px rgba(139,201,234,.13);
+}
+body.light .mini small { color: #79688b; }
+body.light .mini small::before {
+  background: #8a67c9;
+  box-shadow: 0 0 0 3px rgba(138,103,201,.11);
+}
+.mini .icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  color: #d4ccdf;
+  font-size: 20px;
+  line-height: 1;
+  transition: color .18s ease,background-color .18s ease,transform .18s ease;
+}
+.mini .icon:hover { color: #fff; background: rgba(255,255,255,.08); }
+.mini .icon:active { transform: scale(.94); }
+body.light .mini .icon { color: #6d5d7e; }
+body.light .mini .icon:hover { color: #49305f; background: rgba(120,88,160,.08); }
+.mini .play {
+  flex-basis: 46px;
+  width: 46px;
+  height: 46px;
+  color: #fff !important;
+  background: linear-gradient(135deg,#8c6bd4 0%,#637fd5 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 7px 18px rgba(99,96,190,.32);
+}
+.mini .play:hover {
+  background: linear-gradient(135deg,#9576dc 0%,#6b89dc 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.4),
+    0 9px 22px rgba(99,96,190,.4);
+}
+.mini .play:focus-visible {
+  outline: 2px solid #cdb8ff;
+  outline-offset: 3px;
+}
+@media (max-width:740px) {
+  .dock { width: calc(100% - 18px); }
+  .mini {
+    min-height: 56px;
+    padding: 6px;
+    gap: 4px;
+    margin-bottom: 8px;
+    border-radius: 20px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.2),
+      0 9px 24px rgba(0,0,0,.17);
+  }
+  .mini::before { border-radius: 18px; }
+  .mini > img {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+  .mini .meta { gap: 1px; padding: 0 5px 0 6px; }
+  .mini strong { font-size: 12px; }
+  .mini small { gap: 5px; font-size: 9px; }
+  .mini small::before { flex-basis: 4px; width: 4px; height: 4px; }
+  .mini .icon {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+  .mini .play {
+    flex-basis: 42px;
+    width: 42px;
+    height: 42px;
+  }
+}
+@media (max-width:350px) {
+  .mini .meta { padding-right: 2px; }
+  .mini .next { display: none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .mini .icon { transition: none; }
+}
