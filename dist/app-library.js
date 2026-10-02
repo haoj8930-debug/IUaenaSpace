@@ -45,7 +45,11 @@ render = function () {
   const gridSignature = shown.map(t => t.id).join('|');
   if (gridSignature !== libraryGridSignature) {
     libraryGridSignature = gridSignature;
-    $('#grid').innerHTML = shown.map(t => `<button class="card" data-id="${esc(t.id)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"></div><strong title="${esc(t.originalTitle || t.title)}">${esc(t.originalTitle || t.title)}</strong><small>${esc(t.zh || t.release)}</small></button>`).join('');
+    $('#grid').innerHTML = shown.map(t => {
+      const name = t.displayTitle || t.originalTitle || t.title;
+      const note = t.zhStatus === 'reference' ? '（参考译名，尚未确认通行中文名称）' : '';
+      return `<button class="card" data-id="${esc(t.id)}" aria-label="${esc(name)}，${esc(t.zh)}${esc(note)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"></div><strong title="${esc(name)}">${esc(name)}</strong><small title="${esc(t.zh)}${esc(note)}">${esc(t.zh)}</small></button>`;
+    }).join('');
   }
   $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === tracks[selected]?.id));
   more.classList.toggle('hidden', shown.length >= visible.length);
@@ -61,9 +65,10 @@ choose = async function (index, userAction = true) {
   if (librarySelectedId === t.id) { render(); return; }
   librarySelectedId = t.id;
   for (const cover of [$('#cover'), $('#minicover')]) if (cover.getAttribute('src') !== coverFor(t)) cover.src = coverFor(t);
-  $('#title').textContent = t.originalTitle || t.title;
-  $('#subtitle').textContent = t.zh || t.release;
-  $('#minititle').textContent = t.title;
+  $('#title').textContent = t.displayTitle || t.originalTitle || t.title;
+  $('#subtitle').textContent = t.zh;
+  $('#subtitle').title = t.zhStatus === 'reference' ? '参考译名，尚未确认通行中文名称' : t.zh;
+  $('#minititle').textContent = t.displayTitle || t.title;
   $('#minisub').textContent = audioMap[t.id] ? '已绑定本地音频' : '音源后续补充';
   if (currentAudio) { currentAudio.pause(); currentAudio = null; $('.play').textContent = '▶'; }
   const token = ++request;
