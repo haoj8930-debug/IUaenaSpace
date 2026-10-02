@@ -23,7 +23,7 @@
     }
     filtered.slice(shown,shown+limit).forEach((r,j)=>{
       const index=shown+j,button=document.createElement('button');button.type='button';button.className='card';button.setAttribute('aria-label','查看 '+r.title);button.dataset.id=r.id;
-      const art=document.createElement('div');art.className='art';const img=new Image();img.src=r.front;img.alt=r.title+' 正面';img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';img.onerror=()=>{img.hidden=true;const error=document.createElement('span');error.className='art-error';text(error,'点击查看来源');art.append(error)};art.append(img);
+      const art=document.createElement('div');art.className='art';const img=new Image();img.referrerPolicy=r.front.includes('daumcdn.net')?'origin':'no-referrer';img.src=r.front;img.alt=r.title+' 正面';img.loading='lazy';img.decoding='async';img.onerror=()=>{img.hidden=true;const error=document.createElement('span');error.className='art-error';text(error,'点击查看来源');art.append(error)};art.append(img);
       const badge=document.createElement('span');badge.className='badge';text(badge,r.back?'正反面':'背面待补');art.append(badge);button.append(art);
       const h=document.createElement('h3');text(h,r.series);button.append(h);const p=document.createElement('p');text(p,(r.year||'年份待确认')+' · '+r.kind);button.append(p);button.onclick=()=>{opener=button;open(index)};$('grid').append(button);
     });
@@ -31,7 +31,7 @@
   }
   function face(nextSide){
     const r=filtered[selected];side=nextSide;const url=r[side],size=r[side+'Size'];
-    $('detailImage').hidden=false;$('imageError').hidden=true;$('detailImage').src=url;$('detailImage').alt=r.title+(side==='front'?' 正面':' 背面');$('detailImage').referrerPolicy='no-referrer';
+    $('detailImage').hidden=false;$('imageError').hidden=true;$('detailImage').referrerPolicy=url.includes('daumcdn.net')?'origin':'no-referrer';$('detailImage').src=url;$('detailImage').alt=r.title+(side==='front'?' 正面':' 背面');
     $('detailImage').onerror=()=>{$('detailImage').hidden=true;$('imageError').hidden=false};
     $('original').href=url;text($('detailSize'),(side==='front'?'正面':'背面')+' · '+(size?size.join(' × ')+' px':'原尺寸'));
     for(const s of ['front','back'])$(s).setAttribute('aria-pressed',String(s===side));
