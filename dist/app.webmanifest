@@ -1,7 +1,7 @@
 {
   "name": "UAENA小窝",
   "short_name": "UAENA",
-  "description": "IU 音乐、歌词与本地播放 App 预览。",
+  "description": "IU 音乐、歌词与收藏档案。",
   "start_url": "/app-preview.html",
   "scope": "/",
   "display": "standalone",

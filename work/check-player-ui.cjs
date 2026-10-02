@@ -26,6 +26,9 @@ const base = process.argv[2] || 'http://127.0.0.1:4174';
           const cover = player.querySelector('img').getBoundingClientRect();
           const play = player.querySelector('.play').getBoundingClientRect();
           const next = player.querySelector('.next').getBoundingClientRect();
+          const previous = player.querySelector('.prev').getBoundingClientRect();
+          const progress = player.querySelector('.mini-progress').getBoundingClientRect();
+          const nav = document.querySelector('.nav').getBoundingClientRect();
           const style = getComputedStyle(player);
           return {
             width: rect.width,
@@ -34,15 +37,21 @@ const base = process.argv[2] || 'http://127.0.0.1:4174';
             cover: [cover.width, cover.height],
             play: [play.width, play.height],
             next: [next.width, next.height],
+            previous: [previous.width, previous.height],
+            progress: [progress.width, progress.height],
+            navWidth: nav.width,
             title: player.querySelector('strong').textContent.trim(),
             status: player.querySelector('small').textContent.trim()
           };
         });
         assert.ok(ui.width <= width - 16);
+        assert.ok(ui.width < ui.navWidth);
         assert.ok(ui.radius >= 18);
         assert.equal(Math.round(ui.cover[0]), Math.round(ui.cover[1]));
         assert.ok(ui.play[0] >= 40 && ui.play[1] >= 40);
-        assert.ok(width <= 740 ? ui.height <= 58 : ui.height >= 66);
+        assert.ok(ui.height >= 62 && ui.height <= 82);
+        assert.ok(ui.previous[0] > 0 && ui.next[0] > 0);
+        assert.ok(ui.progress[0] > 80 && ui.progress[1] >= 8);
         assert.ok(ui.title);
         assert.ok(ui.status);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));

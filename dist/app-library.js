@@ -68,14 +68,19 @@ choose = async function (index, userAction = true) {
   $('#title').textContent = t.displayTitle || t.originalTitle || t.title;
   $('#subtitle').textContent = t.zh;
   $('#subtitle').title = t.zhStatus === 'reference' ? '参考译名，尚未确认通行中文名称' : t.zh;
-  $('#minititle').textContent = t.displayTitle || t.title;
-  $('#minisub').textContent = audioMap[t.id] ? '已绑定本地音频' : onlineAudio[t.id]?.url ? '可在线播放' : '音源后续补充';
-  if (currentAudio) { currentAudio.pause(); currentAudio = null; $('.play').textContent = '▶'; }
+  $('#minititle').textContent = titleFor(t);
+  $('#minisub').textContent = t.zh || t.release || 'IU';
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  setPlayingUi(false);
+  $('.mini-progress').value = '0';
+  $('.mini-progress').style.setProperty('--player-progress', '0%');
+  clearActiveLyrics();
+  setSystemMetadata(t);
   const token = ++request;
   const box = $('#lyrics');
   const local = window.IU_LOCAL_LYRICS?.[t.id];
   if (local?.lines?.length) {
-    box.innerHTML = local.lines.map(l => `<div class="verse">${esc(l.original)}${l.translation ? `<small>${esc(l.translation)}</small>` : ''}</div>`).join('');
+    box.innerHTML = local.lines.map(l => `<div class="verse"${Number.isFinite(Number(l.time)) ? ` data-time="${Number(l.time)}"` : ''}>${esc(l.original)}${l.translation ? `<small>${esc(l.translation)}</small>` : ''}</div>`).join('');
   } else {
     box.innerHTML = '<p class="empty">本地文件暂未提供这首歌的歌词</p>';
   }
