@@ -38,6 +38,7 @@ render = function () {
     (mode !== 'favorites' || favorites.has(t.id)) &&
     (mode !== 'albums' || (t.category === libraryCategory && (!libraryAlbum || t.releaseId === libraryAlbum))) &&
     `${t.title} ${t.originalTitle || ''} ${t.zh || ''} ${t.release}`.toLowerCase().includes(query));
+  visibleTrackIds = visible.map(track => track.id);
   const columns = getComputedStyle($('#grid')).gridTemplateColumns.trim().split(/\s+/).length;
   const shown = visible.slice(0, columns * libraryRows);
   $('#count').textContent = needsSelection ? '' : `${visible.length} 首`;
@@ -62,7 +63,7 @@ choose = async function (index, userAction = true) {
   const t = tracks[selected];
   if (userAction) musicInteracted = true;
   $('.mini').classList.toggle('hidden', !musicInteracted);
-  if (librarySelectedId === t.id) { render(); return; }
+  if (librarySelectedId === t.id) { render(); renderQueue(); return; }
   librarySelectedId = t.id;
   for (const cover of [$('#cover'), $('#minicover')]) if (cover.getAttribute('src') !== coverFor(t)) cover.src = coverFor(t);
   $('#title').textContent = t.displayTitle || t.originalTitle || t.title;
@@ -84,7 +85,7 @@ choose = async function (index, userAction = true) {
   } else {
     box.innerHTML = '<p class="empty">本地文件暂未提供这首歌的歌词</p>';
   }
-  if (token === request) render();
+  if (token === request) { render(); renderQueue(); }
 };
 
 $('#shelf').onclick = event => {
@@ -111,9 +112,10 @@ $('#grid').onclick = event => {
   const now = Date.now();
   const doubleTap = lastCardTap.id === card.dataset.id && now - lastCardTap.time < 650;
   lastCardTap = { id: card.dataset.id, time: now };
-  choose(tracks.findIndex(t => t.id === card.dataset.id));
-  if (doubleTap) { $('#side').classList.remove('library-blank'); openLyrics(); }
-  else if (matchMedia('(max-width:740px)').matches && (audioMap[card.dataset.id] || onlineAudio[card.dataset.id]?.url)) playCurrent();
+  if (doubleTap) {
+    lastCardTap = { id: '', time: 0 };
+    openTrackAction(card.dataset.id);
+  }
 };
 document.querySelectorAll('[data-tab]').forEach(button => button.onclick = () => {
   mode = button.dataset.tab;
@@ -179,7 +181,7 @@ if (embeddedMusic) {
     }
     if (event.data?.type === 'uaena-open-track') {
       const index = tracks.findIndex(track => track.id === event.data.id);
-      if (index >= 0) { choose(index); $('#side').classList.remove('library-blank'); openLyrics(); }
+      if (index >= 0) choose(index);
     }
     if (event.data?.type === 'uaena-open-album') {
       const entry = libraryAlbums.find(a => a.id === event.data.id || a.title === event.data.title);
