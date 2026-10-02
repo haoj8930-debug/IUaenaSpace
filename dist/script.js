@@ -1,151 +1,9 @@
-const records = [
-  {
-    title: "Love Poem",
-    year: "2019",
-    album: "Love Poem",
-    mood: "comfort",
-    creator: true,
-    tags: ["安慰", "献给听众", "作词"],
-    note: "适合在心很满却说不出口的时候打开。记录重点不是悲伤本身，而是“我会在这里”的陪伴感。",
-  },
-  {
-    title: "Palette",
-    year: "2017",
-    album: "Palette",
-    mood: "self",
-    creator: true,
-    tags: ["自画像", "二十五岁", "作词作曲"],
-    note: "把年龄写成一种清醒的坐标：承认喜欢，也承认改变。适合做生日、阶段总结和自我整理的页签。",
-  },
-  {
-    title: "Through the Night",
-    year: "2017",
-    album: "Palette",
-    mood: "night",
-    creator: true,
-    tags: ["夜晚", "信件感", "作词"],
-    note: "像一封没有寄出的夜间短信，温柔、克制、留白很多。适合放在深夜歌单的第一首。",
-  },
-  {
-    title: "Blueming",
-    year: "2019",
-    album: "Love Poem",
-    mood: "bright",
-    creator: true,
-    tags: ["明亮", "文字游戏", "作词"],
-    note: "把聊天框里的小心思写成轻快的花。页面记录它的蓝色感、轻盈节奏和恋爱时的试探语气。",
-  },
-  {
-    title: "Celebrity",
-    year: "2021",
-    album: "Lilac",
-    mood: "self",
-    creator: true,
-    tags: ["自我", "鼓励", "作词作曲"],
-    note: "写给不合群、被误解、却仍然独一无二的人。很适合放在“需要一点勇气”的清晨。",
-  },
-  {
-    title: "Lilac",
-    year: "2021",
-    album: "Lilac",
-    mood: "bright",
-    creator: true,
-    tags: ["告别", "春天", "作词"],
-    note: "明亮的告别曲，不沉重，却很有仪式感。记录本里把它归为“笑着合上旧章节”。",
-  },
-  {
-    title: "My Sea",
-    year: "2021",
-    album: "Lilac",
-    mood: "comfort",
-    creator: true,
-    tags: ["成长", "长篇叙事", "作词"],
-    note: "适合慢慢听，像从童年走到现在的一次回望。重点记录它的大段情绪推进和辽阔感。",
-  },
-  {
-    title: "Love Wins All",
-    year: "2024",
-    album: "The Winning",
-    mood: "comfort",
-    creator: true,
-    tags: ["守护", "电影感", "作词"],
-    note: "把爱写成共同逃亡和互相照亮。记录本里它是“世界很吵，但仍有人选择牵手”的那一页。",
-  },
-  {
-    title: "Shopper",
-    year: "2024",
-    album: "The Winning",
-    mood: "bright",
-    creator: true,
-    tags: ["欲望", "轻快", "作词"],
-    note: "轻松外壳下有一点俏皮的野心：想要、选择、拿起自己的东西。适合放进通勤提气歌单。",
-  },
-  {
-    title: "Unknown Planet",
-    year: "2026",
-    album: "Unknown Planet",
-    mood: "night",
-    creator: true,
-    tags: ["双主打", "未知", "作词作曲"],
-    note: "档案中最新的双主打节点之一。这里把它记录为从熟悉轨道出发、望向陌生星球的一页。",
-  },
-];
-
-const storageKey = "iu-lyrics-notebook-polished-v1";
-const lyricStorageKey = "iu-full-lyrics-library-v1";
 const themeStorageKey = "iu-theme-mode-v1";
-const presetStorageKey = "iu-theme-preset-v1";
-const seedEntries = [
-  {
-    id: "seed-love-poem",
-    songTitle: "Love Poem",
-    albumName: "Love Poem",
-    mood: "comfort",
-    originalText: "记录提示：适合收藏副歌前后的情绪推进，不展示完整歌词。",
-    translationText: "像把“我会听见你”写成一首缓慢展开的信。",
-    entryNote: "可标注喜欢的现场版本；很适合深夜或低落时回听。",
-  },
-  {
-    id: "seed-through-the-night",
-    songTitle: "Through the Night",
-    albumName: "Palette",
-    mood: "night",
-    originalText: "记录提示：夜晚、信件、想念，是这一页的关键词。",
-    translationText: "克制的表达比直白更有重量，像一句没有发送出去的晚安。",
-    entryNote: "适合作为“睡前页签”。",
-  },
-  {
-    id: "seed-celebrity",
-    songTitle: "Celebrity",
-    albumName: "Lilac",
-    mood: "self",
-    originalText: "记录提示：保留鼓励自己的短句，不搬运完整歌词。",
-    translationText: "写给那些不必被修正的不同，也写给不够相信自己的时刻。",
-    entryNote: "适合早晨出门前听。",
-  },
-  {
-    id: "seed-love-wins-all",
-    songTitle: "Love Wins All",
-    albumName: "The Winning",
-    mood: "comfort",
-    originalText: "记录提示：MV、叙事画面和旋律一起记录会更完整。",
-    translationText: "不是单纯甜蜜，而是混乱世界里仍然选择守护。",
-    entryNote: "可以补充 MV 观看后的理解。",
-  },
-];
 
-const grid = document.querySelector("#recordGrid");
-const searchInput = document.querySelector("#searchInput");
-const creatorOnly = document.querySelector("#creatorOnly");
-const chips = [...document.querySelectorAll("[data-filter]")];
-const shuffleBtn = document.querySelector("#shuffleBtn");
-const spotlight = document.querySelector("#spotlight");
-const entryForm = document.querySelector("#entryForm");
-const libraryCards = document.querySelector("#libraryCards");
-const importFile = document.querySelector("#importFile");
 const catalog = window.IU_CATALOG;
 
 const paletteShowSource = "https://www.kpopn.com/2022/12/18/ius-palette-cover-songs";
+
 const paletteShowRelease = {
   date: "2020-09-01",
   year: 2020,
@@ -353,7 +211,6 @@ const paletteShowTracks = [
     appleMusic: "https://music.apple.com/us/album/fate/1801725556?i=1801725670&uo=4",
   },
 ];
-
 
 const officialSingleSupplements = [
   { title: "BBIBBI", originalTitle: "삐삐", zh: "哔哔", year: 2018, date: "2018-10-10", type: "数字单曲", originalArtist: "IU", image: "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/8a/2a/fb/8a2afbb2-728b-f160-8210-ba43146e9d83/cover-_DS.jpg/600x600bb.jpg", appleMusic: "https://music.apple.com/us/album/bbibbi/1438614238?i=1438614348&uo=4" },
@@ -658,84 +515,74 @@ function applyNeteaseAlbumCovers() {
 }
 
 applyCatalogSupplements();
+
 applyNeteaseAlbumCovers();
+
 ensureTrackMediaLinks();
 
-const releaseShelf = document.querySelector("#releaseShelf");
-const trackGrid = document.querySelector("#trackGrid");
-const musicSidePanel = document.querySelector("#musicSidePanel");
-const releaseFilter = document.querySelector("#releaseFilter");
-const yearFilter = document.querySelector("#yearFilter");
-const releaseTypeFilter = document.querySelector("#releaseTypeFilter");
-const mediaFilter = document.querySelector("#mediaFilter");
-const catalogCount = document.querySelector("#catalogCount");
-const catalogSearch = document.querySelector("#catalogSearch");
-const catalogReset = document.querySelector("#catalogReset");
 const globalSearchInput = document.querySelector("#globalSearchInput");
+
 const globalSearchType = document.querySelector("#globalSearchType");
+
 const globalSearchCount = document.querySelector("#globalSearchCount");
+
 const globalSearchResults = document.querySelector("#globalSearchResults");
+
 const searchPage = document.querySelector(".searchPage");
-const lyricsDialog = document.querySelector("#lyricsDialog");
-const lyricsDialogTitle = document.querySelector("#lyricsDialogTitle");
-const lyricsDialogBody = document.querySelector("#lyricsDialogBody");
-const lyricsDialogClose = document.querySelector("#lyricsDialogClose");
-const trackDetailDialog = document.querySelector("#trackDetailDialog");
-const trackDetailTitle = document.querySelector("#trackDetailTitle");
-const trackDetailBody = document.querySelector("#trackDetailBody");
-const trackDetailClose = document.querySelector("#trackDetailClose");
+
 const screenDetailDialog = document.querySelector("#screenDetailDialog");
+
 const screenDetailTitle = document.querySelector("#screenDetailTitle");
+
 const screenDetailBody = document.querySelector("#screenDetailBody");
+
 const screenDetailClose = document.querySelector("#screenDetailClose");
+
 const bottomNav = document.querySelector("#bottomNav");
+
 const sectionTabs = document.querySelector("#sectionTabs");
+
 const appViewSections = [...document.querySelectorAll("[data-view]")];
+
 const screenGrid = document.querySelector("#screenGrid");
+
 const screenCount = document.querySelector("#screenCount");
+
 const officialShelf = document.querySelector("#officialShelf");
+
 const merchShelf = document.querySelector("#merchShelf");
+
 const merchGrid = document.querySelector("#merchGrid");
+
 const merchCount = document.querySelector("#merchCount");
-const catalogMore = document.querySelector("#catalogMore");
+
 const screenMore = document.querySelector("#screenMore");
+
 const searchMore = document.querySelector("#searchMore");
+
 const merchMore = document.querySelector("#merchMore");
+
 const themeControl = document.querySelector("#themeControl");
-const themePresetControl = document.querySelector("#themePresetControl");
+
 const toTopButton = document.querySelector("#toTopButton");
 
-let activeFilter = "all";
 let activeView = "music";
+
 let screenFilter = "";
+
 let merchFilter = "";
+
 let officialCategoryFilter = "";
-let entries = loadEntries();
-let lyricLibrary = loadLyricLibrary();
-const bundledLyricLibrary = window.IU_LYRICS_BY_NETEASE_ID || {};
+
 let themeMode = localStorage.getItem(themeStorageKey);
+
 if (!['light', 'dark'].includes(themeMode)) themeMode = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-const legacyPresetMap = { midnight: "cosmic", lilac: "letter", golden: "cinema" };
-let themePreset = legacyPresetMap[localStorage.getItem(presetStorageKey)] || localStorage.getItem(presetStorageKey) || "cosmic";
-let catalogVisibleRows = 4;
+
 let screenVisibleRows = 3;
+
 let searchVisibleRows = 3;
+
 let merchVisibleRows = 3;
-let albumPreviewRelease = "";
-let musicLibraryMode = "songs";
-let musicLibraryCategory = "";
-let musicLibraryAlbum = "";
-let activeMusicTrackId = "";
-const musicNestedCategories = new Set(["正规专辑", "迷你专辑", "日专", "花书签"]);
-const musicLibraryTabs = document.createElement("div");
-musicLibraryTabs.className = "musicLibraryTabs";
-musicLibraryTabs.innerHTML = '<button type="button" data-library-tab="songs" class="active">歌曲</button><button type="button" data-library-tab="albums">专辑</button><button type="button" data-library-tab="favorites">收藏</button>';
-releaseShelf.before(musicLibraryTabs);
-const musicSubShelf = document.createElement("div");
-musicSubShelf.className = "releaseShelf musicSubShelf";
-releaseShelf.after(musicSubShelf);
-const musicNewest = (a, b) => (b.publishTime || 0) - (a.publishTime || 0) || (a.trackNo || 0) - (b.trackNo || 0) || String(a.title).localeCompare(String(b.title));
-let lastMobileMusicTap = { id: "", time: 0 };
 
 const sectionTabConfig = {
   music: [],
@@ -1072,15 +919,6 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-function moodLabel(value) {
-  return {
-    comfort: "安慰",
-    bright: "明亮",
-    self: "自我",
-    night: "夜晚",
-  }[value] || "记录";
-}
-
 function trackCategory(track) {
   const text = `${track.title} ${track.release} ${track.type} ${track.source}`.toLowerCase();
   if (text.includes("ost") || text.includes("soundtrack")) return "ost";
@@ -1102,31 +940,6 @@ function categoryLabel(value) {
   }[value] || "作品";
 }
 
-function releaseForTrack(track) {
-  return catalog.releases.find((release) => release.title === track.release) || { type: track.type || track.category || "", title: track.release };
-}
-
-function releaseTypeCategory(track) {
-  const release = releaseForTrack(track);
-  const text = `${release?.type || ""} ${track.type || ""} ${track.release || ""}`.toLowerCase();
-  if (/ost|soundtrack|影视|主题曲/.test(text)) return "ost-release";
-  if (/collab|feat|featuring|合作|参与|duet/.test(text)) return "collab-release";
-  if (/翻唱|cover|flower bookmark/.test(text)) return "cover-release";
-  if (/single|单曲/.test(text)) return "single";
-  if (/mini|迷你|ep/.test(text)) return "mini";
-  if (/studio|正规|album|专辑/.test(text)) return "studio";
-  return "single";
-}
-
-function loadEntries() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(storageKey) || "null");
-    return Array.isArray(saved) && saved.length ? saved : seedEntries;
-  } catch {
-    return seedEntries;
-  }
-}
-
 function normalizeKey(value) {
   return String(value || "")
     .trim()
@@ -1138,258 +951,12 @@ function normalizeKey(value) {
     .replace(/\s+/g, " ");
 }
 
-function trackLyricKey(track) {
-  return `${normalizeKey(track.title)}::${normalizeKey(track.release)}`;
-}
-
-function loadLyricLibrary() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(lyricStorageKey) || "null");
-    return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
-  } catch {
-    return {};
-  }
-}
-
-function saveLyricLibrary() {
-  localStorage.setItem(lyricStorageKey, JSON.stringify(lyricLibrary));
-}
-
-function lyricsHaveContent(payload) {
-  return Boolean(
-    String(payload?.lyrics || "").trim() ||
-    (Array.isArray(payload?.lines) && payload.lines.some((line) => String(line?.original || "").trim())),
-  );
-}
-
-function lyricTitleVariants(value) {
-  const text = String(value || "").trim();
-  const variants = new Set([normalizeKey(text)]);
-  const withoutGroups = text.replace(/\([^)]*\)|\[[^\]]*\]/g, " ").trim();
-  if (withoutGroups) variants.add(normalizeKey(withoutGroups));
-  for (const group of text.matchAll(/\(([^)]*)\)|\[([^\]]*)\]/g)) {
-    String(group[1] || group[2] || "")
-      .split(/[;,/]/)
-      .map((part) => part.replace(/\b(feat(?:uring)?|with|narration by|lit\.)\b.*$/i, "").trim())
-      .filter(Boolean)
-      .forEach((part) => variants.add(normalizeKey(part)));
-  }
-  return [...variants].filter(Boolean);
-}
-
-function lyricVersionFlags(value) {
-  const text = String(value || "");
-  return {
-    instrumental: /\b(inst(?:rumental)?\.?)\b|伴奏/i.test(text),
-    live: /\blive\b|现场|라이브/i.test(text),
-  };
-}
-
-function bundledLyricRecordForTrack(track) {
-  if (track.neteaseSongId) {
-    const direct = bundledLyricLibrary[String(track.neteaseSongId)];
-    if (lyricsHaveContent(direct)) return { id: String(track.neteaseSongId), payload: direct };
-  }
-
-  const trackVariants = new Set([track.title, track.originalTitle].flatMap(lyricTitleVariants));
-  const trackFlags = lyricVersionFlags(`${track.title} ${track.originalTitle || ""}`);
-  const releaseKey = normalizeKey(track.release);
-  const candidates = Object.entries(bundledLyricLibrary)
-    .filter(([, payload]) => {
-      if (!lyricsHaveContent(payload)) return false;
-      const flags = lyricVersionFlags(payload.title);
-      if (flags.instrumental !== trackFlags.instrumental || flags.live !== trackFlags.live) return false;
-      return lyricTitleVariants(payload.title).some((key) => trackVariants.has(key));
-    })
-    .map(([id, payload]) => ({
-      id,
-      payload,
-      score: normalizeKey(payload.release) === releaseKey ? 2 : normalizeKey(payload.title) === normalizeKey(track.title) ? 1 : 0,
-    }))
-    .sort((a, b) => b.score - a.score);
-  return candidates[0] || null;
-}
-
-function lyricForTrack(track) {
-  if (window.IU_LOCAL_LYRICS?.[track.id]?.lines?.length) return window.IU_LOCAL_LYRICS[track.id];
-  const localEntry = lyricLibrary[trackLyricKey(track)] || lyricLibrary[normalizeKey(track.title)];
-  if (lyricsHaveContent(localEntry)) return localEntry;
-  return bundledLyricRecordForTrack(track)?.payload || null;
-}
-
-function normalizeLyricPayload(payload) {
-  const next = {};
-  const addItem = (item, fallbackTitle = "") => {
-    if (!item) return;
-    if (typeof item === "string") {
-      if (!fallbackTitle) return;
-      next[normalizeKey(fallbackTitle)] = { lyrics: item };
-      return;
-    }
-    const title = item.title || item.songTitle || item.name || fallbackTitle;
-    const release = item.release || item.album || item.albumName || "";
-    const lyrics = item.lyrics || item.text || item.originalText || item.original || "";
-    if (!title || !lyrics) return;
-    const key = release ? `${normalizeKey(title)}::${normalizeKey(release)}` : normalizeKey(title);
-    next[key] = {
-      title,
-      release,
-      lyrics,
-      translation: item.translation || item.translationText || "",
-      note: item.note || item.entryNote || "",
-    };
-  };
-
-  if (Array.isArray(payload)) {
-    payload.forEach((item) => addItem(item));
-    return next;
-  }
-
-  if (payload && typeof payload === "object") {
-    if (Array.isArray(payload.tracks)) payload.tracks.forEach((item) => addItem(item));
-    Object.entries(payload).forEach(([key, value]) => {
-      if (key === "tracks") return;
-      addItem(value, key);
-    });
-  }
-
-  return next;
-}
-
-function stripLrcTiming(text) {
-  return String(text || "")
-    .split(/\r?\n/)
-    .map((line) => line.replace(/^\s*(\[[0-9:.]+\])+\s*/, "").trimEnd())
-    .filter((line) => !/^\[(ar|ti|al|by|offset|length):/i.test(line.trim()))
-    .join("\n")
-    .trim();
-}
-
-function titleFromLyricFile(fileName) {
-  return fileName
-    .replace(/\.(json|txt|lrc)$/i, "")
-    .replace(/\s*-\s*(iu|lyrics|歌词)\s*$/i, "")
-    .replace(/[_-]+/g, " ")
-    .trim();
-}
-
-function bestTrackForTitle(title) {
-  const key = normalizeKey(title);
-  return (
-    catalog.tracks.find((track) => normalizeKey(track.title) === key) ||
-    catalog.tracks.find((track) => normalizeKey(track.originalTitle) === key) ||
-    catalog.tracks.find((track) => normalizeKey(track.title).includes(key) || key.includes(normalizeKey(track.title)))
-  );
-}
-
-async function readLyricFile(file) {
-  const text = await file.text();
-  if (/\.json$/i.test(file.name) || file.type === "application/json") {
-    return normalizeLyricPayload(JSON.parse(text));
-  }
-
-  const title = titleFromLyricFile(file.name);
-  const track = bestTrackForTitle(title);
-  const lyrics = /\.lrc$/i.test(file.name) ? stripLrcTiming(text) : text.trim();
-  if (!lyrics) return {};
-
-  const key = track ? trackLyricKey(track) : normalizeKey(title);
-  return {
-    [key]: {
-      title: track?.title || title,
-      release: track?.release || "",
-      lyrics,
-      translation: "",
-      note: `从 ${file.name} 导入`,
-    },
-  };
-}
-
-function saveEntries() {
-  localStorage.setItem(storageKey, JSON.stringify(entries));
-}
-
-function resetEntryForm() {
-  entryForm.reset();
-  document.querySelector("#entryId").value = "";
-}
-
-function renderRecords() {
-  const query = searchInput.value.trim().toLowerCase();
-  const items = records.filter((record) => {
-    const text = `${record.title} ${record.album} ${record.year} ${record.tags.join(" ")}`.toLowerCase();
-    const matchesText = !query || text.includes(query);
-    const matchesMood = activeFilter === "all" || record.mood === activeFilter;
-    const matchesCreator = !creatorOnly.checked || record.creator;
-    return matchesText && matchesMood && matchesCreator;
-  });
-
-  if (!items.length) {
-    grid.innerHTML = `<div class="empty">没有翻到这一页。换一个关键词，或者先取消部分筛选。</div>`;
-    return;
-  }
-
-  grid.innerHTML = items
-    .map(
-      (record) => `
-        <article class="record">
-          <div class="record__meta">
-            <span>${record.year}</span>
-            <span>${record.album}</span>
-          </div>
-          <h3>${record.title}</h3>
-          <p class="record__note">${record.note}</p>
-          <div class="record__tags">
-            ${record.tags.map((tag) => `<span>${tag}</span>`).join("")}
-          </div>
-        </article>
-      `,
-    )
-    .join("");
-}
-
-function coverStyle(cover) {
-  const colors = cover?.colors || ["#0d1324", "#d6414f", "#f7ead2"];
-  if (cover?.image) {
-    return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); background-image: url('${cover.image}'); background-size: contain; background-repeat: no-repeat; background-position: center; color: ${colors[2]};`;
-  }
-  return `background: linear-gradient(135deg, ${colors[0]}, ${colors[1]}); color: ${colors[2]};`;
-}
-
 function searchQueryForTrack(track) {
   return (track.searchQuery || `IU ${track.title} ${track.originalArtist || ""}`).trim();
 }
 
-function encodedTrackQuery(track) {
-  return encodeURIComponent(searchQueryForTrack(track));
-}
-
 function directSearchUrl(base, query) {
   return base + encodeURIComponent(query);
-}
-
-function domesticLinksForTrack(track) {
-  const queryText = searchQueryForTrack(track);
-  const query = encodeURIComponent(queryText);
-  const links = [
-    { label: "QQ 音乐", url: `https://y.qq.com/n/ryqq/search?w=${query}` },
-    { label: "酷狗", url: `https://www.kugou.com/yy/html/search.html#searchType=song&searchKeyWord=${query}` },
-  ];
-  links.unshift(track.neteaseSongId
-    ? { label: "网易云 App", url: `https://y.music.163.com/m/song?id=${track.neteaseSongId}` }
-    : { label: "网易云搜索", url: `https://music.163.com/#/search/m/?s=${query}&type=1` });
-  return links;
-}
-
-function internationalLinksForTrack(track) {
-  const queryText = searchQueryForTrack(track);
-  return [
-    { label: "Spotify", url: directSearchUrl("https://open.spotify.com/search/", queryText) },
-    { label: "YouTube Music", url: directSearchUrl("https://music.youtube.com/search?q=", queryText) },
-    { label: "Apple Music", url: track.audioLinks?.appleMusic || directSearchUrl("https://music.apple.com/us/search?term=", queryText) },
-    { label: "Melon", url: directSearchUrl("https://www.melon.com/search/total/index.htm?q=", queryText) },
-    { label: "Bugs", url: directSearchUrl("https://music.bugs.co.kr/search/integrated?q=", queryText) },
-  ];
 }
 
 function youtubeSearchLink(query) {
@@ -1465,33 +1032,11 @@ function trackChineseTitle(track) {
   return trackZh[plain] || "";
 }
 
-function trackDisplayTitle(track) {
-  const original = String(track.originalTitle || "").trim();
-  const title = String(track.title || "").trim();
-  const titleBase = title.replace(/\s*\([^)]*\)/g, "").trim() || title;
-  const hangul = /[\u3131-\u318e\uac00-\ud7a3]/;
-  const titleParen = title.match(/\(([^)]*[\u3131-\u318e\uac00-\ud7a3][^)]*)\)/)?.[1] || "";
-  const originalBase = original.split(";")[0].trim();
-  const originalName = hangul.test(originalBase) ? originalBase : titleParen.split(";")[0].trim();
-  if (originalName && originalName !== titleBase && !/^LP only$/i.test(originalName)) {
-    return `${originalName} (${titleBase})`;
-  }
-  return titleBase;
-}
-
 function cardTextClass(text = "") {
   const length = String(text).replace(/\s+/g, "").length;
   if (length > 54) return "isTextLong";
   if (length > 34) return "isTextMedium";
   return "isTextShort";
-}
-
-function trackCardLayout(track) {
-  const category = trackCategory(track);
-  const nameLength = trackDisplayTitle(track).length;
-  if (category === "ost" || category === "collab") return "isMediaLayout";
-  if (category === "cover" || nameLength > 42) return "isSplitLayout";
-  return "isClassicLayout";
 }
 
 function trackIntro(track) {
@@ -1891,7 +1436,7 @@ function renderSectionTabs() {
     sectionTabs.innerHTML = "";
     return;
   }
-  const current = activeView === "music" ? mediaFilter.value : activeView === "merch" ? merchFilter : screenFilter;
+  const current = activeView === "merch" ? merchFilter : screenFilter;
   sectionTabs.innerHTML = tabs
     .map(
       (tab) => `
@@ -1930,24 +1475,6 @@ function applyTheme(mode = themeMode) {
   });
 }
 
-function applyPreset(preset = themePreset) {
-  localStorage.removeItem(presetStorageKey);
-  delete document.body.dataset.themePreset;
-}
-
-function musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeValue, mediaValue) {
-  if (releaseValue !== "all" && track.release !== releaseValue) return false;
-  if (yearValue !== "all" && String(track.year) !== yearValue) return false;
-  if (releaseTypeValue !== "all" && releaseTypeCategory(track) !== releaseTypeValue) return false;
-  if (mediaValue === "album" && (track.release === "Collaborations, Covers & Specials" || ["cover", "collab", "ost"].includes(trackCategory(track)))) return false;
-  if (["official", "cover", "collab", "ost"].includes(mediaValue) && trackCategory(track) !== mediaValue) return false;
-  if (mediaValue === "mv" && !track.mv.length) return false;
-  if (mediaValue === "cn" && !domesticLinksForTrack(track).length) return false;
-  if (mediaValue === "creator" && !track.iuCreationRole) return false;
-  if (mediaValue === "version" && !track.version) return false;
-  return true;
-}
-
 function localMusicTracks() {
   const localTracks = Array.isArray(window.IU_LOCAL_TRACKS) ? window.IU_LOCAL_TRACKS : [];
   return localTracks.map((track) => ({
@@ -1976,156 +1503,8 @@ function activeMusicTracks() {
   return localTracks.length ? localTracks : catalog.tracks;
 }
 
-function renderReleaseShelf() {
-  if (window.IU_LOCAL_ALBUMS?.length) {
-    const albums = window.IU_LOCAL_ALBUMS.slice().sort(musicNewest);
-    const categories = [...new Set(albums.map(a => a.category))];
-    releaseShelf.hidden = musicLibraryMode !== "albums";
-    const card = (item, attribute, active) => `<button type="button" class="releaseCard hasImage ${active ? "is-selected" : ""}" style="${coverStyle({ image: item.cover })}" ${attribute} aria-pressed="${active}"><span class="releaseCard__meta"><strong>${escapeHtml(item.title)}</strong></span></button>`;
-    releaseShelf.innerHTML = categories.map(category => card({ title: category, cover: albums.find(a => a.category === category && a.cover)?.cover }, `data-library-category="${escapeHtml(category)}"`, musicLibraryCategory === category)).join("");
-    musicSubShelf.hidden = musicLibraryMode !== "albums" || !musicNestedCategories.has(musicLibraryCategory);
-    musicSubShelf.innerHTML = musicSubShelf.hidden ? "" : albums.filter(a => a.category === musicLibraryCategory).map(a => card(a, `data-library-album="${escapeHtml(a.id)}"`, musicLibraryAlbum === a.id)).join("");
-    return;
-  }
-  const releaseValue = releaseFilter.value || "all";
-  const yearValue = yearFilter.value || "all";
-  const releaseTypeValue = releaseTypeFilter.value || "all";
-  const mediaValue = mediaFilter.value || "all";
-  const localAlbums = Array.isArray(window.IU_LOCAL_ALBUMS) ? window.IU_LOCAL_ALBUMS : [];
-  const visibleReleases = localAlbums.length
-    ? localAlbums.map((album) => ({
-        id: album.id,
-        title: album.title,
-        year: album.category,
-        type: album.category,
-        track_count: album.audioCount || 0,
-        cover: {
-          image: album.cover,
-          colors: ["#efe8ff", "#d7c7f7", "#3b245f"],
-          initials: "IU",
-        },
-      }))
-    : catalog.releases.filter((release) => {
-        if (release.title === "Collaborations, Covers & Specials") return false;
-        if (!release.cover?.image) return false;
-        return catalog.tracks.some((track) => track.release === release.title && musicTrackMatchesFilters(track, releaseValue, yearValue, releaseTypeValue, mediaValue));
-      });
-  releaseShelf.innerHTML = visibleReleases
-    .slice()
-    .sort((a, b) => yearRank(b.year) - yearRank(a.year) || String(a.type).localeCompare(String(b.type), "zh-Hans-CN") || String(a.title).localeCompare(String(b.title), "zh-Hans-CN"))
-    .map(
-      (release) => `
-      <button class="releaseCard ${release.cover?.image ? "hasImage" : ""} ${albumPreviewRelease === release.title ? "is-selected" : ""}" type="button" style="${coverStyle(release.cover)}" data-release-name="${escapeHtml(release.title)}" aria-pressed="${albumPreviewRelease === release.title}">
-        <span class="releaseCard__meta">
-          <strong>${escapeHtml(release.title)}</strong>
-          <small>${release.year} · ${escapeHtml(release.type)} · ${release.track_count} 首</small>
-        </span>
-      </button>
-    `,
-    )
-    .join("") || `<div class="empty">当前筛选下没有匹配的专辑。</div>`;
-}
-
-function fillCatalogFilters() {
-  const localAlbums = Array.isArray(window.IU_LOCAL_ALBUMS) ? window.IU_LOCAL_ALBUMS : [];
-  const musicTracks = activeMusicTracks();
-  const visibleReleases = localAlbums.length
-    ? localAlbums.map((album) => ({ title: album.title }))
-    : catalog.releases.filter((release) => musicTracks.some((track) => track.release === release.title));
-  releaseFilter.innerHTML = `<option value="all">全部发行</option>${visibleReleases
-    .slice()
-    .sort((a, b) => yearRank(b.year) - yearRank(a.year) || String(a.title).localeCompare(String(b.title), "zh-Hans-CN"))
-    .map((release) => `<option value="${escapeHtml(release.title)}">${escapeHtml(release.title)}</option>`)
-    .join("")}`;
-  const years = [...new Set(musicTracks.map((track) => track.year))].sort((a, b) => yearRank(b) - yearRank(a) || String(a).localeCompare(String(b), "zh-Hans-CN"));
-  yearFilter.innerHTML = `<option value="all">全部年份</option>${years
-    .map((year) => `<option value="${year}">${year}</option>`)
-    .join("")}`;
-}
-
-function renderCatalog() {
-  const query = (catalogSearch?.value || "").trim().toLowerCase();
-  const releaseValue = releaseFilter.value;
-  const yearValue = yearFilter.value;
-  const releaseTypeValue = releaseTypeFilter.value;
-  const mediaValue = mediaFilter.value;
-  const hasActiveFilters = Boolean(query) || [releaseValue, yearValue, releaseTypeValue, mediaValue].some((value) => value && value !== "all");
-  const hasAlbumPreview = Boolean(albumPreviewRelease);
-  catalogReset.hidden = !hasActiveFilters;
-  renderReleaseShelf();
-  if (musicLibraryMode === "albums" && (!musicLibraryCategory || (musicNestedCategories.has(musicLibraryCategory) && !musicLibraryAlbum))) {
-    catalogCount.textContent = "";
-    trackGrid.innerHTML = "";
-    if (musicSidePanel) musicSidePanel.innerHTML = "";
-    catalogMore.hidden = true;
-    return;
-  }
-  const effectiveRelease = albumPreviewRelease || releaseValue;
-  const sourceTracks = activeMusicTracks();
-  let musicFavorites = [];
-  try { musicFavorites = JSON.parse(localStorage.getItem("uaena-app-preview-v2") || "{}").favorites || []; } catch {}
-  const filtered = sourceTracks.filter((track) =>
-    (!query || [track.title, track.originalTitle, track.zh, track.release, track.category, track.type].some((value) => String(value || "").toLowerCase().includes(query))) &&
-    musicTrackMatchesFilters(track, effectiveRelease, yearValue, releaseTypeValue, mediaValue) &&
-    (musicLibraryMode !== "favorites" || musicFavorites.includes(track.id)) &&
-    (musicLibraryMode !== "albums" || (track.category === musicLibraryCategory && (!musicLibraryAlbum || track.releaseId === musicLibraryAlbum)))
-  ).sort((a, b) => {
-    const byDate = (b.publishTime || 0) - (a.publishTime || 0);
-    if (byDate) return byDate;
-    const byYear = yearRank(b.year) - yearRank(a.year);
-    if (byYear) return byYear;
-    if (a.release !== b.release) return String(a.release).localeCompare(String(b.release), "zh-Hans-CN");
-    const aNo = Number(a.trackNo) || 999;
-    const bNo = Number(b.trackNo) || 999;
-    return aNo - bNo || String(a.title).localeCompare(String(b.title), "zh-Hans-CN");
-  });
-
-  const visible = filtered.slice(0, visibleCardLimit(trackGrid, catalogVisibleRows, 3));
-  if (!activeMusicTrackId || !filtered.some((track) => track.id === activeMusicTrackId)) {
-    activeMusicTrackId = filtered[0]?.id || "";
-  }
-  renderMusicSidePanel(filtered.find((track) => track.id === activeMusicTrackId) || filtered[0]);
-  catalogCount.textContent = albumPreviewRelease
-    ? `${albumPreviewRelease} · ${filtered.length} tracks`
-    : `${filtered.length} / ${sourceTracks.length} tracks`;
-  trackGrid.innerHTML =
-    visible
-      .map((track) => {
-        const savedLyrics = lyricForTrack(track);
-        const category = trackCategory(track);
-        return `
-          <article class="trackCard ${track.id === activeMusicTrackId ? "is-selected" : ""} ${trackCardLayout(track)} ${cardTextClass(trackDisplayTitle(track))}">
-          <div class="miniCover ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}">
-          </div>
-          <div class="trackBody">
-            <div class="trackTitleRow">
-              <div>
-                <h3>${escapeHtml(trackDisplayTitle(track))}</h3>
-                ${trackChineseTitle(track) ? `<small class="zhLine">${escapeHtml(trackChineseTitle(track))}</small>` : ""}
-              </div>
-              <div class="trackCardActions">
-                <button class="trackLinkButton trackLinkButton--primary" type="button" data-detail-key="${escapeHtml(track.id)}">详情</button>
-                <button class="trackLinkButton" type="button" data-lyrics-id="${escapeHtml(track.id)}">歌词页</button>
-              </div>
-            </div>
-            <p>${track.year} · ${escapeHtml(track.type)} · ${escapeHtml(track.language)}${track.length ? ` · ${escapeHtml(track.length)}` : ""}</p>
-            <p>${escapeHtml(trackIntro(track))}</p>
-            <div class="trackBadges">
-              <span class="categoryBadge">${escapeHtml(categoryLabel(category))}</span>
-              ${track.version ? `<span>${escapeHtml(track.version)}</span>` : ""}
-              ${track.mv.length ? `<span>${track.mv.length} 条影像</span>` : ""}
-              ${savedLyrics ? `<span class="isSaved">已收录歌词</span>` : `<span>待补歌词</span>`}
-            </div>
-          </div>
-        </article>
-      `;
-      })
-      .join("") || `<div class="empty">没有匹配的歌曲，换个筛选试试。</div>`;
-  updateMoreButton(catalogMore, visible.length, filtered.length);
-  renderSectionTabs();
-}
-
 let globalSearchIndex;
+
 function globalSearchItems() {
   if (globalSearchIndex) return globalSearchIndex;
   const trackItems = activeMusicTracks().map((track) => ({
@@ -2304,109 +1683,6 @@ function showDialogSafely(dialog) {
   }
 }
 
-function fallbackLyricLines(savedLyrics) {
-  const creditPattern = /^(作词|作曲|编曲|制作人|监制|混音|母带|和声|录音|吉他|贝斯|鼓|钢琴|键盘|弦乐|Programmed|Lyrics|Composed|Arranged)\s*[:：]/i;
-  const original = String(savedLyrics?.lyrics || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
-  const credits = original.filter((line) => creditPattern.test(line));
-  const lyricLines = original.filter((line) => !creditPattern.test(line));
-  const translations = String(savedLyrics?.translation || "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
-  return {
-    credits,
-    lines: lyricLines.map((line, index) => ({ original: line, translation: translations[index] || "" })),
-  };
-}
-
-function renderPairedLyrics(track, payload) {
-  const fallback = fallbackLyricLines(payload);
-  const lines = Array.isArray(payload?.lines) && payload.lines.length ? payload.lines : fallback.lines;
-  const credits = Array.isArray(payload?.credits) && payload.credits.length ? payload.credits : fallback.credits;
-  lyricsDialogBody.innerHTML = `
-    <div class="lyricsMeta">
-      <span>${escapeHtml(track.release)}</span>
-      <span>${track.year}</span>
-      <span>${escapeHtml(track.language)}</span>
-    </div>
-    ${credits.length ? `<div class="lyricCredits">${credits.map((credit) => `<span>${escapeHtml(credit)}</span>`).join("")}</div>` : ""}
-    <div class="lyricLines">
-      ${lines.map((line) => `
-        <div class="lyricPair">
-          <p class="lyricOriginal">${escapeHtml(line.original || "")}</p>
-          ${line.translation ? `<p class="lyricTranslation">${escapeHtml(line.translation)}</p>` : ""}
-        </div>
-      `).join("")}
-    </div>
-  `;
-}
-
-function pairedLyricsHtml(track, payload, limit = 8) {
-  const fallback = fallbackLyricLines(payload);
-  const lines = Array.isArray(payload?.lines) && payload.lines.length ? payload.lines : fallback.lines;
-  const shown = lines.slice(0, limit);
-  return shown.length
-    ? `<div class="musicSideLyrics">${shown.map((line) => `
-        <div class="musicSideLine">
-          <p>${escapeHtml(line.original || "")}</p>
-          ${line.translation ? `<small>${escapeHtml(line.translation)}</small>` : ""}
-        </div>
-      `).join("")}</div>`
-    : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`;
-}
-
-function renderMusicSidePanel(track) {
-  if (!musicSidePanel || !track) return;
-  const localPayload = window.IU_LOCAL_LYRICS?.[track.id];
-  const savedLyrics = lyricForTrack(track);
-  const payload = localPayload?.lines?.length ? localPayload : savedLyrics;
-  musicSidePanel.innerHTML = `
-    <p class="eyebrow">LYRICS / 歌词</p>
-    <div class="musicSideCover ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}"></div>
-    <div class="musicSideHead">
-      <div>
-        <h3>${escapeHtml(trackDisplayTitle(track))}</h3>
-        ${trackChineseTitle(track) ? `<small>${escapeHtml(trackChineseTitle(track))}</small>` : ""}
-      </div>
-      <button type="button" aria-label="收藏歌曲">♡</button>
-    </div>
-    ${payload ? pairedLyricsHtml(track, payload, 8) : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`}
-  `;
-}
-
-async function openLyricsPage(track) {
-  const savedLyrics = lyricForTrack(track);
-  const bundledRecord = bundledLyricRecordForTrack(track);
-  const lyricSourceId = track.neteaseId || track.neteaseSongId || bundledRecord?.id;
-  const manifestEntry = lyricSourceId ? window.IU_LYRICS_MANIFEST?.[String(lyricSourceId)] : null;
-  const hasLyrics = Boolean(manifestEntry?.path || savedLyrics);
-  lyricsDialogTitle.textContent = track.title;
-  lyricsDialogBody.innerHTML = hasLyrics ? `<div class="lyricsLoading">正在整理逐句歌词…</div>` : `<div class="empty">这首歌的歌词与中文翻译暂未收录。</div>`;
-  showDialogSafely(lyricsDialog);
-  if (!hasLyrics) return;
-  if (window.IU_LOCAL_LYRICS?.[track.id]?.lines?.length) {
-    renderPairedLyrics(track, window.IU_LOCAL_LYRICS[track.id]);
-    return;
-  }
-
-  if (manifestEntry?.path) {
-    try {
-      const response = await fetch(manifestEntry.path);
-      if (!response.ok) throw new Error(`Lyrics request failed: ${response.status}`);
-      const payload = await response.json();
-      const hasPairedLines = Array.isArray(payload?.lines) && payload.lines.length > 0;
-      const hasPlainLyrics = Boolean(String(payload?.lyrics || "").trim());
-      if (!hasPairedLines && !hasPlainLyrics) throw new Error("Lyrics file is empty");
-      renderPairedLyrics(track, payload);
-      return;
-    } catch {
-      // Keep the bundled plain-text lyrics as an offline fallback.
-    }
-  }
-  if (savedLyrics) {
-    renderPairedLyrics(track, savedLyrics);
-  } else {
-    lyricsDialogBody.innerHTML = `<div class="empty">歌词文件暂时无法读取，请稍后再试。</div>`;
-  }
-}
-
 function detailRow(label, value) {
   return value
     ? `<div class="detailRow"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></div>`
@@ -2454,124 +1730,8 @@ function openScreenDetail(item) {
   showDialogSafely(screenDetailDialog);
 }
 
-function openTrackDetail(track) {
-  const category = trackCategory(track);
-  trackDetailTitle.textContent = track.title;
-  trackDetailBody.innerHTML = `
-    <div class="detailHero ${track.cover?.image ? "hasImage" : ""}" style="${coverStyle(track.cover)}">
-      <span>${escapeHtml(track.cover?.initials || "IU")}</span>
-      <strong>${escapeHtml(track.release)}</strong>
-    </div>
-    <div class="detailGrid">
-      ${detailRow("分类", categoryLabel(category))}
-      ${detailRow("发行", track.release)}
-      ${detailRow("年份", track.year)}
-      ${detailRow("类型", track.type)}
-      ${detailRow("语言", track.language)}
-      ${detailRow("曲序", track.trackNo)}
-      ${detailRow("时长", track.length)}
-      ${detailRow("版本", track.version)}
-      ${detailRow("原题", track.originalTitle)}
-      ${detailRow("原唱", track.originalArtist)}
-      ${detailRow("作词", track.lyrics || "资料待补")}
-      ${detailRow("作曲", track.music || "资料待补")}
-      ${detailRow("编曲", track.arrangement || "资料待补")}
-      ${detailRow("IU 参与", track.iuCreationRole)}
-    </div>
-  `;
-  showDialogSafely(trackDetailDialog);
-}
-
-function renderLibrary() {
-  libraryCards.innerHTML = entries
-    .map(
-      (entry) => `
-      <article class="libraryCard">
-        <div class="libraryCard__top">
-          <div>
-            <h3>${escapeHtml(entry.songTitle)}</h3>
-            <small>${escapeHtml(entry.albumName || "未填写出处")} · ${moodLabel(entry.mood)}</small>
-          </div>
-          <div class="libraryCard__actions">
-            <button class="miniButton" type="button" data-edit="${entry.id}">编辑</button>
-            <button class="miniButton" type="button" data-delete="${entry.id}">删除</button>
-          </div>
-        </div>
-        <p>${escapeHtml(entry.translationText || entry.originalText || "还没有摘记。")}</p>
-        ${entry.entryNote ? `<p>${escapeHtml(entry.entryNote)}</p>` : ""}
-      </article>
-    `,
-    )
-    .join("");
-}
-
-chips.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    activeFilter = chip.dataset.filter;
-    chips.forEach((item) => item.classList.toggle("is-active", item === chip));
-    renderRecords();
-  });
-});
-
-releaseShelf.addEventListener("click", (event) => {
-  const categoryButton = event.target.closest("[data-library-category]");
-  if (categoryButton) {
-    musicLibraryCategory = categoryButton.dataset.libraryCategory;
-    musicLibraryAlbum = "";
-    catalogVisibleRows = 4;
-    renderCatalog();
-    return;
-  }
-  const button = event.target.closest("[data-release-name]");
-  if (!button) return;
-  albumPreviewRelease = albumPreviewRelease === button.dataset.releaseName ? "" : button.dataset.releaseName;
-  catalogVisibleRows = 4;
-  renderCatalog();
-  document.querySelector("#catalog").scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-musicLibraryTabs.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-library-tab]");
-  if (!button) return;
-  musicLibraryMode = button.dataset.libraryTab;
-  musicLibraryCategory = "";
-  musicLibraryAlbum = "";
-  albumPreviewRelease = "";
-  catalogVisibleRows = 4;
-  musicLibraryTabs.querySelectorAll("button").forEach(b => b.classList.toggle("active", b === button));
-  renderCatalog();
-});
-musicSubShelf.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-library-album]");
-  if (!button) return;
-  musicLibraryAlbum = button.dataset.libraryAlbum;
-  catalogVisibleRows = 4;
-  renderCatalog();
-});
-[releaseFilter, yearFilter, releaseTypeFilter, mediaFilter].forEach((control) => {
-  control.addEventListener("change", () => {
-    albumPreviewRelease = "";
-    catalogVisibleRows = 4;
-    renderCatalog();
-  });
-});
-catalogSearch?.addEventListener("input", () => {
-  catalogVisibleRows = 4;
-  renderCatalog();
-});
-
-catalogReset?.addEventListener("click", () => {
-  albumPreviewRelease = "";
-  if (catalogSearch) catalogSearch.value = "";
-  releaseFilter.value = "all";
-  yearFilter.value = "all";
-  releaseTypeFilter.value = "all";
-  mediaFilter.value = "all";
-  catalogVisibleRows = 4;
-  renderCatalog();
-});
-
 let searchInputTimer;
+
 [globalSearchInput, globalSearchType].forEach((control) => {
   control?.addEventListener("input", () => {
     searchVisibleRows = 3;
@@ -2624,14 +1784,6 @@ globalSearchResults?.addEventListener("click", (event) => {
 sectionTabs.addEventListener("click", (event) => {
   const button = event.target.closest("[data-section-filter]");
   if (!button) return;
-  if (activeView === "music") {
-    albumPreviewRelease = "";
-    mediaFilter.value = button.dataset.sectionFilter;
-    catalogVisibleRows = 4;
-    renderCatalog();
-    document.querySelector("#catalog").scrollIntoView({ behavior: "smooth", block: "start" });
-    return;
-  }
   if (activeView === "screen") {
     screenFilter = button.dataset.sectionFilter;
     if (screenFilter === "iu-official") officialCategoryFilter = "";
@@ -2680,11 +1832,6 @@ screenGrid.addEventListener("click", (event) => {
   if (item) openScreenDetail(item);
 });
 
-catalogMore?.addEventListener("click", () => {
-  catalogVisibleRows += 4;
-  renderCatalog();
-});
-
 screenMore?.addEventListener("click", () => {
   screenVisibleRows += 3;
   renderScreen();
@@ -2710,57 +1857,10 @@ themeControl.addEventListener("click", (event) => {
   applyTheme(button.dataset.theme);
 });
 
-themePresetControl?.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-preset]");
-  if (!button) return;
-  applyPreset(button.dataset.preset);
-});
-
 window.matchMedia?.("(prefers-color-scheme: light)").addEventListener("change", () => {
   if (themeMode === "system") applyTheme("system");
 });
 
-trackGrid.addEventListener("click", (event) => {
-  const lyricButton = event.target.closest("[data-lyrics-id]");
-  const detailButton = event.target.closest("[data-detail-key]");
-  const cardButton = event.target.closest(".trackCard");
-  const musicTracks = activeMusicTracks();
-  if (lyricButton) {
-    const track = musicTracks.find((item) => String(item.id) === lyricButton.dataset.lyricsId);
-    if (track) openLyricsPage(track);
-    return;
-  }
-  if (detailButton) {
-    const track = musicTracks.find((item) => String(item.id) === detailButton.dataset.detailKey);
-    if (track) openTrackDetail(track);
-    return;
-  }
-  if (cardButton && !window.matchMedia("(max-width: 640px)").matches) {
-    const key = cardButton.querySelector("[data-detail-key]")?.dataset.detailKey;
-    const track = musicTracks.find((item) => String(item.id) === key);
-    if (track) {
-      activeMusicTrackId = track.id;
-      renderCatalog();
-    }
-    return;
-  }
-  if (cardButton && window.matchMedia("(max-width: 640px)").matches) {
-    const key = cardButton.querySelector("[data-detail-key]")?.dataset.detailKey;
-    const track = musicTracks.find((item) => String(item.id) === key);
-    if (track) activeMusicTrackId = track.id;
-    const now = Date.now();
-    const isSecondTap = key && lastMobileMusicTap.id === key && now - lastMobileMusicTap.time < 650;
-    lastMobileMusicTap = { id: key || "", time: now };
-    if (isSecondTap) {
-      if (track) openLyricsPage(track);
-    } else {
-      renderCatalog();
-    }
-  }
-});
-
-lyricsDialogClose.addEventListener("click", () => lyricsDialog.close());
-trackDetailClose.addEventListener("click", () => trackDetailDialog.close());
 screenDetailClose.addEventListener("click", () => screenDetailDialog.close());
 
 document.querySelectorAll("dialog").forEach((dialog) => {
@@ -2772,88 +1872,8 @@ document.querySelectorAll("dialog").forEach((dialog) => {
   });
 });
 
-searchInput.addEventListener("input", renderRecords);
-creatorOnly.addEventListener("change", renderRecords);
-
-shuffleBtn.addEventListener("click", () => {
-  const item = records[Math.floor(Math.random() * records.length)];
-  spotlight.innerHTML = `
-    <span>今日页签</span>
-    <strong>${item.title}</strong>
-    <small>${item.note}</small>
-  `;
-});
-
-entryForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const id = document.querySelector("#entryId").value || crypto.randomUUID();
-  const next = {
-    id,
-    songTitle: document.querySelector("#songTitle").value.trim(),
-    albumName: document.querySelector("#albumName").value.trim(),
-    mood: document.querySelector("#entryMood").value,
-    originalText: document.querySelector("#originalText").value.trim(),
-    translationText: document.querySelector("#translationText").value.trim(),
-    entryNote: document.querySelector("#entryNote").value.trim(),
-  };
-  entries = [next, ...entries.filter((entry) => entry.id !== id)];
-  saveEntries();
-  resetEntryForm();
-  renderLibrary();
-});
-
-document.querySelector("#resetForm").addEventListener("click", resetEntryForm);
-
-libraryCards.addEventListener("click", (event) => {
-  const editId = event.target.dataset.edit;
-  const deleteId = event.target.dataset.delete;
-  if (editId) {
-    const entry = entries.find((item) => item.id === editId);
-    if (!entry) return;
-    document.querySelector("#entryId").value = entry.id;
-    document.querySelector("#songTitle").value = entry.songTitle;
-    document.querySelector("#albumName").value = entry.albumName || "";
-    document.querySelector("#entryMood").value = entry.mood || "comfort";
-    document.querySelector("#originalText").value = entry.originalText || "";
-    document.querySelector("#translationText").value = entry.translationText || "";
-    document.querySelector("#entryNote").value = entry.entryNote || "";
-    entryForm.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-  if (deleteId) {
-    entries = entries.filter((item) => item.id !== deleteId);
-    saveEntries();
-    renderLibrary();
-  }
-});
-
-document.querySelector("#exportBtn").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(entries, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "iu-lyrics-notebook-backup.json";
-  link.click();
-  URL.revokeObjectURL(url);
-});
-
-importFile.addEventListener("change", async () => {
-  const file = importFile.files?.[0];
-  if (!file) return;
-  const imported = JSON.parse(await file.text());
-  if (Array.isArray(imported)) {
-    entries = imported;
-    saveEntries();
-    renderLibrary();
-  }
-  importFile.value = "";
-});
-
-renderRecords();
-renderReleaseShelf();
-fillCatalogFilters();
-renderCatalog();
 renderGlobalSearch();
-renderLibrary();
+
 applyTheme(themeMode);
-applyPreset(themePreset);
+
 setView("music");

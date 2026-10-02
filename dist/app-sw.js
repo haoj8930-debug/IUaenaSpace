@@ -1,14 +1,13 @@
-const CACHE_NAME = "uaena-app-preview-v8";
+const CACHE_NAME = "uaena-app-preview-v9";
 const ASSETS = [
   "app-preview.html",
   "app.webmanifest",
-  "data/catalog.js",
   "data/local-albums.js",
   "data/local-lyrics.js",
   "app-library.js",
+  "app-core.js",
   "app-library.css",
   "ui-glass.css",
-  "data/lyrics-manifest.js",
   "assets/uaena-symbol-dark.png",
   "assets/uaena-symbol-light.png",
   "assets/bg-uaena-dark-landscape.png",

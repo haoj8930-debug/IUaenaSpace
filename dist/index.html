@@ -1,19 +1,12 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>UAENA小窝</title>
-    <meta
-      name="description"
-      content="一个为 IU 歌曲、创作节点和听歌心情整理的私人歌词记录本。"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1324'/%3E%3Cpath d='M18 14h19c6 0 10 4 10 10v26c-3-3-7-5-12-5H18z' fill='%23f7ead2'/%3E%3Cpath d='M18 14v31c5 0 9 2 13 5V20c-4-4-8-6-13-6z' fill='%23d6414f'/%3E%3Ccircle cx='44' cy='18' r='5' fill='%23d9a441'/%3E%3C/svg%3E"
-    />
-    <link rel="stylesheet" href="./styles.css?v=20261001-3" />
+    <meta name="description" content="一个为 IU 歌曲、创作节点和听歌心情整理的私人歌词记录本。">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1324'/%3E%3Cpath d='M18 14h19c6 0 10 4 10 10v26c-3-3-7-5-12-5H18z' fill='%23f7ead2'/%3E%3Cpath d='M18 14v31c5 0 9 2 13 5V20c-4-4-8-6-13-6z' fill='%23d6414f'/%3E%3Ccircle cx='44' cy='18' r='5' fill='%23d9a441'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./styles.css?v=20261002-cleanup">
     <script>
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
@@ -21,262 +14,11 @@
   </head>
   <body>
     <main class="shell">
-      <section class="hero retiredSection" data-view="music" aria-labelledby="page-title">
-        <div class="hero__image" aria-hidden="true">
-          <img src="./assets/hero-notebook.png" alt="" />
-        </div>
-        <div class="hero__content">
-          <p class="eyebrow">UAENA Archive</p>
-          <h1 id="page-title">UAENA小窝</h1>
-          <p class="lede">
-            把每首歌的出处、创作线索、音源 MV、封面和你自己收藏的完整歌词页收进同一本夜间手账里。
-          </p>
-          <div class="hero__actions">
-            <a class="button button--primary" href="#records">翻开记录</a>
-            <button class="button button--ghost" id="shuffleBtn" type="button">今天听哪首</button>
-          </div>
-          <div class="spotlight" id="spotlight" aria-live="polite">
-            <span>今日页签</span>
-            <strong>Love Poem</strong>
-            <small>给需要被温柔托住的一晚</small>
-          </div>
-        </div>
-      </section>
-
-      <section class="stats retiredSection" data-view="music" aria-label="档案概览">
-        <article>
-          <span>正式发行</span>
-          <strong>25</strong>
-        </article>
-        <article>
-          <span>歌曲/版本记录</span>
-          <strong>185</strong>
-        </article>
-        <article>
-          <span>创作署名</span>
-          <strong>79</strong>
-        </article>
-        <article>
-          <span>奖项与提名</span>
-          <strong>434</strong>
-        </article>
-      </section>
 
       <section class="musicAppView" data-view="music" aria-label="Music">
-        <iframe id="musicAppFrame" src="app-preview.html?embedded=1&v=20261001-4" title="IU Music Archive" allow="autoplay" loading="eager"></iframe>
+        <iframe id="musicAppFrame" src="app-preview.html?embedded=1&v=20261002-cleanup" title="IU Music Archive" allow="autoplay" loading="eager"></iframe>
       </section>
       <nav class="sectionTabs" id="sectionTabs" aria-label="当前页面分类导航"></nav>
-
-      <section class="catalog" data-view="music" id="catalog" aria-labelledby="catalog-title">
-        <div class="sectionHead catalog__head">
-          <div>
-            <p class="eyebrow">Full catalog</p>
-            <h2 id="catalog-title">我的音乐</h2>
-          </div>
-          <strong id="catalogCount">205 tracks</strong>
-        </div>
-        <label class="catalogSearchBar" aria-label="搜索歌曲和专辑">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"></circle>
-            <path d="m16.5 16.5 4 4"></path>
-          </svg>
-          <input id="catalogSearch" autocomplete="off" />
-        </label>
-        <div class="catalogTools catalogTools--legacy" aria-label="歌库筛选">
-          <label>
-            <span>发行</span>
-            <select id="releaseFilter"></select>
-          </label>
-          <label>
-            <span>年份</span>
-            <select id="yearFilter"></select>
-          </label>
-          <label>
-            <span>发行类型</span>
-            <select id="releaseTypeFilter">
-              <option value="all">全部发行类型</option>
-              <option value="studio">正规专辑</option>
-              <option value="mini">迷你专辑</option>
-              <option value="single">单曲</option>
-              <option value="cover-release">翻唱专辑</option>
-              <option value="collab-release">合作 / 参与</option>
-              <option value="ost-release">OST / 影视</option>
-            </select>
-          </label>
-          <label>
-            <span>类型</span>
-            <select id="mediaFilter">
-              <option value="all">全部</option>
-              <option value="album">专辑 / 正式发行</option>
-              <option value="official">正式发行</option>
-              <option value="cover">翻唱</option>
-              <option value="collab">合作 / 参与</option>
-              <option value="ost">OST</option>
-              <option value="mv">有 MV / 影像</option>
-              <option value="cn">国内音源入口</option>
-              <option value="creator">IU 参与创作</option>
-              <option value="version">版本 / 伴奏</option>
-            </select>
-          </label>
-        </div>
-        <button class="filterResetButton" id="catalogReset" type="button" hidden aria-label="重置音乐筛选">← 重置筛选</button>
-        <div class="releaseShelf" id="releaseShelf" aria-label="发行封面"></div>
-        <div class="trackGrid" id="trackGrid"></div>
-        <button class="listMoreButton" id="catalogMore" type="button">显示更多</button>
-        <aside class="musicSidePanel" id="musicSidePanel" aria-label="当前歌曲歌词预览"></aside>
-      </section>
-
-      <section class="notebook retiredSection" data-view="music" aria-labelledby="notebook-title">
-        <div class="sectionHead">
-          <p class="eyebrow">Personal notebook</p>
-          <h2 id="notebook-title">写下你自己的歌词页</h2>
-        </div>
-        <div class="notebook__layout">
-          <form class="entryForm" id="entryForm">
-            <input type="hidden" id="entryId" />
-            <label>
-              <span>歌曲</span>
-              <input id="songTitle" required placeholder="例如：Through the Night" />
-            </label>
-            <label>
-              <span>专辑 / 出处</span>
-              <input id="albumName" placeholder="例如：Palette" />
-            </label>
-            <label>
-              <span>心情标签</span>
-              <select id="entryMood">
-                <option value="comfort">安慰</option>
-                <option value="bright">明亮</option>
-                <option value="self">自我</option>
-                <option value="night">夜晚</option>
-              </select>
-            </label>
-            <label>
-              <span>原文 / 完整歌词</span>
-              <textarea id="originalText" placeholder="可以贴你自己保存的歌词、时间戳或出处提示。"></textarea>
-            </label>
-            <label>
-              <span>中文理解 / 翻译摘记</span>
-              <textarea id="translationText" placeholder="写你的理解、译意或想回看的句子。"></textarea>
-            </label>
-            <label>
-              <span>备注</span>
-              <textarea id="entryNote" placeholder="现场版本、适合的心情、为什么想收藏这一页。"></textarea>
-            </label>
-            <div class="formActions">
-              <button class="button button--primary" type="submit">保存记录</button>
-              <button class="button button--ghost" id="resetForm" type="button">清空</button>
-            </div>
-          </form>
-          <div class="library">
-            <div class="library__bar">
-              <strong>我的记录</strong>
-              <div>
-                <button class="miniButton" id="exportBtn" type="button">导出</button>
-                <label class="miniButton" for="importFile">导入</label>
-                <input class="srOnly" id="importFile" type="file" accept="application/json" />
-              </div>
-            </div>
-            <div class="libraryCards" id="libraryCards"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="workspace retiredSection" data-view="music" id="records">
-        <aside class="panel" aria-label="记录本筛选">
-          <div>
-            <p class="panel__label">Find a page</p>
-            <h2>按心情翻歌</h2>
-          </div>
-          <label class="search">
-            <span>搜索</span>
-            <input id="searchInput" type="search" placeholder="歌名 / 专辑 / 年份" />
-          </label>
-          <div class="filterGroup" aria-label="情绪筛选">
-            <button class="chip is-active" type="button" data-filter="all">全部</button>
-            <button class="chip" type="button" data-filter="comfort">安慰</button>
-            <button class="chip" type="button" data-filter="bright">明亮</button>
-            <button class="chip" type="button" data-filter="self">自我</button>
-            <button class="chip" type="button" data-filter="night">夜晚</button>
-          </div>
-          <label class="toggle">
-            <input id="creatorOnly" type="checkbox" />
-            <span>只看 IU 参与创作</span>
-          </label>
-          <div class="note">
-            <strong>记录原则</strong>
-            <p>
-              完整歌词通过你的本地导入文件保存；网站代码里只保留作品信息、主题札记、听歌入口和空白模板。
-            </p>
-          </div>
-        </aside>
-
-        <section class="records" aria-label="歌曲记录">
-          <div class="sectionHead">
-            <p class="eyebrow">Selected pages</p>
-            <h2>精选歌词记录</h2>
-          </div>
-          <div class="grid" id="recordGrid"></div>
-        </section>
-      </section>
-
-      <section class="timeline retiredSection" data-view="music" aria-labelledby="timeline-title">
-        <div class="sectionHead">
-          <p class="eyebrow">Milestones</p>
-          <h2 id="timeline-title">从少女叙事到创作主导</h2>
-        </div>
-        <div class="timeline__rail">
-          <article>
-            <span>2008</span>
-            <h3>Lost and Found</h3>
-            <p>以《Lost Child》开启正式发行档案，早期声音偏清澈、稚嫩，却已经有很强的叙事辨识度。</p>
-          </article>
-          <article>
-            <span>2015</span>
-            <h3>Chat-Shire</h3>
-            <p>创作主导期被明确看见，多首歌曲参与词曲，把童话、讽刺和自我观察放进同一张作品里。</p>
-          </article>
-          <article>
-            <span>2017</span>
-            <h3>Palette</h3>
-            <p>把“二十五岁”的自我定位写成流行文本，轻盈但不轻飘，像一次公开的自画像。</p>
-          </article>
-          <article>
-            <span>2021</span>
-            <h3>Lilac</h3>
-            <p>明亮告别与成熟节奏并行，正规五辑让“春天”成为回望青春、继续出发的双重隐喻。</p>
-          </article>
-          <article>
-            <span>2024</span>
-            <h3>The Winning</h3>
-            <p>《Love Wins All》和 H.E.R.E.H. 世界巡演之后，歌曲被更多听众当成陪伴式的长线记忆。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="archive retiredSection" data-view="music">
-        <div class="archive__copy">
-          <p class="eyebrow">Archive Notes</p>
-          <h2>这本记录本已经放入的内容</h2>
-          <p>
-            数据摘要来自本机 IU 完整作品档案：正式发行、曲目、创作署名、合作/OST、影视、演唱会与奖项索引。页面只精选适合浏览的记录，保留完整档案的可追溯逻辑。
-          </p>
-        </div>
-        <div class="archive__cards">
-          <article>
-            <strong>创作视角</strong>
-            <span>作词 53 条，词曲 22 条，词曲编 4 条</span>
-          </article>
-          <article>
-            <strong>听歌方式</strong>
-            <span>按情绪、年代、专辑和 IU 创作参与快速翻阅</span>
-          </article>
-          <article>
-            <strong>版权边界</strong>
-            <span>完整歌词由你本地导入，页面负责整理、搜索和展示</span>
-          </article>
-        </div>
-      </section>
 
       <section class="screenPage appPage" data-view="screen" id="screen" aria-labelledby="screen-title">
         <div class="sectionHead catalog__head">
@@ -303,7 +45,7 @@
           <div class="globalSearchPanel">
             <label class="globalSearchBox">
               <span class="globalSearchIcon navIcon navIcon--search" aria-hidden="true"></span>
-              <input id="globalSearchInput" type="search" placeholder="搜索音乐、专辑、影视、舞台或开箱" />
+              <input id="globalSearchInput" type="search" placeholder="搜索音乐、专辑、影视、舞台或开箱">
             </label>
             <label class="globalSearchScope">
               <span>范围</span>
@@ -345,16 +87,9 @@
             <article class="profileHero">
               <span>UAENA</span>
               <h3>UAENA小窝</h3>
-              <a
-                class="profileHero__planetLink"
-                href="https://www.unknownpla.net/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="打开 Unknown Planet 官网"
-                title="Unknown Planet"
-              >
-                <img class="profileHero__planetIcon profileHero__planetIcon--light" src="./assets/unknown-planet-light.png" alt="" />
-                <img class="profileHero__planetIcon profileHero__planetIcon--dark" src="./assets/unknown-planet-dark.png" alt="" />
+              <a class="profileHero__planetLink" href="https://www.unknownpla.net/" target="_blank" rel="noreferrer" aria-label="打开 Unknown Planet 官网" title="Unknown Planet">
+                <img class="profileHero__planetIcon profileHero__planetIcon--light" src="./assets/unknown-planet-light.png" alt="">
+                <img class="profileHero__planetIcon profileHero__planetIcon--dark" src="./assets/unknown-planet-dark.png" alt="">
               </a>
             </article>
             <article class="settingsCard feedbackCard">
@@ -378,7 +113,7 @@
           <article class="settingsCard">
             <h3>版本</h3>
             <strong>1.0</strong>
-            <p>当前版本：音乐档案、影视档案、完整歌词本地导入、国内音源搜索入口。</p>
+            <p>音乐、影视、开箱与全站搜索。</p>
           </article>
         </div>
       </section>
@@ -407,26 +142,7 @@
         <span>Profile</span>
       </button>
     </nav>
-    <dialog class="lyricsDialog" id="lyricsDialog">
-      <div class="lyricsDialog__head">
-        <div>
-          <p class="eyebrow">Lyrics page</p>
-          <h2 id="lyricsDialogTitle">歌词页</h2>
-        </div>
-        <button class="dialogCloseButton" id="lyricsDialogClose" type="button" aria-label="关闭歌词页"><span aria-hidden="true"></span></button>
-      </div>
-      <div class="lyricsDialog__body" id="lyricsDialogBody"></div>
-    </dialog>
-    <dialog class="lyricsDialog detailDialog" id="trackDetailDialog">
-      <div class="lyricsDialog__head">
-        <div>
-          <p class="eyebrow">Track dossier</p>
-          <h2 id="trackDetailTitle">歌曲档案</h2>
-        </div>
-        <button class="dialogCloseButton" id="trackDetailClose" type="button" aria-label="关闭歌曲详情"><span aria-hidden="true"></span></button>
-      </div>
-      <div class="lyricsDialog__body" id="trackDetailBody"></div>
-    </dialog>
+
     <dialog class="lyricsDialog detailDialog" id="screenDetailDialog">
       <div class="lyricsDialog__head">
         <div>
@@ -438,18 +154,16 @@
       <div class="lyricsDialog__body" id="screenDetailBody"></div>
     </dialog>
     <script src="./data/catalog.js?v=20260928-4"></script>
-    <script src="./data/netease.js"></script>
+
     <script src="./data/local-albums.js?v=20261001-3"></script>
-    <script src="./data/local-lyrics.js?v=20261001-3"></script>
     <script src="./data/merch.js?v=20260928-4"></script>
     <script src="./data/youtube-official.js?v=20260928-4"></script>
     <script src="./data/official-cover-cache.js?v=20261001-5"></script>
-    <script src="./data/lyrics.js?v=20260928-4"></script>
-    <script src="./data/lyrics-manifest.js?v=20260929-3"></script>
+
     <script src="./data/screen-covers.js?v=20260929-3"></script>
-    <script src="./script.js?v=20261001-5"></script>
-    <script src="./music-app-bridge.js?v=20261001-5"></script>
-    <link rel="stylesheet" href="./music-app-bridge.css?v=20261001-4" />
-    <link rel="stylesheet" href="./ui-glass.css?v=20261001-5" />
+    <script src="./script.js?v=20261002-cleanup"></script>
+    <script src="./music-app-bridge.js?v=20261002-cleanup"></script>
+
+    <link rel="stylesheet" href="./ui-glass.css?v=20261002-cleanup">
   </body>
 </html>

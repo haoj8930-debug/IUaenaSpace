@@ -31,12 +31,14 @@ renderShelf = function () {
 };
 
 render = function () {
+  // Hidden iframes have no usable grid geometry; keep the current page intact.
+  if ($('#grid').getBoundingClientRect().width < 1) return;
   const needsSelection = mode === 'albums' && (!libraryCategory || (nestedCategories.has(libraryCategory) && !libraryAlbum));
   const visible = needsSelection ? [] : tracks.filter(t =>
     (mode !== 'favorites' || favorites.has(t.id)) &&
     (mode !== 'albums' || (t.category === libraryCategory && (!libraryAlbum || t.releaseId === libraryAlbum))) &&
     `${t.title} ${t.originalTitle || ''} ${t.zh || ''} ${t.release}`.toLowerCase().includes(query));
-  const columns = getComputedStyle($('#grid')).gridTemplateColumns.split(' ').length;
+  const columns = getComputedStyle($('#grid')).gridTemplateColumns.trim().split(/\s+/).length;
   const shown = visible.slice(0, columns * libraryRows);
   $('#count').textContent = needsSelection ? '' : `${visible.length} 首`;
   $('#empty').classList.toggle('hidden', needsSelection || visible.length > 0);
@@ -49,7 +51,6 @@ render = function () {
   more.classList.toggle('hidden', shown.length >= visible.length);
   $('.fav').textContent = favorites.has(tracks[selected]?.id) ? '♥' : '♡';
   $('#side').classList.toggle('library-blank', mode === 'albums' && !$('#side').classList.contains('open'));
-  updateProfile();
 };
 
 choose = async function (index, userAction = true) {
@@ -108,7 +109,6 @@ document.querySelectorAll('[data-tab]').forEach(button => button.onclick = () =>
   mode = button.dataset.tab;
   libraryCategory = '';
   libraryAlbum = '';
-  album = '';
   libraryRows = 4;
   $('#side').classList.remove('open');
   document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b === button));
@@ -164,6 +164,9 @@ if (embeddedMusic) {
   });
   addEventListener('message', event => {
     if (event.origin !== location.origin || event.source !== parent) return;
+    if (event.data?.type === 'uaena-view-active') {
+      requestAnimationFrame(() => requestAnimationFrame(render));
+    }
     if (event.data?.type === 'uaena-open-track') {
       const index = tracks.findIndex(track => track.id === event.data.id);
       if (index >= 0) { choose(index); $('#side').classList.remove('library-blank'); openLyrics(); }
