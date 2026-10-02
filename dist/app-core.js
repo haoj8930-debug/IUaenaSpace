@@ -6,6 +6,7 @@ try { saved = JSON.parse(localStorage.getItem(storeKey) || '{}') || {}; } catch 
 const favorites = new Set(saved.favorites || []);
 let audioMap = saved.audioMap || {};
 const audioUrls = {};
+const onlineAudio = window.IU_AUDIO_SOURCES || {};
 let selected = 0, mode = 'songs', query = '', request = 0, deferredInstall = null, currentAudio = null;
 let lastCardTap = { id: '', time: 0 };
 let render, choose, renderShelf;
@@ -39,10 +40,11 @@ const db = {
 };
 async function srcFor(t) {
   if (audioUrls[t.id]) return audioUrls[t.id];
-  if (!audioMap[t.id]) return '';
-  const file = await db.get(t.id).catch(() => null);
-  if (!file) return '';
-  return audioUrls[t.id] = URL.createObjectURL(file);
+  if (audioMap[t.id]) {
+    const file = await db.get(t.id).catch(() => null);
+    if (file) return audioUrls[t.id] = URL.createObjectURL(file);
+  }
+  return onlineAudio[t.id]?.url || '';
 }
 async function playCurrent() {
   const t = tracks[selected];
@@ -59,7 +61,7 @@ async function playCurrent() {
     currentAudio.onerror = () => toast('这个音频浏览器暂时无法播放');
   }
   await currentAudio.play().then(() => {
-    $('.play').textContent = 'Ⅱ'; $('#minisub').textContent = '正在播放本地音频';
+    $('.play').textContent = 'Ⅱ'; $('#minisub').textContent = src.startsWith('blob:') ? '正在播放本地音频' : '正在在线播放';
   }).catch(() => toast('浏览器阻止播放，请再点一次播放'));
 }
 const openLyrics = () => $('#side').classList.add('open');

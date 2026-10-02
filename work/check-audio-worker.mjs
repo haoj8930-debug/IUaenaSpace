@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import worker from '../audio-cloud/worker.mjs';
+const bytes=new Uint8Array([0,1,2,3,4,5,6,7,8,9]),key='audio/'+ 'a'.repeat(24)+'.mp3';
+let reads=0;
+const env={AUDIO:{async head(k){return k===key?{size:10,httpEtag:'"test"',writeHttpMetadata(h){h.set('Content-Type','audio/mpeg')}}:null},async get(k,{range}){reads++;return {body:bytes.slice(range.offset,range.offset+range.length)}}}};
+const fetch=(method,range,path=key)=>worker.fetch(new Request('https://audio.test/'+path,{method,headers:range?{Range:range}:{}}),env);
+let r=await fetch('GET');assert.equal(r.status,200);assert.deepEqual(new Uint8Array(await r.arrayBuffer()),bytes);
+r=await fetch('GET','bytes=2-5');assert.equal(r.status,206);assert.equal(r.headers.get('Content-Range'),'bytes 2-5/10');assert.deepEqual([...new Uint8Array(await r.arrayBuffer())],[2,3,4,5]);
+r=await fetch('GET','bytes=-3');assert.equal(r.status,206);assert.deepEqual([...new Uint8Array(await r.arrayBuffer())],[7,8,9]);
+r=await fetch('GET','bytes=9-');assert.equal(r.headers.get('Content-Length'),'1');assert.equal(r.status,206);
+for(const range of ['bytes=10-','bytes=5-2','bytes=0-1,3-4','bytes=-0'])assert.equal((await fetch('GET',range)).status,416);
+const before=reads;r=await fetch('HEAD');assert.equal(r.status,200);assert.equal(r.headers.get('Content-Length'),'10');assert.equal(reads,before);
+assert.equal((await fetch('OPTIONS')).status,204);assert.equal((await fetch('POST')).status,405);assert.equal((await fetch('GET',null,'../other')).status,404);
+console.log('Audio streaming checks passed: full file, ranges, invalid ranges, HEAD, CORS and methods');

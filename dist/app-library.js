@@ -69,7 +69,7 @@ choose = async function (index, userAction = true) {
   $('#subtitle').textContent = t.zh;
   $('#subtitle').title = t.zhStatus === 'reference' ? '参考译名，尚未确认通行中文名称' : t.zh;
   $('#minititle').textContent = t.displayTitle || t.title;
-  $('#minisub').textContent = audioMap[t.id] ? '已绑定本地音频' : '音源后续补充';
+  $('#minisub').textContent = audioMap[t.id] ? '已绑定本地音频' : onlineAudio[t.id]?.url ? '可在线播放' : '音源后续补充';
   if (currentAudio) { currentAudio.pause(); currentAudio = null; $('.play').textContent = '▶'; }
   const token = ++request;
   const box = $('#lyrics');
@@ -108,7 +108,7 @@ $('#grid').onclick = event => {
   lastCardTap = { id: card.dataset.id, time: now };
   choose(tracks.findIndex(t => t.id === card.dataset.id));
   if (doubleTap) { $('#side').classList.remove('library-blank'); openLyrics(); }
-  else if (matchMedia('(max-width:740px)').matches && audioMap[card.dataset.id]) playCurrent();
+  else if (matchMedia('(max-width:740px)').matches && (audioMap[card.dataset.id] || onlineAudio[card.dataset.id]?.url)) playCurrent();
 };
 document.querySelectorAll('[data-tab]').forEach(button => button.onclick = () => {
   mode = button.dataset.tab;

@@ -1,0 +1,20 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const manifestPath=process.argv[2]||'D:/音乐/IUIUImusic/音频云存储导入清单.json';
+const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8')),folder=path.dirname(manifestPath);
+const log=JSON.parse(fs.readFileSync(path.join(folder,'音频云存储上传记录.json'),'utf8'));
+const root=path.resolve(__dirname,'..'),context={window:{}};
+vm.runInNewContext(fs.readFileSync(path.join(root,'dist/data/audio-sources.js'),'utf8'),context);
+vm.runInNewContext(fs.readFileSync(path.join(root,'dist/data/local-albums.js'),'utf8'),context);
+const sources=context.window.IU_AUDIO_SOURCES,tracks=context.window.IU_LOCAL_TRACKS;
+assert.equal(manifest.matched,414);assert.equal(Object.keys(sources).length,414);assert.equal(tracks.length,414);
+assert.equal(new Set(manifest.mappings.map(c=>c.id)).size,414);assert.equal(new Set(manifest.mappings.map(c=>c.objectKey)).size,414);
+let bytes=0;
+for(const c of manifest.mappings){assert.equal(log[c.id]?.verified,true,c.id);assert.equal(log[c.id].bytes,c.bytes);assert.match(log[c.id].sha256,/^[a-f0-9]{64}$/);assert.equal(sources[c.id]?.bytes,c.bytes);assert.ok(sources[c.id].url.endsWith('/'+c.objectKey));assert.equal(sources[c.id].format,c.contentType);assert.ok(tracks.some(t=>t.id===c.id));bytes+=c.bytes;}
+assert.equal(bytes,manifest.totalBytes);
+const report={音频文件:414,已上传并验证:414,网站已绑定:414,总字节数:bytes,FLAC:manifest.mappings.filter(c=>c.contentType==='audio/flac').length,MP3:manifest.mappings.filter(c=>c.contentType==='audio/mpeg').length,待处理:[]};
+fs.writeFileSync(path.join(folder,'音频导入完成校验.json'),JSON.stringify(report,null,2));
+const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';
+const fields=['歌曲','专辑','格式','大小字节','网站记录ID','本地文件','云音源链接','状态'];
+const rows=manifest.mappings.map(c=>[c.title,c.release,path.extname(c.file).slice(1).toUpperCase(),c.bytes,c.id,c.file,sources[c.id].url,'已上传并验证']);
+fs.writeFileSync(path.join(folder,'音乐导入核对表.csv'),'\ufeff'+[fields,...rows].map(r=>r.map(quote).join(',')).join('\r\n'));
+console.log(JSON.stringify(report));

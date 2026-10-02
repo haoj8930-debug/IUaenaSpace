@@ -1,0 +1,8 @@
+{
+  "name": "iu-uaena-audio",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-02",
+  "account_id": "d80e1d15cfdf8416d513859f5bcd47b6",
+  "workers_dev": true,
+  "r2_buckets": [{"binding":"AUDIO","bucket_name":"iu-uaena-audio"}]
+}
