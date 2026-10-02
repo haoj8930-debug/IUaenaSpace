@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IU 小卡收藏馆 · UAENA小窝</title>
+  <meta name="description" content="IU 小卡收藏目录，按年份、系列与卡型查找，查看正反面和高清扫描。">
+  <link rel="icon" href="./assets/icons/gift.svg"><link rel="stylesheet" href="./photocards.css?v=20261002-1">
+  <script defer src="./photocards.js?v=20261002-1"></script>
+  <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+  <header class="topbar"><a href="./?view=merch">← 返回 Present</a><span>UAENA 小窝</span><button id="theme" type="button" aria-label="切换明暗主题">切换主题</button></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">IU PHOTOCARD ARCHIVE</p><h1>把每一份心动，<br>好好收藏。</h1><p class="lead">IU 小卡收藏馆</p><p class="description">从专辑附卡到会员礼盒，沿着年份翻看收藏。<br>有正面先收录，背面留待慢慢补齐。</p></div><div class="hero-art" aria-hidden="true"><img id="heroImage" alt=""><span>IU · UAENA</span></div></section>
+    <section class="stats" aria-label="目录保存统计"><div><strong>899</strong><span>目录条目</span></div><div><strong>435</strong><span>已收录背面</span></div><div><strong>464</strong><span>背面待补</span></div></section>
+    <p class="collection-note">目录含小卡、明信片、贴纸等；部分卡型及年份待核实。高清扫描与完整目录有重叠，数量不合并。</p>
+    <div class="collections" role="group" aria-label="选择收藏目录"><button type="button" data-collection="catalog" aria-pressed="true">完整目录 <span>899</span></button><button type="button" data-collection="scans" aria-pressed="false">高清扫描 <span>407</span></button><a href="./data/photocards.csv" download>下载目录表 ↗</a></div>
+    <form id="filters" class="filters" role="search"><label class="search"><span class="sr">搜索系列或卡片</span><input id="query" type="search" placeholder="搜索系列、卡片或编号…"></label><label><span class="sr">年份</span><select id="year"><option value="">所有年份</option></select></label><label><span class="sr">分类</span><select id="category"><option value="">所有分类</option></select></label><label><span class="sr">卡型</span><select id="kind"><option value="">所有卡型</option></select></label><label class="missing"><input type="checkbox" id="missing">背面待补</label><button id="clearFilters" type="button">重置</button></form>
+    <div class="results-head"><p id="count" role="status" aria-live="polite">正在打开收藏…</p><span>按系列年份排列</span></div>
+    <div id="error" role="alert" hidden>目录暂时未能打开。<button type="button" id="retry">重新加载</button></div>
+    <section id="grid" class="grid" aria-label="小卡目录"></section><p id="empty" hidden>还没有符合条件的卡片，试试其他关键词。</p><button id="more" class="more" type="button" hidden>再看 36 张</button>
+    <footer><span>收藏持续补充中 · 更新于 2026.10.02</span><p>卡面版权归相应权利方所有。原图保留来源水印，点击卡片可查看来源和原尺寸图片。</p></footer>
+  </main>
+  <dialog id="detail"><div class="detail-top"><span id="detailIndex"></span><button id="close" type="button" aria-label="关闭卡片详情">×</button></div><div class="detail-layout"><div class="detail-art"><img id="detailImage" alt=""><p id="imageError" hidden>图片暂时无法读取，可打开原图或来源页面查看。</p></div><div class="detail-info"><p id="detailYear" class="eyebrow"></p><h2 id="detailTitle"></h2><p id="detailSeries"></p><div class="sides" role="group" aria-label="选择卡面"><button id="front" type="button" aria-pressed="true">正面</button><button id="back" type="button" aria-pressed="false">背面</button></div><p id="detailSize"></p><p id="detailNote"></p><a id="original" target="_blank" rel="noopener noreferrer">查看原尺寸图片 ↗</a><a id="source" target="_blank" rel="noopener noreferrer">来源页面 ↗</a><div class="detail-nav"><button id="prev" type="button">← 上一张</button><button id="next" type="button">下一张 →</button></div></div></div></dialog>
+</body></html>
+

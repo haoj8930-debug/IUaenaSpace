@@ -1,0 +1,14 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const archive = process.argv[2] || 'D:/音乐/IUIUImusic/小卡';
+const out = path.resolve(__dirname, '../dist/data');
+const catalog = JSON.parse(fs.readFileSync(path.join(archive, '_资料/完整目录下载记录.json'), 'utf8'));
+const scans = JSON.parse(fs.readFileSync(path.join(archive, '逐卡清单.json'), 'utf8'));
+const rows = catalog.map(c => ({ id:c.id, title:c.name.replace(/^IU - IU - /,''), series:c.series, year:c.series_year, category:c.category, kind:c.kind, front:c.front_url, back:c.back_url || '', frontSize:[c['正面'].width,c['正面'].height], backSize:c['反面']?[c['反面'].width,c['反面'].height]:null, source:c.page_url, note:c.year_basis, sourcePhotocard:c.is_photocard }));
+const highres = scans.map((c,i) => ({id:'scan-'+i, title:c['系列']+' · '+c['编号'], series:c['系列'], year:c['系列年份'] || null, category:'高清扫描',kind:c['卡种'],front:c['正面原图URL'],back:c['反面原图URL'] || '',frontSize:c['正面尺寸'].split('×').map(Number),backSize:c['反面尺寸']?c['反面尺寸'].split('×').map(Number):null,source:c['正面来源'],note:[c['备注'], '实际发行日期：'+c['发行日期']].filter(Boolean).join('；')}));
+fs.mkdirSync(out,{recursive:true});
+fs.writeFileSync(path.join(out,'photocards.json'),JSON.stringify({updated:'2026-10-02',catalog:rows,scans:highres}));
+const fields=['目录ID','系列年份','分类','系列','卡型','正面','背面','来源'];
+const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';
+fs.writeFileSync(path.join(out,'photocards.csv'),'\ufeff'+[fields,...rows.map(c=>[c.id,c.year||'待确认',c.category,c.series,c.kind,c.front,c.back,c.source])].map(r=>r.map(quote).join(',')).join('\r\n'));
+console.log(JSON.stringify({catalog:rows.length,fronts:rows.filter(c=>c.front).length,backs:rows.filter(c=>c.back).length,scans:highres.length}));
