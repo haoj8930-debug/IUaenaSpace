@@ -5,6 +5,7 @@ let libraryAlbum = '';
 let libraryRows = 4;
 let libraryGridSignature = '';
 let librarySelectedId = '';
+let libraryHighlightedId = '';
 let musicInteracted = false;
 const byNewest = (a, b) => (b.publishTime || 0) - (a.publishTime || 0) || (a.trackNo || 0) - (b.trackNo || 0) || String(a.title).localeCompare(String(b.title));
 tracks.sort(byNewest);
@@ -52,7 +53,7 @@ render = function () {
       return `<button class="card" data-id="${esc(t.id)}" aria-label="${esc(name)}，${esc(t.zh)}${esc(note)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"></div><strong title="${esc(name)}">${esc(name)}</strong><small title="${esc(t.zh)}${esc(note)}">${esc(t.zh)}</small></button>`;
     }).join('');
   }
-  $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === tracks[selected]?.id));
+  $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === libraryHighlightedId));
   more.classList.toggle('hidden', shown.length >= visible.length);
   $('.fav').textContent = favorites.has(tracks[selected]?.id) ? '♥' : '♡';
   $('#side').classList.toggle('library-blank', mode === 'albums' && !$('#side').classList.contains('open'));
@@ -109,13 +110,8 @@ subShelf.onclick = event => {
 $('#grid').onclick = event => {
   const card = event.target.closest('[data-id]');
   if (!card) return;
-  const now = Date.now();
-  const doubleTap = lastCardTap.id === card.dataset.id && now - lastCardTap.time < 650;
-  lastCardTap = { id: card.dataset.id, time: now };
-  if (doubleTap) {
-    lastCardTap = { id: '', time: 0 };
-    openTrackAction(card.dataset.id);
-  }
+  libraryHighlightedId = card.dataset.id;
+  $('#grid').querySelectorAll('.card').forEach(item => item.classList.toggle('selected', item === card));
 };
 document.querySelectorAll('[data-tab]').forEach(button => button.onclick = () => {
   mode = button.dataset.tab;

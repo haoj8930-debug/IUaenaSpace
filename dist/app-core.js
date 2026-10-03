@@ -16,7 +16,6 @@ let actionTrackId = '';
 let selected = 0, mode = 'songs', query = '', request = 0, deferredInstall = null, currentAudio = null;
 let activeLyricTime = null;
 let audioErrorToastTimer = 0;
-let lastCardTap = { id: '', time: 0 };
 let lastLyricTap = { time: '', at: 0 };
 let render, choose, renderShelf;
 const $ = selector => document.querySelector(selector);
