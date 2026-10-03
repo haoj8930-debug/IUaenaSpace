@@ -93,6 +93,11 @@ body.light .mini { background: rgba(255,255,255,.78); }
   .mini small { font-size: 10px; }
   .mini .icon { width: 32px; height: 32px; flex: 0 0 32px; }
 }
+
+body.parent-player-only { min-height: 0; overflow: hidden; background: transparent !important; }
+body.parent-player-only::before,body.parent-player-only .app,body.parent-player-only .nav { display: none !important; }
+body.parent-player-only .dock { bottom: 0 !important; }
+body.parent-player-only .mini { margin-bottom: 0; }
 @media(prefers-reduced-motion:reduce) { :is(.nav-indicator,#bottomNav .bottomNav__indicator) { transition: none !important; } }
 
 .profileIntroStack { display: grid; align-content: start; gap: 14px; min-width: 0; }
@@ -387,18 +392,18 @@ body.light .mini { color: #17151c; background: rgba(245,244,247,.8) !important; 
 .mini-progress::-moz-range-progress { height: 2px; background: #6f6875; }
 
 :is(.nav,#bottomNav) {
-  width: min(420px,calc(100% - 42px)) !important; height: 66px !important; min-height: 66px !important;
+  width: min(420px,calc(100vw - 42px)) !important; height: 66px !important; min-height: 66px !important;
   margin-inline: auto; padding: 6px !important; color: #242129 !important;
   border: 1px solid rgba(255,255,255,.58) !important; border-radius: 999px !important;
   background: rgba(239,238,242,.7) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.86),0 14px 34px rgba(0,0,0,.16) !important;
   backdrop-filter: blur(28px) saturate(1.15) !important; -webkit-backdrop-filter: blur(28px) saturate(1.15) !important;
-  touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
 .nav button,#bottomNav button { min-height: 54px !important; color: #45414a !important; font-size: 0 !important; }
 .nav button > span,#bottomNav button > span:not(.navIcon) { display: none !important; }
 .nav button.active,#bottomNav button.is-active { color: #111015 !important; }
-.nav img,#bottomNav .navIcon { width: 26px !important; height: 26px !important; opacity: .92; filter: none !important; }
+.nav img,#bottomNav .navIcon { width: 26px !important; height: 26px !important; opacity: .92; filter: none !important; pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
 :is(.nav-indicator,#bottomNav .bottomNav__indicator) {
   top: 6px !important; bottom: 6px !important; left: 6px !important;
   width: calc((100% - 12px)/5) !important; height: calc(100% - 12px) !important;
@@ -423,7 +428,7 @@ body.light .mini { color: #17151c; background: rgba(245,244,247,.8) !important; 
   .mini > img { width: 50px; height: 50px; border-radius: 13px; }
   .mini .icon,.mini .play { flex-basis: 38px; width: 38px; height: 38px; }
   .mini .mini-fav { font-size: 27px; }
-  :is(.nav,#bottomNav) { width: min(342px,calc(100% - 30px)) !important; height: 62px !important; min-height: 62px !important; padding: 5px !important; }
+  :is(.nav,#bottomNav) { width: min(342px,calc(100vw - 30px)) !important; height: 62px !important; min-height: 62px !important; padding: 5px !important; }
   .nav button,#bottomNav button { min-height: 52px !important; }
   .nav img,#bottomNav .navIcon { width: 25px !important; height: 25px !important; }
   :is(.nav-indicator,#bottomNav .bottomNav__indicator) { top: 5px !important; bottom: 5px !important; left: 5px !important; width: calc((100% - 10px)/5) !important; height: calc(100% - 10px) !important; }

@@ -474,7 +474,9 @@ h3 {
     rgba(13, 19, 36, 0.72);
   box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(24px) saturate(1.35);
+  scrollbar-width: none;
 }
+.sectionTabs::-webkit-scrollbar { display: none; }
 
 body[data-active-view="music"] .sectionTabs {
   margin-top: 0;
@@ -594,6 +596,16 @@ body[data-active-view="music"] .sectionTabs {
   font-weight: 900;
   letter-spacing: 0;
   overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.toTopButton.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .toTopButton::before {
@@ -2537,6 +2549,15 @@ body[data-active-view="music"] #sectionTabs,
 body[data-active-view="music"] #toTopButton,
 
 body[data-active-view="music"] #bottomNav { display: none !important; }
+body:not([data-active-view="music"]) .musicAppView {
+  display: block !important;
+  inset: auto 0 88px;
+  height: 76px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 55;
+}
+body:not([data-active-view="music"]) .musicAppView iframe { background: transparent; pointer-events: auto; }
 #bottomNav {
   box-sizing: border-box;
   width: min(720px, calc(100% - 28px)) !important;
@@ -2551,6 +2572,7 @@ body[data-active-view="music"] #bottomNav { display: none !important; }
 #bottomNav .navIcon { width: 27px !important; height: 27px !important; }
 #bottomNav .bottomNav__indicator { top: 8px; bottom: 8px; left: 8px; width: calc((100% - 16px) / 5); }
 @media (max-width: 740px) {
+  body:not([data-active-view="music"]) .musicAppView { bottom: 79px; height: 72px; }
   #bottomNav { width: calc(100% - 18px) !important; height: 76px !important; min-height: 76px !important; bottom: 12px !important; padding: 6px !important; }
   #bottomNav .navIcon { width: 25px !important; height: 25px !important; }
   #bottomNav .bottomNav__indicator { top: 6px; bottom: 6px; left: 6px; width: calc((100% - 12px) / 5); }

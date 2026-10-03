@@ -466,12 +466,14 @@ $('#lyrics').onclick = event => {
 };
 $('#side .close').onclick = () => $('#side').classList.remove('open');
 document.addEventListener('keydown', event => { if (event.key === 'Escape') $('#side').classList.remove('open'); });
-$('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'Music', '音乐'], ['tv', 'Tv', '影视'], ['gift', 'Present', '开箱'], ['search', 'Search', '搜索'], ['user-round', 'Profile', '我的']].map(([icon, name, label], i) => `<button class="${i === 0 ? 'active' : ''}" data-nav="${name}" aria-label="${label}" title="${label}"><img src="assets/icons/${icon}.svg" alt=""></button>`).join('');
+$('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'Music', '音乐'], ['tv', 'Tv', '影视'], ['gift', 'Present', '开箱'], ['search', 'Search', '搜索'], ['user-round', 'Profile', '我的']].map(([icon, name, label], i) => `<button class="${i === 0 ? 'active' : ''}" data-nav="${name}" aria-label="${label}" title="${label}"><img src="assets/icons/${icon}.svg" alt="" draggable="false"></button>`).join('');
 function enablePressDragNavigation(nav, selector) {
   const buttons = [...nav.querySelectorAll(selector)];
   const indicator = nav.querySelector('.nav-indicator');
   let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, lastX = 0, targetIndex = 0, suppressClickUntil = 0;
   const clearPreview = () => buttons.forEach(button => button.classList.remove('drag-preview'));
+  nav.addEventListener('dragstart', event => event.preventDefault());
+  nav.addEventListener('contextmenu', event => event.preventDefault());
   const update = clientX => {
     const rect = nav.getBoundingClientRect();
     const segment = indicator.offsetWidth;
@@ -489,14 +491,20 @@ function enablePressDragNavigation(nav, selector) {
   const finish = commit => {
     clearTimeout(holdTimer);
     nav.classList.remove('is-pressing');
-    if (!dragging) return;
+    if (!dragging) { pointerId = -1; return; }
     dragging = false;
+    pointerId = -1;
     nav.classList.remove('is-dragging');
     clearPreview();
+    if (!commit) {
+      const activeIndex = Math.max(0, buttons.findIndex(button => button.classList.contains('active')));
+      nav.style.setProperty('--active-index', String(activeIndex));
+      return;
+    }
     nav.style.setProperty('--active-index', String(targetIndex));
     buttons.forEach((button, index) => button.classList.toggle('active', index === targetIndex));
     suppressClickUntil = performance.now() + 450;
-    if (commit) buttons[targetIndex]?.click();
+    buttons[targetIndex]?.click();
   };
   nav.addEventListener('pointerdown', event => {
     if (event.button !== 0) return;

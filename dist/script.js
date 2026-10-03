@@ -568,11 +568,11 @@ const toTopButton = document.querySelector("#toTopButton");
 
 let activeView = "music";
 
-let screenFilter = "";
+let screenFilter = "iu-official";
 
-let merchFilter = "";
+let merchFilter = window.IU_MERCH?.categories?.[0]?.id || "";
 
-let officialCategoryFilter = "";
+let officialCategoryFilter = window.IU_YOUTUBE_OFFICIAL?.categories?.[0]?.id || "";
 
 let themeMode = localStorage.getItem(themeStorageKey);
 
@@ -1463,6 +1463,7 @@ function setView(view) {
   if (view === "search") renderGlobalSearch();
   renderSectionTabs();
   document.body.classList.add("app-ready");
+  requestAnimationFrame(syncToTopButton);
 }
 
 function applyTheme(mode = themeMode) {
@@ -1823,6 +1824,8 @@ function enablePressDragBottomNav(nav) {
   const indicator = nav.querySelector(".bottomNav__indicator");
   let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, lastX = 0, targetIndex = 0, suppressClickUntil = 0;
   const clearPreview = () => buttons.forEach((button) => button.classList.remove("drag-preview"));
+  nav.addEventListener("dragstart", (event) => event.preventDefault());
+  nav.addEventListener("contextmenu", (event) => event.preventDefault());
   const update = (clientX) => {
     const rect = nav.getBoundingClientRect();
     const segment = indicator.offsetWidth;
@@ -1840,8 +1843,9 @@ function enablePressDragBottomNav(nav) {
   const finish = (commit) => {
     clearTimeout(holdTimer);
     nav.classList.remove("is-pressing");
-    if (!dragging) return;
+    if (!dragging) { pointerId = -1; return; }
     dragging = false;
+    pointerId = -1;
     nav.classList.remove("is-dragging");
     clearPreview();
     suppressClickUntil = performance.now() + 450;
@@ -1916,6 +1920,11 @@ merchMore?.addEventListener("click", () => {
 toTopButton?.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+function syncToTopButton() {
+  toTopButton?.classList.toggle("is-visible", activeView !== "music" && window.scrollY > 320);
+}
+window.addEventListener("scroll", syncToTopButton, { passive: true });
 
 themeControl.addEventListener("click", (event) => {
   const button = event.target.closest("[data-theme]");

@@ -215,6 +215,17 @@ $('.theme').onclick = () => {
 };
 if (embeddedMusic) {
   const views = { Tv: 'screen', Present: 'merch', Search: 'search', Profile: 'profile' };
+  const syncEmbeddedNav = name => {
+    const buttons = [...document.querySelectorAll('[data-nav]')];
+    const index = Math.max(0, buttons.findIndex(button => button.dataset.nav === name));
+    buttons.forEach((button, itemIndex) => button.classList.toggle('active', itemIndex === index));
+    $('.nav').style.setProperty('--active-index', String(index));
+  };
+  const setParentView = view => {
+    const playerOnly = view && view !== 'music';
+    document.body.classList.toggle('parent-player-only', playerOnly);
+    if (!playerOnly) syncEmbeddedNav('Music');
+  };
   document.querySelectorAll('[data-nav]').forEach(button => button.onclick = () => {
     const view = views[button.dataset.nav];
     if (view) parent.postMessage({ type: 'uaena-navigate', view }, location.origin);
@@ -222,8 +233,10 @@ if (embeddedMusic) {
   addEventListener('message', event => {
     if (event.origin !== location.origin || event.source !== parent) return;
     if (event.data?.type === 'uaena-view-active') {
+      setParentView('music');
       requestAnimationFrame(() => requestAnimationFrame(render));
     }
+    if (event.data?.type === 'uaena-parent-view') setParentView(event.data.view);
     if (event.data?.type === 'uaena-open-track') {
       const index = tracks.findIndex(track => track.id === event.data.id);
       if (index >= 0) choose(index);
@@ -242,6 +255,12 @@ if (embeddedMusic) {
       localStorage.setItem('uaena-music-light', String(event.data.light));
     }
   });
+  $('.queue-toggle').addEventListener('click', () => {
+    if (document.body.classList.contains('parent-player-only')) parent.postMessage({ type: 'uaena-navigate', view: 'music' }, location.origin);
+  }, true);
+  $('.mini .meta').addEventListener('click', () => {
+    if (document.body.classList.contains('parent-player-only')) parent.postMessage({ type: 'uaena-navigate', view: 'music' }, location.origin);
+  }, true);
 } else {
   const views = { Tv: 'screen', Present: 'merch', Search: 'search', Profile: 'profile' };
   document.querySelectorAll('[data-nav]').forEach(button => {
