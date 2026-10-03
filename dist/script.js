@@ -1819,6 +1819,14 @@ merchShelf?.addEventListener("click", (event) => {
   merchGrid.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
+const cardNativeActionGuard = ".screenCard,.merchCard,.officialVideoCard,.officialCategoryCard,.globalResult,.photocard-entry";
+document.addEventListener("dragstart", (event) => {
+  if (event.target.closest?.(cardNativeActionGuard)) event.preventDefault();
+});
+document.addEventListener("contextmenu", (event) => {
+  if (event.target.closest?.(cardNativeActionGuard)) event.preventDefault();
+});
+
 function enablePressDragBottomNav(nav) {
   const buttons = [...nav.querySelectorAll("[data-app-view]")];
   const indicator = nav.querySelector(".bottomNav__indicator");

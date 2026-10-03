@@ -174,6 +174,9 @@ document.querySelectorAll('[data-tab]').forEach(button => button.onclick = () =>
 });
 $('#searchInput').oninput = event => { query = event.target.value.toLowerCase(); libraryRows = 4; render(); };
 more.onclick = () => { libraryRows += 4; render(); };
+const libraryCardGuard = '.card,.shelf button,.queue-row,.track-action-panel';
+document.addEventListener('dragstart', event => { if (event.target.closest?.(libraryCardGuard)) event.preventDefault(); });
+document.addEventListener('contextmenu', event => { if (event.target.closest?.(libraryCardGuard)) event.preventDefault(); });
 let resizeFrame;
 addEventListener('resize', () => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(render); });
 renderShelf();

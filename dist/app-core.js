@@ -466,7 +466,7 @@ $('#lyrics').onclick = event => {
 };
 $('#side .close').onclick = () => $('#side').classList.remove('open');
 document.addEventListener('keydown', event => { if (event.key === 'Escape') $('#side').classList.remove('open'); });
-$('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'Music', '音乐'], ['tv', 'Tv', '影视'], ['gift', 'Present', '开箱'], ['search', 'Search', '搜索'], ['user-round', 'Profile', '我的']].map(([icon, name, label], i) => `<button class="${i === 0 ? 'active' : ''}" data-nav="${name}" aria-label="${label}" title="${label}"><img src="assets/icons/${icon}.svg" alt="" draggable="false"></button>`).join('');
+$('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'Music', '音乐'], ['tv', 'Tv', '影视'], ['gift', 'Present', '开箱'], ['search', 'Search', '搜索'], ['profile', 'Profile', '我的']].map(([icon, name, label], i) => `<button class="${i === 0 ? 'active' : ''}" data-nav="${name}" aria-label="${label}" title="${label}"><span class="navIcon navIcon--${icon}" aria-hidden="true"></span></button>`).join('');
 function enablePressDragNavigation(nav, selector) {
   const buttons = [...nav.querySelectorAll(selector)];
   const indicator = nav.querySelector('.nav-indicator');
