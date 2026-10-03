@@ -1617,7 +1617,7 @@ function renderGlobalSearch() {
   searchPage?.classList.toggle("has-search", Boolean(query) || type !== "all");
   if (!query && type === "all") {
     globalSearchCount.textContent = "请搜索或筛选";
-    globalSearchResults.innerHTML = `<div class="empty selectionPrompt">输入关键词，或选择一个搜索范围。</div>`;
+    globalSearchResults.innerHTML = "";
     searchMore.hidden = true;
     return;
   }
@@ -1830,7 +1830,7 @@ document.addEventListener("contextmenu", (event) => {
 function enablePressDragBottomNav(nav) {
   const buttons = [...nav.querySelectorAll("[data-app-view]")];
   const indicator = nav.querySelector(".bottomNav__indicator");
-  let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, lastX = 0, targetIndex = 0, suppressClickUntil = 0;
+  let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, targetIndex = 0, suppressClickUntil = 0;
   const clearPreview = () => buttons.forEach((button) => button.classList.remove("drag-preview"));
   nav.addEventListener("dragstart", (event) => event.preventDefault());
   nav.addEventListener("contextmenu", (event) => event.preventDefault());
@@ -1838,15 +1838,10 @@ function enablePressDragBottomNav(nav) {
     const rect = nav.getBoundingClientRect();
     const segment = indicator.offsetWidth;
     const start = indicator.offsetLeft;
-    const x = Math.max(0, Math.min(segment * (buttons.length - 1), clientX - rect.left - start - segment / 2));
-    const movement = clientX - lastX;
-    lastX = clientX;
+    const x = Math.round(Math.max(0, Math.min(segment * (buttons.length - 1), clientX - rect.left - start - segment / 2)));
     targetIndex = Math.round(x / segment);
     nav.style.setProperty("--drag-x", `${x}px`);
-    nav.style.setProperty("--drag-scale-x", String(1.06 + Math.min(Math.abs(movement) / 110, 0.14)));
-    nav.style.setProperty("--drag-scale-y", String(0.98 - Math.min(Math.abs(movement) / 300, 0.08)));
-    clearPreview();
-    buttons[targetIndex]?.classList.add("drag-preview");
+    buttons.forEach((button, index) => button.classList.toggle("drag-preview", index === targetIndex));
   };
   const finish = (commit) => {
     clearTimeout(holdTimer);
@@ -1868,7 +1863,7 @@ function enablePressDragBottomNav(nav) {
   nav.addEventListener("pointerdown", (event) => {
     if (event.button !== 0) return;
     pointerId = event.pointerId;
-    startX = lastX = event.clientX;
+    startX = event.clientX;
     nav.classList.add("is-pressing");
     holdTimer = setTimeout(() => {
       dragging = true;
