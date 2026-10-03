@@ -201,7 +201,7 @@ function clearActiveLyrics() {
 function syncLyricsAt(seconds, force = false) {
   const track = tracks[selected];
   const lines = timedLyricsFor(track);
-  const elapsed = (seconds + 0.5) * 1000;
+  const elapsed = seconds * 1000;
   let nextTime = null;
   for (const line of lines) {
     const time = Number(line.time);
@@ -217,8 +217,13 @@ function syncLyricsAt(seconds, force = false) {
     verse.classList.toggle('is-active', active);
     if (active && !activeVerse) activeVerse = verse;
   }
-  if (activeVerse && $('#side').classList.contains('open')) {
-    activeVerse.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  if (activeVerse && getComputedStyle($('#side')).display !== 'none') {
+    const lyricsBox = $('#lyrics');
+    const scroller = lyricsBox.scrollHeight > lyricsBox.clientHeight + 2 ? lyricsBox : $('#side');
+    const scrollerRect = scroller.getBoundingClientRect();
+    const verseRect = activeVerse.getBoundingClientRect();
+    const top = scroller.scrollTop + verseRect.top - scrollerRect.top - (scrollerRect.height - verseRect.height) / 2;
+    scroller.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }
   if (currentAudio && !currentAudio.paused && nextTime !== null) {
     const matching = lines.filter(line => Number(line.time) === nextTime);
