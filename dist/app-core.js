@@ -17,7 +17,7 @@ let selected = 0, mode = 'songs', query = '', request = 0, deferredInstall = nul
 let activeLyricTime = null;
 let audioErrorToastTimer = 0;
 let lastLyricTap = { time: '', at: 0 };
-let render, choose, renderShelf;
+let render, choose, renderShelf, syncCardActions;
 const $ = selector => document.querySelector(selector);
 const coverFor = t => t.cover || 'assets/covers/palette.jpg';
 const titleFor = t => t.displayTitle || t.originalTitle || t.title;
@@ -91,6 +91,7 @@ function setPlayingUi(playing) {
   button.title = playing ? '暂停' : '播放';
   button.setAttribute('aria-label', playing ? '暂停' : '播放');
   if ('mediaSession' in navigator) navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+  syncCardActions?.();
 }
 
 function setPlaybackModeUi() {

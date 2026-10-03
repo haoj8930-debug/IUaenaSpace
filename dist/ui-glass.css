@@ -236,6 +236,29 @@ body.light .mini .icon:hover { color: #49305f; background: rgba(120,88,160,.08);
 .verse { transform-origin: left center; transition: transform .26s ease,color .26s ease,opacity .26s ease; cursor: pointer; }
 .verse.is-active { color: var(--accent); font-weight: 720; transform: scale(1.14); }
 .verse.is-active small { color: color-mix(in srgb,var(--accent) 70%,var(--muted)); font-weight: 500; }
+.card { position: relative; cursor: pointer; }
+.card.actions-open { z-index: 4; }
+.card.actions-open .art { overflow: visible; }
+.card.actions-open .art img { border-radius: inherit; }
+.card:focus-visible { outline: none; }
+.card:focus-visible .art { box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 72%,transparent),0 16px 36px rgba(0,0,0,.25); }
+.card-actions {
+  position: absolute; top: 50%; left: 50%; z-index: 3;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 6px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
+  background: rgba(24,22,34,.78); box-shadow: 0 12px 30px rgba(0,0,0,.28);
+  backdrop-filter: blur(18px) saturate(1.25); -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%,-44%) scale(.94);
+  transition: opacity .18s ease,transform .18s ease,visibility .18s ease;
+}
+.card.actions-open .card-actions { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%,-50%) scale(1); }
+.card-actions button { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: #f7f2ff; background: rgba(255,255,255,.1); }
+.card-actions button:hover,.card-actions button:focus-visible { color: #fff; background: rgba(169,139,232,.42); outline: none; }
+.card-actions button:active { transform: scale(.94); }
+.card-actions button[hidden] { display: none; }
+.card-actions svg { width: 22px; height: 22px; fill: currentColor; pointer-events: none; }
+body.light .card-actions { border-color: rgba(91,68,125,.14); background: rgba(255,255,255,.9); box-shadow: 0 12px 28px rgba(63,42,92,.18); }
+body.light .card-actions button { color: #684d91; background: rgba(112,82,154,.09); }
 .queue-sheet,.track-action { position: fixed; inset: 0; z-index: 30; display: grid; place-items: end center; padding: 22px; }
 .queue-backdrop,.track-action-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; background: rgba(8,8,14,.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .queue-panel,.track-action-panel {

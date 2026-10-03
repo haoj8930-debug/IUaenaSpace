@@ -6,6 +6,8 @@ let libraryRows = 4;
 let libraryGridSignature = '';
 let librarySelectedId = '';
 let libraryHighlightedId = '';
+let cardActionId = '';
+let lastCardTap = { id: '', time: 0 };
 let musicInteracted = false;
 const byNewest = (a, b) => (b.publishTime || 0) - (a.publishTime || 0) || (a.trackNo || 0) - (b.trackNo || 0) || String(a.title).localeCompare(String(b.title));
 tracks.sort(byNewest);
@@ -50,10 +52,11 @@ render = function () {
     $('#grid').innerHTML = shown.map(t => {
       const name = t.displayTitle || t.originalTitle || t.title;
       const note = t.zhStatus === 'reference' ? '（参考译名，尚未确认通行中文名称）' : '';
-      return `<button class="card" data-id="${esc(t.id)}" aria-label="${esc(name)}，${esc(t.zh)}${esc(note)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"></div><strong title="${esc(name)}">${esc(name)}</strong><small title="${esc(t.zh)}${esc(note)}">${esc(t.zh)}</small></button>`;
+      return `<div class="card" data-id="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(name)}，${esc(t.zh)}${esc(note)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"><div class="card-actions" aria-label="歌曲操作"><button type="button" data-card-action="play" title="播放" aria-label="播放 ${esc(name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><button type="button" data-card-action="pause" title="暂停" aria-label="暂停 ${esc(name)}" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><button type="button" data-card-action="add" title="加入播放列表" aria-label="将 ${esc(name)} 加入播放列表"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14v2H5zm0 4h14v2H5zm0 4h14v2H5z"/></svg></button></div></div><strong title="${esc(name)}">${esc(name)}</strong><small title="${esc(t.zh)}${esc(note)}">${esc(t.zh)}</small></div>`;
     }).join('');
   }
   $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === libraryHighlightedId));
+  syncCardActions();
   more.classList.toggle('hidden', shown.length >= visible.length);
   $('.fav').textContent = favorites.has(tracks[selected]?.id) ? '♥' : '♡';
   $('#side').classList.toggle('library-blank', mode === 'albums' && !$('#side').classList.contains('open'));
@@ -107,11 +110,52 @@ subShelf.onclick = event => {
   renderShelf();
   render();
 };
-$('#grid').onclick = event => {
+syncCardActions = function () {
+  const playingId = currentAudio && !currentAudio.paused ? tracks[selected]?.id : '';
+  $('#grid').querySelectorAll('.card').forEach(card => {
+    card.classList.toggle('actions-open', card.dataset.id === cardActionId);
+    const pause = card.querySelector('[data-card-action="pause"]');
+    if (pause) pause.hidden = card.dataset.id !== playingId;
+  });
+};
+
+$('#grid').onclick = async event => {
+  const action = event.target.closest('[data-card-action]');
+  if (action) {
+    const card = action.closest('[data-id]');
+    const id = card?.dataset.id;
+    if (!id) return;
+    event.stopPropagation();
+    if (action.dataset.cardAction === 'play') {
+      const sameTrack = tracks[selected]?.id === id && currentAudio;
+      if (sameTrack) {
+        if (currentAudio.paused) await currentAudio.play().catch(error => showPlaybackError(error));
+      } else {
+        await playTrackFromCurrentView(id);
+      }
+    }
+    if (action.dataset.cardAction === 'pause' && tracks[selected]?.id === id) currentAudio?.pause();
+    if (action.dataset.cardAction === 'add') addTrackToQueue(id);
+    cardActionId = '';
+    syncCardActions();
+    return;
+  }
   const card = event.target.closest('[data-id]');
   if (!card) return;
   libraryHighlightedId = card.dataset.id;
   $('#grid').querySelectorAll('.card').forEach(item => item.classList.toggle('selected', item === card));
+  const now = Date.now();
+  const doubleTap = event.detail >= 2 || (lastCardTap.id === card.dataset.id && now - lastCardTap.time < 650);
+  lastCardTap = doubleTap ? { id: '', time: 0 } : { id: card.dataset.id, time: now };
+  cardActionId = doubleTap ? card.dataset.id : '';
+  syncCardActions();
+};
+$('#grid').onkeydown = event => {
+  if (event.target.closest('[data-card-action]')) return;
+  const card = event.target.closest('[data-id]');
+  if (!card || (event.key !== 'Enter' && event.key !== ' ')) return;
+  event.preventDefault();
+  card.click();
 };
 document.querySelectorAll('[data-tab]').forEach(button => button.onclick = () => {
   mode = button.dataset.tab;
