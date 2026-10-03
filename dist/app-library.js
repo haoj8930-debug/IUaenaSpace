@@ -58,7 +58,12 @@ render = function () {
   $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === libraryHighlightedId));
   syncCardActions();
   more.classList.toggle('hidden', shown.length >= visible.length);
-  $('.fav').textContent = favorites.has(tracks[selected]?.id) ? '♥' : '♡';
+  const favorite = favorites.has(tracks[selected]?.id);
+  $('.fav').textContent = favorite ? '♥' : '♡';
+  $('.mini-fav').textContent = favorite ? '♥' : '♡';
+  $('.mini-fav').classList.toggle('is-favorite', favorite);
+  $('.mini-fav').setAttribute('aria-pressed', String(favorite));
+  $('.mini-fav').setAttribute('aria-label', favorite ? '取消收藏当前歌曲' : '收藏当前歌曲');
   $('#side').classList.toggle('library-blank', mode === 'albums' && !$('#side').classList.contains('open'));
 };
 
@@ -66,7 +71,7 @@ choose = async function (index, userAction = true) {
   selected = (index + tracks.length) % tracks.length;
   const t = tracks[selected];
   if (userAction) musicInteracted = true;
-  $('.mini').classList.toggle('hidden', !musicInteracted);
+  $('.mini').classList.remove('hidden');
   if (librarySelectedId === t.id) { render(); renderQueue(); return; }
   librarySelectedId = t.id;
   for (const cover of [$('#cover'), $('#minicover')]) if (cover.getAttribute('src') !== coverFor(t)) cover.src = coverFor(t);

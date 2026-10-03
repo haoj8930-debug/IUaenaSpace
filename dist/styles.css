@@ -1744,6 +1744,42 @@ body.theme-light .bottomNav {
   border-color: rgba(13, 19, 36, 0.14);
 }
 
+/* Reference-video navigation: icon-only frosted capsule. */
+#bottomNav {
+  width: min(420px,calc(100% - 42px)); height: 66px; min-height: 66px;
+  padding: 6px; border: 1px solid rgba(255,255,255,.58); border-radius: 999px;
+  color: #45414a; background: rgba(239,238,242,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.88),0 14px 34px rgba(0,0,0,.16);
+  backdrop-filter: blur(28px) saturate(1.15); -webkit-backdrop-filter: blur(28px) saturate(1.15);
+  touch-action: pan-y; user-select: none; -webkit-user-select: none;
+}
+#bottomNav button { min-height: 54px; color: #45414a; font-size: 0; }
+#bottomNav button > span:not(.navIcon) { display: none; }
+#bottomNav button.is-active { color: #111015; }
+#bottomNav .navIcon { width: 26px; height: 26px; }
+#bottomNav .bottomNav__indicator {
+  top: 6px; bottom: 6px; left: 6px; width: calc((100% - 12px)/5); height: calc(100% - 12px);
+  border: 1px solid rgba(255,255,255,.72); background: rgba(255,255,255,.54);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9),0 5px 16px rgba(40,34,48,.12);
+  transition: transform 360ms cubic-bezier(.2,.84,.25,1);
+}
+#bottomNav.is-pressing:not(.is-dragging) .bottomNav__indicator { filter: brightness(1.04); }
+#bottomNav.is-dragging .bottomNav__indicator {
+  transform: translate3d(var(--drag-x),0,0) scale(var(--drag-scale-x,1.06),var(--drag-scale-y,.98));
+  border-radius: 24px; filter: brightness(1.06) saturate(1.08);
+  transition: transform 45ms linear,border-radius 140ms ease,filter 140ms ease;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.96),0 8px 22px rgba(73,59,91,.18);
+}
+#bottomNav.is-dragging button.drag-preview { color: #0d0c10; transform: scale(1.08); }
+body.theme-light #bottomNav { color: #45414a; background: rgba(242,241,245,.76); }
+body.theme-light #bottomNav button,body.theme-light #bottomNav button.is-active { color: #242129; }
+@media (max-width:740px) {
+  #bottomNav { width: min(342px,calc(100% - 30px)); height: 62px; min-height: 62px; padding: 5px; }
+  #bottomNav button { min-height: 52px; }
+  #bottomNav .navIcon { width: 25px; height: 25px; }
+  #bottomNav .bottomNav__indicator { top: 5px; bottom: 5px; left: 5px; width: calc((100% - 10px)/5); height: calc(100% - 10px); }
+}
+
 body.theme-light .bottomNav button {
   color: rgba(38, 29, 62, 0.72);
   border-color: transparent;

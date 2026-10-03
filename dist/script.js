@@ -1818,6 +1818,72 @@ merchShelf?.addEventListener("click", (event) => {
   merchGrid.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
+function enablePressDragBottomNav(nav) {
+  const buttons = [...nav.querySelectorAll("[data-app-view]")];
+  const indicator = nav.querySelector(".bottomNav__indicator");
+  let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, lastX = 0, targetIndex = 0, suppressClickUntil = 0;
+  const clearPreview = () => buttons.forEach((button) => button.classList.remove("drag-preview"));
+  const update = (clientX) => {
+    const rect = nav.getBoundingClientRect();
+    const segment = indicator.offsetWidth;
+    const start = indicator.offsetLeft;
+    const x = Math.max(0, Math.min(segment * (buttons.length - 1), clientX - rect.left - start - segment / 2));
+    const movement = clientX - lastX;
+    lastX = clientX;
+    targetIndex = Math.round(x / segment);
+    nav.style.setProperty("--drag-x", `${x}px`);
+    nav.style.setProperty("--drag-scale-x", String(1.06 + Math.min(Math.abs(movement) / 110, 0.14)));
+    nav.style.setProperty("--drag-scale-y", String(0.98 - Math.min(Math.abs(movement) / 300, 0.08)));
+    clearPreview();
+    buttons[targetIndex]?.classList.add("drag-preview");
+  };
+  const finish = (commit) => {
+    clearTimeout(holdTimer);
+    nav.classList.remove("is-pressing");
+    if (!dragging) return;
+    dragging = false;
+    nav.classList.remove("is-dragging");
+    clearPreview();
+    suppressClickUntil = performance.now() + 450;
+    if (commit) {
+      const button = buttons[targetIndex];
+      if (button) {
+        setView(button.dataset.appView);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+  nav.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) return;
+    pointerId = event.pointerId;
+    startX = lastX = event.clientX;
+    nav.classList.add("is-pressing");
+    holdTimer = setTimeout(() => {
+      dragging = true;
+      nav.classList.add("is-dragging");
+      nav.setPointerCapture?.(pointerId);
+      update(event.clientX);
+    }, 280);
+  });
+  nav.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== pointerId) return;
+    if (!dragging && Math.abs(event.clientX - startX) > 10) {
+      clearTimeout(holdTimer);
+      nav.classList.remove("is-pressing");
+      return;
+    }
+    if (dragging) { event.preventDefault(); update(event.clientX); }
+  }, { passive: false });
+  nav.addEventListener("pointerup", (event) => { if (event.pointerId === pointerId) finish(true); });
+  nav.addEventListener("pointercancel", (event) => { if (event.pointerId === pointerId) finish(false); });
+  nav.addEventListener("click", (event) => {
+    if (event.detail > 0 && performance.now() < suppressClickUntil) {
+      event.preventDefault(); event.stopImmediatePropagation();
+    }
+  }, true);
+}
+enablePressDragBottomNav(bottomNav);
+
 bottomNav.addEventListener("click", (event) => {
   const button = event.target.closest("[data-app-view]");
   if (!button) return;

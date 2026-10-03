@@ -218,6 +218,15 @@ function syncLyricsAt(seconds, force = false) {
     verse.classList.toggle('is-active', active);
     if (active && !activeVerse) activeVerse = verse;
   }
+  const matching = nextTime === null ? [] : lines.filter(line => Number(line.time) === nextTime);
+  const currentLine = matching.find(line => line.translation?.trim()) || matching[0];
+  if (currentLine) {
+    $('#minititle').textContent = currentLine.original?.trim() || titleFor(track);
+    $('#minisub').textContent = currentLine.translation?.trim() || track.zh || track.release || 'IU';
+  } else {
+    $('#minititle').textContent = titleFor(track);
+    $('#minisub').textContent = track.zh || track.release || 'IU';
+  }
   if (activeVerse && getComputedStyle($('#side')).display !== 'none') {
     const lyricsBox = $('#lyrics');
     const scroller = lyricsBox.scrollHeight > lyricsBox.clientHeight + 2 ? lyricsBox : $('#side');
@@ -227,8 +236,7 @@ function syncLyricsAt(seconds, force = false) {
     scroller.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }
   if (currentAudio && !currentAudio.paused && nextTime !== null) {
-    const matching = lines.filter(line => Number(line.time) === nextTime);
-    setSystemMetadata(track, matching.find(line => line.translation?.trim()) || matching[0]);
+    setSystemMetadata(track, currentLine);
   } else if (nextTime === null) {
     setSystemMetadata(track);
   }
@@ -333,11 +341,22 @@ async function playCurrent() {
   }).catch(error => showPlaybackError(error));
 }
 const openLyrics = () => $('#side').classList.add('open');
-$('.fav').onclick = () => {
+const miniFavorite = document.createElement('button');
+miniFavorite.className = 'icon mini-fav';
+miniFavorite.type = 'button';
+miniFavorite.title = '收藏';
+miniFavorite.setAttribute('aria-label', '收藏当前歌曲');
+miniFavorite.setAttribute('aria-pressed', 'false');
+miniFavorite.textContent = '♡';
+$('.mini-controls').prepend(miniFavorite);
+$('.queue-toggle').innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h13v2H4zm0 5h13v2H4zm0 5h9v2H4zm14-1 4 2-4 2z"/></svg>';
+const toggleCurrentFavorite = () => {
   const id = tracks[selected].id;
   favorites.has(id) ? favorites.delete(id) : favorites.add(id);
   save(); render(); renderQueue();
 };
+$('.fav').onclick = toggleCurrentFavorite;
+miniFavorite.onclick = toggleCurrentFavorite;
 $('.prev').onclick = () => stepTrack(-1);
 $('.next').onclick = () => stepTrack(1);
 $('.play').onclick = playCurrent;
@@ -385,7 +404,52 @@ $('.mini-progress').oninput = event => {
   syncProgress();
   syncLyricsAt(currentAudio.currentTime, true);
 };
+let miniSwipePointer = -1, miniSwipeStartX = 0, miniSwipeX = 0, miniSwipeActive = false, suppressMiniClickUntil = 0;
+const miniMeta = $('.meta');
+const resetMiniSwipe = (fromX = 0) => {
+  miniMeta.style.transition = 'none';
+  miniMeta.style.transform = `translateX(${fromX}px)`;
+  miniMeta.style.opacity = fromX ? '.25' : '1';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    miniMeta.style.transition = 'transform .24s cubic-bezier(.2,.8,.2,1),opacity .2s ease';
+    miniMeta.style.transform = 'translateX(0)';
+    miniMeta.style.opacity = '1';
+  }));
+};
+miniMeta.addEventListener('pointerdown', event => {
+  if (event.button !== 0) return;
+  miniSwipePointer = event.pointerId;
+  miniSwipeStartX = miniSwipeX = event.clientX;
+  miniSwipeActive = false;
+  miniMeta.style.transition = 'none';
+  miniMeta.setPointerCapture?.(event.pointerId);
+});
+miniMeta.addEventListener('pointermove', event => {
+  if (event.pointerId !== miniSwipePointer) return;
+  const delta = event.clientX - miniSwipeStartX;
+  if (Math.abs(delta) > 8) miniSwipeActive = true;
+  if (!miniSwipeActive) return;
+  event.preventDefault();
+  miniSwipeX = event.clientX;
+  miniMeta.style.transform = `translateX(${Math.max(-58, Math.min(58, delta * .32))}px)`;
+  miniMeta.style.opacity = String(Math.max(.45, 1 - Math.abs(delta) / 190));
+}, { passive: false });
+const finishMiniSwipe = async event => {
+  if (event.pointerId !== miniSwipePointer) return;
+  const delta = miniSwipeX - miniSwipeStartX;
+  miniSwipePointer = -1;
+  if (!miniSwipeActive || Math.abs(delta) < 46) { resetMiniSwipe(); return; }
+  suppressMiniClickUntil = performance.now() + 420;
+  miniMeta.style.transition = 'transform .12s ease-in,opacity .12s ease-in';
+  miniMeta.style.transform = `translateX(${delta < 0 ? -62 : 62}px)`;
+  miniMeta.style.opacity = '.12';
+  await stepTrack(delta < 0 ? 1 : -1);
+  resetMiniSwipe(delta < 0 ? 36 : -36);
+};
+miniMeta.addEventListener('pointerup', finishMiniSwipe);
+miniMeta.addEventListener('pointercancel', event => { if (event.pointerId === miniSwipePointer) { miniSwipePointer = -1; resetMiniSwipe(); } });
 $('.mini').onclick = event => {
+  if (performance.now() < suppressMiniClickUntil) return;
   if (!event.target.closest('button,input')) openLyrics();
 };
 $('.meta').onkeydown = event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openLyrics(); } };
@@ -402,7 +466,73 @@ $('#lyrics').onclick = event => {
 };
 $('#side .close').onclick = () => $('#side').classList.remove('open');
 document.addEventListener('keydown', event => { if (event.key === 'Escape') $('#side').classList.remove('open'); });
-$('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'Music'], ['tv', 'Tv'], ['gift', 'Present'], ['search', 'Search'], ['user-round', 'Profile']].map(([icon, name], i) => `<button class="${i === 0 ? 'active' : ''}" data-nav="${name}" aria-label="${name}" title="${name}"><img src="assets/icons/${icon}.svg" alt="">${name}</button>`).join('');
+$('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'Music', '音乐'], ['tv', 'Tv', '影视'], ['gift', 'Present', '开箱'], ['search', 'Search', '搜索'], ['user-round', 'Profile', '我的']].map(([icon, name, label], i) => `<button class="${i === 0 ? 'active' : ''}" data-nav="${name}" aria-label="${label}" title="${label}"><img src="assets/icons/${icon}.svg" alt=""></button>`).join('');
+function enablePressDragNavigation(nav, selector) {
+  const buttons = [...nav.querySelectorAll(selector)];
+  const indicator = nav.querySelector('.nav-indicator');
+  let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, lastX = 0, targetIndex = 0, suppressClickUntil = 0;
+  const clearPreview = () => buttons.forEach(button => button.classList.remove('drag-preview'));
+  const update = clientX => {
+    const rect = nav.getBoundingClientRect();
+    const segment = indicator.offsetWidth;
+    const start = indicator.offsetLeft;
+    const x = Math.max(0, Math.min(segment * (buttons.length - 1), clientX - rect.left - start - segment / 2));
+    const movement = clientX - lastX;
+    lastX = clientX;
+    targetIndex = Math.round(x / segment);
+    nav.style.setProperty('--drag-x', `${x}px`);
+    nav.style.setProperty('--drag-scale-x', String(1.06 + Math.min(Math.abs(movement) / 110, .14)));
+    nav.style.setProperty('--drag-scale-y', String(.98 - Math.min(Math.abs(movement) / 300, .08)));
+    clearPreview();
+    buttons[targetIndex]?.classList.add('drag-preview');
+  };
+  const finish = commit => {
+    clearTimeout(holdTimer);
+    nav.classList.remove('is-pressing');
+    if (!dragging) return;
+    dragging = false;
+    nav.classList.remove('is-dragging');
+    clearPreview();
+    nav.style.setProperty('--active-index', String(targetIndex));
+    buttons.forEach((button, index) => button.classList.toggle('active', index === targetIndex));
+    suppressClickUntil = performance.now() + 450;
+    if (commit) buttons[targetIndex]?.click();
+  };
+  nav.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    pointerId = event.pointerId;
+    startX = lastX = event.clientX;
+    nav.classList.add('is-pressing');
+    holdTimer = setTimeout(() => {
+      dragging = true;
+      nav.classList.add('is-dragging');
+      nav.setPointerCapture?.(pointerId);
+      update(event.clientX);
+    }, 280);
+  });
+  nav.addEventListener('pointermove', event => {
+    if (event.pointerId !== pointerId) return;
+    if (!dragging && Math.abs(event.clientX - startX) > 10) {
+      clearTimeout(holdTimer);
+      nav.classList.remove('is-pressing');
+      return;
+    }
+    if (dragging) { event.preventDefault(); update(event.clientX); }
+  }, { passive: false });
+  nav.addEventListener('pointerup', event => { if (event.pointerId === pointerId) finish(true); });
+  nav.addEventListener('pointercancel', event => { if (event.pointerId === pointerId) finish(false); });
+  nav.addEventListener('click', event => {
+    if (event.detail > 0 && performance.now() < suppressClickUntil) {
+      event.preventDefault(); event.stopImmediatePropagation(); return;
+    }
+    const button = event.target.closest(selector);
+    if (!button) return;
+    const index = buttons.indexOf(button);
+    nav.style.setProperty('--active-index', String(index));
+    buttons.forEach((entry, itemIndex) => entry.classList.toggle('active', itemIndex === index));
+  }, true);
+}
+enablePressDragNavigation($('.nav'), '[data-nav]');
 window.addEventListener('beforeinstallprompt', event => {
   event.preventDefault(); deferredInstall = event; $('.install').classList.remove('hidden');
 });
