@@ -1,4 +1,4 @@
-const CACHE_NAME = "uaena-app-preview-v13";
+const CACHE_NAME = "uaena-app-preview-v14";
 const ASSETS = [
   "app-preview.html",
   "app.webmanifest",
@@ -40,6 +40,11 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  const url = new URL(event.request.url);
+  if (url.origin === location.origin && url.pathname.startsWith("/audio/")) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
   if (['document', 'script', 'style'].includes(event.request.destination)) {
     event.respondWith(fetch(event.request).then(response => {
       if (response.ok && new URL(event.request.url).origin === location.origin) {

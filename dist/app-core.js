@@ -15,6 +15,7 @@ let visibleTrackIds = [];
 let actionTrackId = '';
 let selected = 0, mode = 'songs', query = '', request = 0, deferredInstall = null, currentAudio = null;
 let activeLyricTime = null;
+let audioErrorToastTimer = 0;
 let lastCardTap = { id: '', time: 0 };
 let lastLyricTap = { time: '', at: 0 };
 let render, choose, renderShelf;
@@ -22,12 +23,40 @@ const $ = selector => document.querySelector(selector);
 const coverFor = t => t.cover || 'assets/covers/palette.jpg';
 const titleFor = t => t.displayTitle || t.originalTitle || t.title;
 const save = () => localStorage.setItem(storeKey, JSON.stringify({ favorites: [...favorites], audioMap, playbackMode, queueIds, queueSource }));
+const audioWorkerHost = 'iu-uaena-audio.iu-sites-project-appgprj-6ab4dada73048191a662992936b7d281.workers.dev';
+function playbackSrcFor(src) {
+  try {
+    const url = new URL(src, location.href);
+    if (location.protocol === 'https:' && url.hostname === audioWorkerHost) {
+      return `/audio/${url.pathname.split('/').pop()}`;
+    }
+  } catch {}
+  return src;
+}
 function toast(text) {
   const el = $('.toast');
   el.textContent = text;
   el.classList.remove('hidden');
   clearTimeout(window.toastTimer);
   window.toastTimer = setTimeout(() => el.classList.add('hidden'), 2600);
+}
+
+function playbackErrorText(error, audio = currentAudio) {
+  if (error?.name === 'AbortError') return '';
+  const mediaCode = audio?.error?.code || 0;
+  if (error?.name === 'NotAllowedError') return '请再点一次播放按钮开始播放';
+  if (error?.name === 'NotSupportedError' || mediaCode === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) return '这个音源格式暂时无法播放';
+  if (mediaCode === MediaError.MEDIA_ERR_NETWORK) return '音源网络连接失败，请换个网络或稍后再试';
+  if (mediaCode === MediaError.MEDIA_ERR_DECODE) return '音源解码失败，换一首试试';
+  if (audio?.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) return '音源地址暂时不可用';
+  return '音源加载失败，请稍后再试';
+}
+
+function showPlaybackError(error, audio = currentAudio) {
+  const text = playbackErrorText(error, audio);
+  if (!text) return;
+  clearTimeout(audioErrorToastTimer);
+  audioErrorToastTimer = setTimeout(() => toast(text), 80);
 }
 const db = {
   open() {
@@ -255,7 +284,7 @@ async function handleEnded() {
 
 async function playLyricAt(time) {
   const track = tracks[selected];
-  const src = await srcFor(track);
+  const src = playbackSrcFor(await srcFor(track));
   if (!src) { toast('音源后续补充'); return; }
   const absoluteSrc = new URL(src, location.href).href;
   if (!currentAudio || currentAudio.src !== absoluteSrc || currentAudio.paused) await playCurrent();
@@ -267,14 +296,14 @@ async function playLyricAt(time) {
     ]);
   }
   currentAudio.currentTime = Math.max(0, Number(time) / 1000);
-  await currentAudio.play().catch(() => toast('浏览器阻止播放，请再试一次'));
+  await currentAudio.play().catch(error => showPlaybackError(error));
   syncProgress();
   syncLyricsAt(currentAudio.currentTime, true);
 }
 
 async function playCurrent() {
   const t = tracks[selected];
-  const src = await srcFor(t);
+  const src = playbackSrcFor(await srcFor(t));
   if (tracks[selected]?.id !== t.id) return;
   if (!src) { toast('音源后续补充'); return; }
   const absoluteSrc = new URL(src, location.href).href;
@@ -290,11 +319,12 @@ async function playCurrent() {
     currentAudio.onended = handleEnded;
     currentAudio.ontimeupdate = () => { syncProgress(); syncLyricsAt(currentAudio.currentTime); };
     currentAudio.onloadedmetadata = syncProgress;
-    currentAudio.onerror = () => toast('这个音频浏览器暂时无法播放');
+    currentAudio.onerror = event => showPlaybackError(event, currentAudio);
   }
   await currentAudio.play().then(() => {
+    clearTimeout(audioErrorToastTimer);
     setPlayingUi(true);
-  }).catch(() => toast('浏览器阻止播放，请再点一次播放'));
+  }).catch(error => showPlaybackError(error));
 }
 const openLyrics = () => $('#side').classList.add('open');
 $('.fav').onclick = () => {

@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/audio/:path*",
+      "destination": "https://iu-uaena-audio.iu-sites-project-appgprj-6ab4dada73048191a662992936b7d281.workers.dev/audio/:path*"
+    }
+  ]
+}
