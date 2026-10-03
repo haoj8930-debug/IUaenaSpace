@@ -792,6 +792,10 @@ body[data-active-view="music"] .sectionTabs {
   padding: 8px 4px 0;
 }
 
+.globalSearchResults:empty {
+  display: none;
+}
+
 .searchPage:not(.has-search) .globalSearchResults .selectionPrompt {
   min-height: 58px;
   padding: 14px;
@@ -1777,12 +1781,14 @@ body.theme-light .bottomNav {
 }
 #bottomNav.is-pressing:not(.is-dragging) .bottomNav__indicator { filter: brightness(1.04); }
 #bottomNav.is-dragging .bottomNav__indicator {
-  transform: translate3d(var(--drag-x),0,0) scale(var(--drag-scale-x,1.06),var(--drag-scale-y,.98));
-  border-radius: 24px; filter: brightness(1.06) saturate(1.08);
-  transition: transform 45ms linear,border-radius 140ms ease,filter 140ms ease;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.96),0 8px 22px rgba(73,59,91,.18);
+  transform: translate3d(var(--drag-x),0,0);
+  filter: none;
+  transition: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.88),0 5px 16px rgba(40,34,48,.12);
 }
-#bottomNav.is-dragging button.drag-preview { color: #0d0c10; transform: scale(1.08); }
+#bottomNav.is-dragging button { opacity: 1; }
+#bottomNav.is-dragging button.drag-preview { color: #6f55a8; transform: scale(1.06); }
+#bottomNav.is-dragging button .navIcon { display: block; visibility: visible; opacity: .96; filter: none; }
 body.theme-light #bottomNav { color: #45414a; background: rgba(242,241,245,.76); }
 body.theme-light #bottomNav button,body.theme-light #bottomNav button.is-active { color: #242129; }
 @media (max-width:740px) {
@@ -2540,7 +2546,7 @@ body.theme-light .globalSearchPanel input::placeholder {
 }
 
 .musicAppView { position: fixed; inset: 0; z-index: 20; background: #121218; }
-.musicAppView iframe { display: block; width: 100%; height: 100%; border: 0; }
+.musicAppView iframe { display: block; width: 100%; height: 100%; border: 0; background: transparent; }
 body[data-active-view="music"] { overflow: hidden; }
 body[data-active-view="music"] [data-view="music"]:not(.musicAppView),
 

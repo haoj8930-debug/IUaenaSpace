@@ -206,6 +206,7 @@ for (const shelf of [$('#shelf'), subShelf]) {
   sync();
 }
 const setMusicTheme = light => {
+  document.documentElement.classList.toggle('light', light);
   document.body.classList.toggle('light', light);
   $('.logo').src = `assets/uaena-symbol-${light ? 'light' : 'dark'}.png`;
 };
@@ -226,6 +227,7 @@ if (embeddedMusic) {
   };
   const setParentView = view => {
     const playerOnly = view && view !== 'music';
+    document.documentElement.classList.toggle('parent-player-only', playerOnly);
     document.body.classList.toggle('parent-player-only', playerOnly);
     if (!playerOnly) syncEmbeddedNav('Music');
   };

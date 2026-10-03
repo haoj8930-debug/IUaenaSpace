@@ -470,7 +470,7 @@ $('.nav').innerHTML = '<span class="nav-indicator"></span>' + [['headphones', 'M
 function enablePressDragNavigation(nav, selector) {
   const buttons = [...nav.querySelectorAll(selector)];
   const indicator = nav.querySelector('.nav-indicator');
-  let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, lastX = 0, targetIndex = 0, suppressClickUntil = 0;
+  let holdTimer = 0, dragging = false, pointerId = -1, startX = 0, targetIndex = 0, suppressClickUntil = 0;
   const clearPreview = () => buttons.forEach(button => button.classList.remove('drag-preview'));
   nav.addEventListener('dragstart', event => event.preventDefault());
   nav.addEventListener('contextmenu', event => event.preventDefault());
@@ -478,15 +478,10 @@ function enablePressDragNavigation(nav, selector) {
     const rect = nav.getBoundingClientRect();
     const segment = indicator.offsetWidth;
     const start = indicator.offsetLeft;
-    const x = Math.max(0, Math.min(segment * (buttons.length - 1), clientX - rect.left - start - segment / 2));
-    const movement = clientX - lastX;
-    lastX = clientX;
+    const x = Math.round(Math.max(0, Math.min(segment * (buttons.length - 1), clientX - rect.left - start - segment / 2)));
     targetIndex = Math.round(x / segment);
     nav.style.setProperty('--drag-x', `${x}px`);
-    nav.style.setProperty('--drag-scale-x', String(1.06 + Math.min(Math.abs(movement) / 110, .14)));
-    nav.style.setProperty('--drag-scale-y', String(.98 - Math.min(Math.abs(movement) / 300, .08)));
-    clearPreview();
-    buttons[targetIndex]?.classList.add('drag-preview');
+    buttons.forEach((button, index) => button.classList.toggle('drag-preview', index === targetIndex));
   };
   const finish = commit => {
     clearTimeout(holdTimer);
@@ -509,7 +504,7 @@ function enablePressDragNavigation(nav, selector) {
   nav.addEventListener('pointerdown', event => {
     if (event.button !== 0) return;
     pointerId = event.pointerId;
-    startX = lastX = event.clientX;
+    startX = event.clientX;
     nav.classList.add('is-pressing');
     holdTimer = setTimeout(() => {
       dragging = true;

@@ -72,3 +72,33 @@ input:focus-visible{outline:2px solid var(--accent);outline-offset:4px}img{displ
   }
 }
 @media (max-width: 740px) { .shelf button { flex-basis: 86px; }.side.open.library-blank { visibility: visible; } }
+
+/* Stable selection feedback and a real dark mobile lyrics surface. */
+.card.selected .art,
+.card:focus-visible .art {
+  box-shadow: 0 0 0 3px color-mix(in srgb,var(--accent) 72%,transparent);
+}
+html.parent-player-only,
+html.parent-player-only body {
+  min-height: 0;
+  background: transparent !important;
+}
+@media (max-width: 740px) {
+  body:not(.light) .side.open {
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,.09);
+    background:
+      linear-gradient(180deg,rgba(28,27,38,.97),rgba(18,18,24,.94)),
+      #121218;
+    box-shadow: 0 20px 60px rgba(0,0,0,.32);
+  }
+  body:not(.light) .side.open .songhead h2,
+  body:not(.light) .side.open .verse { color: var(--text); }
+  body:not(.light) .side.open .songhead small,
+  body:not(.light) .side.open .verse small { color: var(--muted); }
+  body:not(.light) .side.open .close {
+    color: var(--text);
+    border-color: rgba(255,255,255,.1);
+    background: rgba(255,255,255,.08);
+  }
+}
