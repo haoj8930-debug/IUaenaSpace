@@ -6,7 +6,13 @@ export default {
   const key=new URL(request.url).pathname.slice(1);
   if(!/^audio\/[a-f0-9]{24}\.(mp3|flac)$/.test(key))return new Response('Not found',{status:404,headers});
   const meta=await env.AUDIO.head(key);if(!meta)return new Response('Not found',{status:404,headers});
-  meta.writeHttpMetadata(headers);headers.set('ETag',meta.httpEtag);headers.set('Cache-Control','public, max-age=86400');
+  meta.writeHttpMetadata(headers);headers.set('ETag',meta.httpEtag);
+  // A cached 206 response can be reused for a different Range request by an
+  // intermediary whose cache key does not include Range, truncating playback.
+  headers.set('Cache-Control','private, no-store');
+  headers.set('CDN-Cache-Control','no-store');
+  headers.set('Vercel-CDN-Cache-Control','no-store');
+  headers.set('Vary','Range');
   let offset=0,length=meta.size,status=200;
   const range=request.headers.get('Range');
   if(range){

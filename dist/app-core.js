@@ -24,11 +24,12 @@ const coverFor = t => t.cover || 'assets/covers/palette.jpg';
 const titleFor = t => t.displayTitle || t.originalTitle || t.title;
 const save = () => localStorage.setItem(storeKey, JSON.stringify({ favorites: [...favorites], audioMap, playbackMode, queueIds, queueSource }));
 const audioWorkerHost = 'iu-uaena-audio.iu-sites-project-appgprj-6ab4dada73048191a662992936b7d281.workers.dev';
+const audioProxyVersion = '20261003-range-fix2';
 function playbackSrcFor(src) {
   try {
     const url = new URL(src, location.href);
     if (location.protocol === 'https:' && url.hostname === audioWorkerHost) {
-      return `/audio/${url.pathname.split('/').pop()}`;
+      return `/audio/${url.pathname.split('/').pop()}?v=${audioProxyVersion}`;
     }
   } catch {}
   return src;
