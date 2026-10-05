@@ -589,10 +589,9 @@ const sectionTabConfig = {
   screen: [
     { value: "iu-official", label: "IU Official" },
     { value: "program", label: "综艺" },
-    { value: "music-stage", label: "打歌舞台" },
-    { value: "concert-video", label: "演唱会" },
+    { value: "music-stage", label: "LIVE" },
     { value: "tv", label: "电视剧" },
-    { value: "film", label: "电影" },
+    { value: "film", label: "电影 / 演唱会" },
   ],
   merch: [],
   search: [],
@@ -1054,36 +1053,9 @@ function uniqueTracksByTitle(titles) {
 }
 
 function musicStageItems() {
-  return uniqueTracksByTitle([
-    "Good Day",
-    "You & I",
-    "The Red Shoes",
-    "Friday",
-    "Twenty-Three",
-    "Palette",
-    "Through the Night",
-    "BBIBBI",
-    "Blueming",
-    "Celebrity",
-    "Lilac",
-    "Coin",
-    "strawberry moon",
-    "Love Wins All",
-    "Shopper",
-    "Holssi",
-  ]).map((track) => ({
-    id: `stage-${track.id}`,
-    title: `${track.title} Music Show Stage`,
-    zh: `${trackChineseTitle(track) || track.title} 打歌舞台`,
-    year: track.year,
-    type: "打歌舞台 / 音乐节目",
-    role: "Performer",
-    notes: "聚合官方电视台、节目频道和公开舞台搜索入口，方便继续补精确视频。",
-    image: track.cover?.image,
-    source: youtubeSearchLink(`IU ${track.title} music show stage official KBS MBC SBS Mnet`),
-    kind: "music-stage",
-  }));
+  return (window.IU_LIVE_VIDEOS || []).filter(item => item.source && item.image);
 }
+
 
 function concertVideoItems() {
   const userConcertLinks = {
@@ -1126,8 +1098,8 @@ function concertVideoItems() {
       year: 2019,
       type: "演唱会 / Live clips",
       role: "Performer",
-      notes: "整理 Love Poem 演唱会相关官方片段和公开视频入口。",
-      image: "https://cdnticket.melon.co.kr/resource/image/upload/marketing/2019/10/20191021135954e0e7b6c6-ee01-4dff-8c75-d3c699021c22.png",
+      notes: "2019 IU Tour Concert [Love, poem] in Seoul 演唱会影像。封面采用正式 DVD 封面，不使用歌曲专辑图。",
+      image: "./assets/screen-landscape/concert-love-poem-original.jpg?v=20261005-love-poem",
       source: youtubeSearchLink("IU Love Poem concert official live clip"),
       resourceLinks: [{ label: "Bilibili 全场中字", url: userConcertLinks.lovePoem }],
       kind: "concert-video",
@@ -1153,7 +1125,7 @@ function screenItems() {
   return [
     ...(screen.programs || []).map((item) => ({ ...item, kind: "program" })),
     ...musicStageItems(),
-    ...concertVideoItems(),
+    ...concertVideoItems().map(item => ({ ...item, kind: "film" })),
     ...(screen.tv || []).map((item) => ({ ...item, kind: "tv" })),
     ...(screen.films || []).filter((item) => !/concert/i.test(item.title)).map((item) => ({ ...item, kind: "film" })),
   ]
@@ -1164,22 +1136,20 @@ function screenItems() {
 function screenKindLabel(kind) {
   return {
     program: "综艺",
-    "music-stage": "打歌舞台",
+    "music-stage": "LIVE",
     "concert-video": "演唱会",
     tv: "电视剧",
-    film: "电影",
+    film: "电影 / 演唱会",
   }[kind] || "影视";
 }
 
 function screenSearchLinks(item) {
+  if (item.videoId) return [];
   const queryText = ('IU ' + item.title + ' ' + (item.meta?.zh || item.zh || '')).trim();
   const query = encodeURIComponent(queryText);
   return [
     { label: "YouTube 官方/舞台", url: 'https://www.youtube.com/results?search_query=' + query + '%20official%20stage%20trailer' },
-    { label: "Google", url: 'https://www.google.com/search?q=' + query },
     { label: "Bilibili", url: 'https://search.bilibili.com/all?keyword=' + query },
-    { label: "百度", url: 'https://www.baidu.com/s?wd=' + query },
-    { label: "豆瓣", url: 'https://www.douban.com/search?q=' + query },
   ];
 }
 
@@ -1214,6 +1184,7 @@ function screenCoverStyle(item) {
 }
 
 function screenCoverImage(item) {
+  if (item.videoId) return item.image || "";
   return window.IU_SCREEN_COVERS?.[item.title] || item.meta?.image || item.episodeImage || item.image || "";
 }
 
@@ -1349,7 +1320,7 @@ function renderScreen() {
         return `
           <article class="screenCard ${screenCardLayout(item)}">
             <div class="screenCard__cover ${hasCover ? "" : "isMissingCover"}">
-              ${hasCover ? `<img src="${escapeHtml(screenCoverImage(item))}" alt="${escapeHtml(item.title)}" loading="lazy">` : ''}
+              ${hasCover ? `${item.videoId ? `<a href="${escapeHtml(item.source)}" target="_blank" rel="noreferrer" aria-label="播放 ${escapeHtml(item.title)}">` : ''}<img src="${escapeHtml(screenCoverImage(item))}" alt="${escapeHtml(item.title)}" loading="lazy">${item.videoId ? '</a>' : ''}` : ''}
             </div>
             <div class="screenCard__body">
               <span>${screenKindLabel(item.kind)} · ${escapeHtml(item.type || "")}</span>
@@ -1360,7 +1331,7 @@ function renderScreen() {
               <div class="trackLinks">
                 ${links.map((link) => `<a href="${link.url}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("")}
                 ${resourceLinks.map((link) => `<a class="trackLinkButton--primary" href="${link.url}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("")}
-                ${item.source ? `<a href="${item.source}" target="_blank" rel="noreferrer">来源</a>` : ""}
+                ${item.source && /(?:youtu\.be|youtube\.com|bilibili\.com)/i.test(item.source) ? `<a href="${item.source}" target="_blank" rel="noreferrer">${item.videoId ? 'YouTube · 官方视频' : /results\?/.test(item.source) ? 'YouTube 搜索' : '视频来源'}</a>` : ""}
                 <button class="trackLinkButton trackLinkButton--primary" type="button" data-screen-detail="${escapeHtml(item.id || item.title)}">详细信息</button>
               </div>
             </div>

@@ -3,7 +3,7 @@ window.IU_SCREEN_COVERS = {
   "Dream High 2": "./assets/screen-landscape/tv-dream-high-2.jpg",
   "Heroes": "./assets/screen-landscape/program-heroes.jpg",
   "BBIBBI Music Show Stage": "./assets/screen-landscape/stage-bbibbi.jpg",
-  "IU Love Poem Concert": "./assets/screen-landscape/concert-love-poem.jpg",
+  "IU Love Poem Concert": "./assets/screen-landscape/concert-love-poem-original.jpg?v=20261005-love-poem",
   "Dream High": "./assets/screen-landscape/tv-dream-high.jpg",
   "LILAC Music Show Stage": "./assets/screen-landscape/stage-lilac.jpg",
   "Hyori's Homestay (Season 1)": "./assets/screen-landscape/program-hyori-homestay.jpg",

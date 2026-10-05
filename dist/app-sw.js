@@ -1,4 +1,4 @@
-const CACHE_NAME = "uaena-app-preview-v35";
+const CACHE_NAME = "uaena-app-preview-v36";
 const ASSETS = [
   "app-preview.html",
   "app.webmanifest",
