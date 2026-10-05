@@ -18,7 +18,8 @@ let activeLyricTime = null;
 let audioErrorToastTimer = 0;
 let lastLyricTap = { time: '', at: 0 };
 let render, choose, renderShelf, syncCardActions;
-const $ = selector => document.querySelector(selector);
+const $ = selector => document.querySelector(selector) || (window.parent !== window ? parent.document.querySelector(selector) : null);
+const mediaNavigator = window.parent !== window ? parent.navigator : navigator;
 const coverFor = t => t.cover || 'assets/covers/palette.jpg';
 const titleFor = t => t.displayTitle || t.originalTitle || t.title;
 const save = () => localStorage.setItem(storeKey, JSON.stringify({ favorites: [...favorites], audioMap, playbackMode, queueIds, queueSource }));
@@ -90,7 +91,7 @@ function setPlayingUi(playing) {
   button.classList.toggle('is-playing', playing);
   button.title = playing ? '暂停' : '播放';
   button.setAttribute('aria-label', playing ? '暂停' : '播放');
-  if ('mediaSession' in navigator) navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
+  if ('mediaSession' in mediaNavigator) mediaNavigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
   syncCardActions?.();
 }
 
@@ -178,11 +179,11 @@ async function playTrackFromCurrentView(id) {
 }
 
 function setSystemMetadata(track, lyric = null) {
-  if (!('mediaSession' in navigator) || !window.MediaMetadata || !track) return;
+  if (!('mediaSession' in mediaNavigator) || !window.MediaMetadata || !track) return;
   const songTitle = titleFor(track);
   const artwork = new URL(coverFor(track), location.href).href;
   const lyricTitle = lyric?.original?.trim();
-  navigator.mediaSession.metadata = new MediaMetadata({
+  mediaNavigator.mediaSession.metadata = new MediaMetadata({
     title: lyricTitle || songTitle,
     artist: lyricTitle ? (lyric.translation?.trim() || `${songTitle} · IU`) : (track.zh || 'IU'),
     album: lyricTitle ? `${songTitle} · UAENA小窝` : 'UAENA小窝',
@@ -202,7 +203,7 @@ function clearActiveLyrics() {
 function syncLyricsAt(seconds, force = false) {
   const track = tracks[selected];
   const lines = timedLyricsFor(track);
-  const elapsed = seconds * 1000;
+  const elapsed = seconds * 1000 + (window.UAENA_PLAYER?.lyricOffset() || 0);
   let nextTime = null;
   for (const line of lines) {
     const time = Number(line.time);
@@ -249,16 +250,16 @@ function syncProgress() {
   const value = Number.isFinite(duration) && duration > 0 ? Math.round(position / duration * 1000) : 0;
   progress.value = String(value);
   progress.style.setProperty('--player-progress', `${value / 10}%`);
-  if ('mediaSession' in navigator && Number.isFinite(duration) && duration > 0) {
+  if ('mediaSession' in mediaNavigator && Number.isFinite(duration) && duration > 0) {
     try {
-      navigator.mediaSession.setPositionState({ duration, playbackRate: currentAudio.playbackRate || 1, position: Math.min(position, duration) });
+      mediaNavigator.mediaSession.setPositionState({ duration, playbackRate: currentAudio.playbackRate || 1, position: Math.min(position, duration) });
     } catch {}
   }
 }
 
 async function selectTrack(index, autoplay = false) {
   await choose(index);
-  if (autoplay) await playCurrent();
+  if (autoplay && (!currentAudio || currentAudio.paused)) await playCurrent();
 }
 
 async function stepTrack(delta) {
@@ -270,7 +271,8 @@ async function stepTrack(delta) {
   }
   const currentId = tracks[selected]?.id;
   const position = ids.indexOf(currentId);
-  const nextId = ids[(Math.max(position, 0) + delta + ids.length) % ids.length];
+  const shift = playbackMode === 'shuffle' && delta > 0 && ids.length > 1 ? 1 + Math.floor(Math.random() * (ids.length - 1)) : delta;
+  const nextId = ids[(Math.max(position, 0) + shift + ids.length) % ids.length];
   await selectTrack(tracks.findIndex(track => track.id === nextId), autoplay);
 }
 
@@ -324,23 +326,36 @@ async function playCurrent() {
   if (currentAudio && currentAudio.src === absoluteSrc && !currentAudio.paused) {
     currentAudio.pause(); return;
   }
-  if (!currentAudio || currentAudio.src !== absoluteSrc) {
-    currentAudio?.pause();
-    currentAudio = new Audio(src);
-    currentAudio.preload = 'metadata';
-    currentAudio.onplay = () => { setPlayingUi(true); syncLyricsAt(currentAudio.currentTime, true); };
-    currentAudio.onpause = () => setPlayingUi(false);
-    currentAudio.onended = handleEnded;
-    currentAudio.ontimeupdate = () => { syncProgress(); syncLyricsAt(currentAudio.currentTime); };
-    currentAudio.onloadedmetadata = syncProgress;
-    currentAudio.onerror = event => showPlaybackError(event, currentAudio);
-  }
+  prepareAudioSource(src);
   await currentAudio.play().then(() => {
     clearTimeout(audioErrorToastTimer);
     setPlayingUi(true);
   }).catch(error => showPlaybackError(error));
 }
-const openLyrics = () => $('#side').classList.add('open');
+
+// Start buffering the selected source before playback, without discarding a usable buffer.
+function prepareAudioSource(src) {
+  if (!src) return;
+  const absoluteSrc = new URL(src, location.href).href;
+  if (!currentAudio || currentAudio.src !== absoluteSrc) {
+    currentAudio?.pause();
+    currentAudio = currentAudio || (window.parent !== window ? parent.document : document).createElement('audio');
+    currentAudio.className = 'uaena-audio';
+    if (!currentAudio.isConnected) (window.parent !== window ? parent.document : document).body.append(currentAudio);
+    currentAudio.preload = 'auto';
+    currentAudio.src = src;
+    currentAudio.onplay = () => { setPlayingUi(true); syncLyricsAt(currentAudio.currentTime, true); };
+    currentAudio.onpause = () => setPlayingUi(false);
+    currentAudio.onended = handleEnded;
+    currentAudio.ontimeupdate = () => { syncProgress(); syncLyricsAt(currentAudio.currentTime); };
+    currentAudio.onloadedmetadata = () => syncProgress();
+    currentAudio.onerror = event => showPlaybackError(event, currentAudio);
+  }
+}
+const openLyrics = () => {
+  if (parent !== window) parent.postMessage({ type: 'uaena-navigate', view: 'music' }, location.origin);
+  $('#side').classList.add('open');
+};
 const miniFavorite = document.createElement('button');
 miniFavorite.className = 'icon mini-fav';
 miniFavorite.type = 'button';
@@ -545,9 +560,9 @@ $('.install').onclick = async () => {
 };
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('app-sw.js').catch(() => {});
 setPlaybackModeUi();
-if ('mediaSession' in navigator) {
+if ('mediaSession' in mediaNavigator) {
   const handlers = {
-    play: () => playCurrent(),
+    play: () => { if (!currentAudio || currentAudio.paused) playCurrent(); },
     pause: () => currentAudio?.pause(),
     previoustrack: () => stepTrack(-1),
     nexttrack: () => stepTrack(1),
@@ -559,6 +574,9 @@ if ('mediaSession' in navigator) {
     }
   };
   for (const [action, handler] of Object.entries(handlers)) {
-    try { navigator.mediaSession.setActionHandler(action, handler); } catch {}
+    try { mediaNavigator.mediaSession.setActionHandler(action, handler); } catch {}
+  }
+  for (const action of ['seekbackward', 'seekforward']) {
+    try { mediaNavigator.mediaSession.setActionHandler(action, null); } catch {}
   }
 }

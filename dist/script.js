@@ -1244,8 +1244,8 @@ function updateMoreButton(button, visibleCount, totalCount) {
 function officialCategories() {
   return (window.IU_YOUTUBE_OFFICIAL?.categories || []).map(category => ({
     ...category,
-    cover: window.IU_OFFICIAL_COVERS?.[category.cover] || category.cover,
-    videos: category.videos.map(video => ({ ...video, thumbnail: window.IU_OFFICIAL_COVERS ? (window.IU_OFFICIAL_COVERS[video.thumbnail] || 'assets/icons/tv.svg') : video.thumbnail })),
+    cover: window.IU_OFFICIAL_COVERS?.[category.cover] ? `${window.IU_OFFICIAL_COVERS[category.cover]}?v=20261005-originals` : category.cover,
+    videos: category.videos.map(video => ({ ...video, thumbnail: window.IU_OFFICIAL_COVERS?.[video.thumbnail] ? `${window.IU_OFFICIAL_COVERS[video.thumbnail]}?v=20261005-originals` : window.IU_OFFICIAL_COVERS ? 'assets/icons/tv.svg' : video.thumbnail })),
   }));
 }
 
@@ -1312,7 +1312,7 @@ function renderOfficialVideos() {
           </span>
           <span class="officialVideoCard__body">
             <strong>${escapeHtml(video.title)}</strong>
-            <small>${escapeHtml(category.title)}${views ? ` · ${views}` : ""}</small>
+            <small>${escapeHtml(category.title)}${video.publishedAt ? ` · ${escapeHtml(video.publishedAt)}` : ""}${views ? ` · ${views}` : ""}</small>
           </span>
         </a>
       `;
@@ -1348,7 +1348,8 @@ function renderScreen() {
         const hasCover = Boolean(screenCoverImage(item));
         return `
           <article class="screenCard ${screenCardLayout(item)}">
-            <div class="screenCard__cover ${hasCover ? "" : "isMissingCover"}" style="${screenCoverStyle(item)}">
+            <div class="screenCard__cover ${hasCover ? "" : "isMissingCover"}">
+              ${hasCover ? `<img src="${escapeHtml(screenCoverImage(item))}" alt="${escapeHtml(item.title)}" loading="lazy">` : ''}
             </div>
             <div class="screenCard__body">
               <span>${screenKindLabel(item.kind)} · ${escapeHtml(item.type || "")}</span>
@@ -1455,8 +1456,9 @@ function setView(view) {
     section.classList.toggle("is-active-view", section.dataset.view === view);
   });
   bottomNav.querySelectorAll("[data-app-view]").forEach((button, index) => {
-    button.classList.toggle("is-active", button.dataset.appView === view);
-    if (button.dataset.appView === view) bottomNav.style.setProperty("--active-index", index);
+    const navigationView = view === 'photocards' ? 'merch' : view;
+    button.classList.toggle("is-active", button.dataset.appView === navigationView);
+    if (button.dataset.appView === navigationView) bottomNav.style.setProperty("--active-index", index);
   });
   if (view === "screen") renderScreen();
   if (view === "merch") renderMerch();

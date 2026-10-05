@@ -80,7 +80,10 @@ choose = async function (index, userAction = true) {
   $('#subtitle').title = t.zhStatus === 'reference' ? '参考译名，尚未确认通行中文名称' : t.zh;
   $('#minititle').textContent = titleFor(t);
   $('#minisub').textContent = t.zh || t.release || 'IU';
-  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  if (currentAudio) currentAudio.pause();
+  const availableSrc = audioUrls[t.id] || (!audioMap[t.id] && onlineAudio[t.id]?.url);
+  if (availableSrc) prepareAudioSource(playbackSrcFor(availableSrc));
+  else if (currentAudio) { currentAudio.removeAttribute('src'); currentAudio.load(); }
   setPlayingUi(false);
   $('.mini-progress').value = '0';
   $('.mini-progress').style.setProperty('--player-progress', '0%');
@@ -134,7 +137,7 @@ $('#grid').onclick = async event => {
     if (action.dataset.cardAction === 'play') {
       const sameTrack = tracks[selected]?.id === id && currentAudio;
       if (sameTrack) {
-        if (currentAudio.paused) await currentAudio.play().catch(error => showPlaybackError(error));
+        if (currentAudio.paused) await playCurrent();
       } else {
         await playTrackFromCurrentView(id);
       }
@@ -260,9 +263,6 @@ if (embeddedMusic) {
       localStorage.setItem('uaena-music-light', String(event.data.light));
     }
   });
-  $('.queue-toggle').addEventListener('click', () => {
-    if (document.body.classList.contains('parent-player-only')) parent.postMessage({ type: 'uaena-navigate', view: 'music' }, location.origin);
-  }, true);
   $('.mini .meta').addEventListener('click', () => {
     if (document.body.classList.contains('parent-player-only')) parent.postMessage({ type: 'uaena-navigate', view: 'music' }, location.origin);
   }, true);

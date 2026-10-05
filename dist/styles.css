@@ -2583,3 +2583,14 @@ body:not([data-active-view="music"]) .musicAppView iframe { background: transpar
   #bottomNav .navIcon { width: 25px !important; height: 25px !important; }
   #bottomNav .bottomNav__indicator { top: 6px; bottom: 6px; left: 6px; width: calc((100% - 12px) / 5); }
 }
+.screenGrid { align-items:start; }
+/* Match Music cards: natural cover ratio, then text directly on the page. */
+.screenCard,.officialVideoCard { display:block!important;min-height:0!important;height:auto!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;overflow:visible!important; }
+.screenCard__cover,.officialVideoCard__cover { display:block!important;aspect-ratio:auto!important;height:auto!important;padding:0!important;background:transparent!important;border-radius:1rem;overflow:hidden; }
+.screenCard__cover img,.officialVideoCard__cover img { display:block;width:100%;height:auto!important;object-fit:contain; }
+.screenCard__cover::after { display:none; }
+.screenCard__cover.isMissingCover { min-height:10rem;background:var(--sheet)!important; }
+.screenCard__body,.officialVideoCard__body { padding:.75rem 0 0;background:transparent!important; }
+.screenCard__body p { color:var(--muted); }
+.officialVideoCard__body strong { display:block;-webkit-line-clamp:unset;overflow:visible;overflow-wrap:anywhere; }
+.officialVideoCard__cover:has(img[src="assets/icons/tv.svg"]) { aspect-ratio:16/9!important;background:var(--sheet)!important; }

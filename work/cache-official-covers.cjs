@@ -20,7 +20,18 @@ async function worker() {
     const local = `assets/official-covers/${id}.jpg`;
     const file = path.join(root, local);
     try {
-      if (!fs.existsSync(file)) await run('curl.exe', ['--fail', '--silent', '--show-error', '--proxy', 'http://127.0.0.1:7897', '--max-time', '15', '--retry', '1', url, '-o', file]);
+      if (!fs.existsSync(file)) {
+        const temporary = file + '.download';
+        for (const quality of ['maxresdefault', 'sddefault', 'hqdefault']) {
+          try {
+            await run('curl.exe', ['--fail', '--silent', '--show-error', '--proxy', 'http://127.0.0.1:7897', '--max-time', '15', '--retry', '1', url.replace('hqdefault', quality), '-o', temporary]);
+            const bytes = fs.readFileSync(temporary);
+            if (bytes.length <= 1000) continue;
+            fs.renameSync(temporary, file); break;
+          } catch {}
+        }
+        if (fs.existsSync(temporary)) fs.unlinkSync(temporary);
+      }
       if (fs.statSync(file).size > 1000) cached[url] = local;
     } catch { console.log(`Missing cover: ${id}`); }
   }
