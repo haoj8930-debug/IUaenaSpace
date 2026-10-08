@@ -9,6 +9,18 @@ let libraryHighlightedId = '';
 let cardActionId = '';
 let lastCardTap = { id: '', time: 0 };
 let musicInteracted = false;
+let libraryOrder = 'time-desc';
+try { const stored = localStorage.getItem('uaena-library-order-v1'); if (['time-desc','time-asc','melon-likes-desc'].includes(stored)) libraryOrder = stored; } catch {}
+const orderToolbar = document.createElement('div');
+orderToolbar.className = 'library-order';
+orderToolbar.innerHTML = '<label for="libraryOrder">排列方式</label><select id="libraryOrder" aria-label="歌曲排列方式"><option value="time-desc">时间 · 最新在前</option><option value="time-asc">时间 · 最早在前</option><option value="melon-likes-desc">Melon 喜欢数 · 从高到低</option></select><p class="melon-order-note" role="status"></p>';
+$('.tabs').after(orderToolbar);
+orderToolbar.querySelector('select').value = libraryOrder;
+orderToolbar.querySelector('select').onchange = event => {
+  libraryOrder = event.target.value; libraryRows = 4;
+  try { localStorage.setItem('uaena-library-order-v1',libraryOrder); } catch {}
+  render();
+};
 const byNewest = (a, b) => (b.publishTime || 0) - (a.publishTime || 0) || (a.trackNo || 0) - (b.trackNo || 0) || String(a.title).localeCompare(String(b.title));
 tracks.sort(byNewest);
 const subShelf = document.createElement('div');
@@ -20,10 +32,47 @@ more.id = 'libraryMore';
 more.className = 'library-more hidden';
 more.textContent = '更多';
 $('#grid').after(more);
-const libraryCategories = [...new Set(libraryAlbums.map(a => a.category))].map(category => {
+const albumOverview = document.createElement('section');
+albumOverview.className = 'album-overview';
+albumOverview.setAttribute('aria-label', '专辑列表');
+$('#grid').before(albumOverview);
+const albumHeading = document.createElement('header');
+albumHeading.className = 'record-track-head';
+$('#grid').before(albumHeading);
+albumHeading.onclick = event => {
+  if (!event.target.closest('[data-record-back]')) return;
+  libraryAlbum = ''; libraryRows = 4; renderShelf(); render(); window.scrollTo({ top:0, behavior:'instant' });
+};
+function renderAlbumOverview() {
+  document.body.dataset.libraryMode = mode;
+  const overview = mode === 'albums' && !libraryAlbum;
+  document.body.classList.toggle('album-overview-open', overview);
+  document.body.classList.toggle('record-tracks-open', mode === 'albums' && Boolean(libraryAlbum));
+  if (mode === 'albums' && libraryAlbum) {
+    const album = libraryAlbums.find(item => item.id === libraryAlbum);
+    albumHeading.innerHTML = `<button type="button" data-record-back>← ${esc(libraryCategory || '专辑')}</button><h2>${esc(album?.title || libraryCategory)}</h2><small>${esc(libraryCategory)}${album ? ` · ${album.audioCount} 首` : ''}</small>`;
+  }
+  const signature = `${libraryCategory}|${query}`;
+  if (!overview) return;
+  if (albumOverview.dataset.query === signature) return;
+  albumOverview.dataset.query = signature;
+  const albums = libraryAlbums.filter(album => (!libraryCategory || album.category === libraryCategory) && `${album.title} ${album.category}`.toLowerCase().includes(query)).slice().sort(byNewest);
+  albumOverview.innerHTML = `<header class="record-shelf-head"><h2>${esc(libraryCategory || '全部发行')}</h2><small>${albums.length} 张 · 最新在前</small></header><div class="record-grid">${albums.map(album => {
+    const year = album.publishTime > 0 ? new Date(album.publishTime).getUTCFullYear() : '';
+    return `<button type="button" class="record-card" data-record-id="${esc(album.id)}" aria-label="查看 ${esc(album.title)}"><span class="record-sleeve"><img src="${esc(album.cover || '')}" alt="${esc(album.title)}" loading="lazy" decoding="async"></span><strong>${esc(album.title)}</strong><small>${esc(album.category)}${year ? ` · ${year}` : ''}</small></button>`;
+  }).join('')}</div>${albums.length ? '' : '<p class="record-empty">没有匹配的发行，试试其他关键词。</p>'}`;
+}
+albumOverview.onclick = event => {
+  const button = event.target.closest('[data-record-id]');
+  const album = libraryAlbums.find(item => item.id === button?.dataset.recordId);
+  if (!album) return;
+  libraryCategory = album.category; libraryAlbum = album.id; libraryRows = 4;
+  renderShelf(); render(); window.scrollTo({ top:0, behavior:'instant' });
+};
+const libraryCategories = window.UAENA_LIBRARY_ORDER.categories([...new Set(libraryAlbums.map(a => a.category))].map(category => {
   const releases = libraryAlbums.filter(a => a.category === category).sort(byNewest);
   return { category, title: category, cover: releases.find(a => a.cover)?.cover, publishTime: releases[0]?.publishTime || 0 };
-}).sort(byNewest);
+}));
 
 renderShelf = function () {
   $('#shelf').classList.toggle('hidden', mode !== 'albums');
@@ -34,25 +83,34 @@ renderShelf = function () {
 };
 
 render = function () {
+  renderAlbumOverview();
+  const melonOrder = mode === 'songs' && libraryOrder === 'melon-likes-desc';
+  const knownCount = tracks.filter(track => window.UAENA_LIBRARY_ORDER.entryFor(track)).length;
+  const officialCount = Number(window.IU_MELON_LIKES?.officialRows) || 0;
+  orderToolbar.querySelector('.melon-order-note').textContent = melonOrder ? (knownCount ? `Melon 官方 ${officialCount} 条已读取 · 本站匹配 ${knownCount} / ${tracks.length} 条 · 喜欢数截至 2026-10-09。` : '暂未取得可核实的逐曲喜欢数，当前仍按时间排列。') : '';
   // Hidden iframes have no usable grid geometry; keep the current page intact.
   if ($('#grid').getBoundingClientRect().width < 1) return;
   const needsSelection = mode === 'albums' && (!libraryCategory || (nestedCategories.has(libraryCategory) && !libraryAlbum));
-  const visible = needsSelection ? [] : tracks.filter(t =>
+  let visible = needsSelection ? [] : tracks.filter(t =>
     (mode !== 'favorites' || favorites.has(t.id)) &&
     (mode !== 'albums' || (t.category === libraryCategory && (!libraryAlbum || t.releaseId === libraryAlbum))) &&
     `${t.title} ${t.originalTitle || ''} ${t.zh || ''} ${t.release}`.toLowerCase().includes(query));
+  visible = window.UAENA_LIBRARY_ORDER.sort(visible,mode === 'songs' ? libraryOrder : 'time-desc');
   visibleTrackIds = visible.map(track => track.id);
   const columns = getComputedStyle($('#grid')).gridTemplateColumns.trim().split(/\s+/).length;
-  const shown = visible.slice(0, columns * libraryRows);
+  const listLayout = matchMedia('(max-width:740px)').matches && ['songs','albums'].includes(mode);
+  const shown = visible.slice(0, columns * libraryRows * (listLayout ? 3 : 1));
   $('#count').textContent = needsSelection ? '' : `${visible.length} 首`;
   $('#empty').classList.toggle('hidden', needsSelection || visible.length > 0);
-  const gridSignature = shown.map(t => t.id).join('|');
+  const gridSignature = `${melonOrder ? 'melon' : 'time'}|${shown.map(t => t.id).join('|')}`;
   if (gridSignature !== libraryGridSignature) {
     libraryGridSignature = gridSignature;
     $('#grid').innerHTML = shown.map(t => {
       const name = t.displayTitle || t.originalTitle || t.title;
       const note = t.zhStatus === 'reference' ? '（参考译名，尚未确认通行中文名称）' : '';
-      return `<div class="card" data-id="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(name)}，${esc(t.zh)}${esc(note)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"><div class="card-actions" aria-label="歌曲操作"><button type="button" data-card-action="play" title="播放" aria-label="播放 ${esc(name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><button type="button" data-card-action="pause" title="暂停" aria-label="暂停 ${esc(name)}" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><button type="button" data-card-action="add" title="加入播放列表" aria-label="将 ${esc(name)} 加入播放列表"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14v2H5zm0 4h14v2H5zm0 4h14v2H5z"/></svg></button></div></div><strong title="${esc(name)}">${esc(name)}</strong><small title="${esc(t.zh)}${esc(note)}">${esc(t.zh)}</small></div>`;
+      const melon = window.UAENA_LIBRARY_ORDER.entryFor(t);
+      const melonLabel = melonOrder ? `<span class="song-melon"${melon ? ` title="数据截至 ${esc(melon.asOf)}"` : ''}>Melon · ${melon ? `${melon.likes.toLocaleString('zh-CN')} 人喜欢` : '暂无数据'}</span>` : '';
+      return `<div class="card" data-id="${esc(t.id)}" role="button" tabindex="0" aria-label="${esc(name)}，${esc(t.zh)}${esc(note)}"><div class="art"><img src="${esc(coverFor(t))}" alt="${esc(t.release)}" loading="lazy" decoding="async"><div class="card-actions" aria-label="歌曲操作"><button type="button" data-card-action="play" title="播放" aria-label="播放 ${esc(name)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg></button><button type="button" data-card-action="pause" title="暂停" aria-label="暂停 ${esc(name)}" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><button type="button" data-card-action="add" title="加入播放列表" aria-label="将 ${esc(name)} 加入播放列表"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14v2H5zm0 4h14v2H5zm0 4h14v2H5z"/></svg></button></div></div><strong title="${esc(name)}">${esc(name)}</strong><small title="${esc(t.zh)}${esc(note)}">${esc(t.zh)}</small>${melonLabel}</div>`;
     }).join('');
   }
   $('#grid').querySelectorAll('.card').forEach(card => card.classList.toggle('selected', card.dataset.id === libraryHighlightedId));
@@ -122,6 +180,7 @@ syncCardActions = function () {
   const playingId = currentAudio && !currentAudio.paused ? tracks[selected]?.id : '';
   $('#grid').querySelectorAll('.card').forEach(card => {
     card.classList.toggle('actions-open', card.dataset.id === cardActionId);
+    card.classList.toggle('is-playing', card.dataset.id === playingId);
     const pause = card.querySelector('[data-card-action="pause"]');
     if (pause) pause.hidden = card.dataset.id !== playingId;
   });
@@ -213,7 +272,7 @@ const setMusicTheme = light => {
   document.body.classList.toggle('light', light);
   $('.logo').src = `assets/uaena-symbol-${light ? 'light' : 'dark'}.png`;
 };
-setMusicTheme(localStorage.getItem('uaena-music-light') === 'true');
+setMusicTheme(window.uaenaInitialTheme ? window.uaenaInitialTheme === 'light' : localStorage.getItem('uaena-music-light') === 'true');
 $('.theme').onclick = () => {
   const light = !document.body.classList.contains('light');
   setMusicTheme(light);

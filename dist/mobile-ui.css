@@ -1,0 +1,201 @@
+/* Mobile edition: quiet surfaces, content-led hierarchy. Desktop rules stay intact. */
+@media (max-width: 740px) {
+  html { background:#18171c; }
+  html[data-initial-theme="light"],html.light { background:#faf9f7; }
+  body {
+    --mobile-bg:#18171c; --mobile-surface:#232228; --mobile-ink:#f4f1f7;
+    --mobile-muted:#b2adb9; --mobile-line:#ffffff14; --mobile-accent:#cab3ee;
+    --mobile-selected:#34303f;
+    --bg:var(--mobile-bg); --sheet:var(--mobile-surface); --sheet-strong:var(--mobile-surface);
+    --text:var(--mobile-ink); --paper:var(--mobile-ink); --paper-soft:var(--mobile-ink);
+    --muted:var(--mobile-muted); --line:var(--mobile-line); --accent:var(--mobile-accent); --gold:var(--mobile-accent);
+    background:var(--mobile-bg)!important;color:var(--mobile-ink)!important;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;
+    line-height:1.55;
+  }
+  body:is(.light,.theme-light),body.photocard-layout:not(.dark) {
+    --mobile-bg:#faf9f7; --mobile-surface:#f0eeec; --mobile-ink:#28242e;
+    --mobile-muted:#706976; --mobile-line:#30273c16; --mobile-accent:#78529e;
+    --mobile-selected:#eee6f4;
+    --ink:var(--mobile-ink); --field:var(--mobile-bg); --card:var(--mobile-surface);
+    --text:var(--mobile-ink); --paper:var(--mobile-ink); --paper-soft:var(--mobile-ink);
+    --muted:var(--mobile-muted); --line:var(--mobile-line); --accent:var(--mobile-accent); --gold:var(--mobile-accent);
+  }
+  body::before,body::after { display:none!important; }
+  body :is(button,a,input,select):focus-visible { outline:2px solid var(--mobile-accent);outline-offset:3px; }
+  .shell { width:100%;padding:1.25rem 1.25rem calc(11rem + env(safe-area-inset-bottom)); }
+  .app { padding:1.5rem 1.25rem calc(11rem + env(safe-area-inset-bottom)); }
+  .top { gap:.5rem;margin-bottom:1.75rem; }
+  .top .logo { width:2rem;height:2rem; }
+  .brand { min-width:0; }
+  .brand-title { gap:0; }
+  .brand-title strong { font-size:1.125rem;letter-spacing:-.025em;font-weight:750; }
+  .brand small { font-size:.6875rem;color:var(--mobile-muted);margin-top:.25rem; }
+  .top-actions { gap:0; }
+  .top :is(.theme,.tutorial-toggle,.fanchant-link) { width:2.75rem;height:2.75rem;min-width:2.75rem;border:0;background:transparent;box-shadow:none;backdrop-filter:none;color:var(--mobile-muted); }
+  .top .fanchant-link { color:var(--mobile-accent); }
+  .heading { margin:0 0 .75rem;min-height:0; }
+  .count { color:var(--mobile-muted);font-size:.75rem; }
+  .app .search { min-height:3.25rem;border:0;border-radius:.875rem;background:var(--mobile-surface);padding:0 1rem;box-shadow:none;backdrop-filter:none;margin-bottom:1.25rem; }
+  .search::after { display:none; }
+  .app .search input { font-size:.875rem; }
+  .app .tabs { flex-wrap:nowrap;gap:.25rem;margin-bottom:1.5rem;overflow-x:auto;scrollbar-width:none; }
+  .app .tabs button { min-height:2.75rem;flex:1;padding:.5rem .25rem;font-size:.8125rem;border-radius:.75rem;font-weight:600; }
+  .app .tabs button.active { color:var(--mobile-accent);background:var(--mobile-selected); }
+  .app .grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1rem; }
+  .app .art { border-radius:.75rem;background:var(--mobile-surface);box-shadow:none; }
+  .app .art::after { border:0; }
+  .app .card strong { font-size:.875rem;line-height:1.45;margin-top:.625rem;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical; }
+  .app .card small { font-size:.75rem;height:auto;margin-top:.25rem;line-height:1.5;color:var(--mobile-muted); }
+  .app .card:hover img { transform:none; }
+  .app .card.selected .art { box-shadow:0 0 0 2px var(--mobile-accent); }
+  .app .shelf { gap:1rem;padding:.25rem .125rem 1rem;margin-bottom:1rem; }
+  .app .shelf button { flex-basis:6rem; }
+  .app .shelf img { box-shadow:none;border-radius:.75rem; }
+  .app .shelf-scrollbar { display:none; }
+  .sectionHead,.catalog__head { display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem; }
+  .sectionHead .eyebrow { display:none; }
+  .sectionHead h2 { font-size:1.5rem;line-height:1.35;letter-spacing:-.035em;margin:0;font-weight:750; }
+  .sectionHead>strong { font-size:.6875rem;font-weight:500;color:var(--mobile-muted);padding:0;border:0;background:transparent;white-space:nowrap; }
+  body .sectionTabs { top:0;gap:.25rem;padding:.5rem 0 .75rem;margin-bottom:1.5rem;border:0;border-radius:0;background:var(--mobile-bg)!important;box-shadow:none;backdrop-filter:none; }
+  body .sectionTabs button { min-height:2.75rem;padding:0 .875rem;border:0;border-radius:.75rem;background:transparent;color:var(--mobile-muted);box-shadow:none;backdrop-filter:none;font-size:.875rem;font-weight:600; }
+  body .sectionTabs button.is-active { background:var(--mobile-selected)!important;color:var(--mobile-accent)!important;box-shadow:none; }
+  .screenGrid,.merchGrid { grid-template-columns:1fr;gap:2rem; }
+  .officialShelf { --official-card-size:8.5rem;gap:.75rem;margin:0 0 1.5rem;padding:.25rem 0 .5rem;scrollbar-width:none; }
+  .officialShelf::-webkit-scrollbar { display:none; }
+  .officialCategoryCard { border:0;border-radius:.75rem;box-shadow:none; }
+  .officialCategoryCard::before { display:none; }
+  .officialCategoryCard.is-active { transform:none;outline:2px solid var(--mobile-accent);outline-offset:-2px;box-shadow:none; }
+  .officialCategoryCard__copy { padding:1rem .75rem .75rem; }
+  .officialCategoryCard__copy strong { font-size:.9375rem; }
+  .officialCategoryCard__copy :is(small,em) { font-size:.6875rem; }
+  body :is(.screenCard,.merchCard,.officialVideoCard) { border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;backdrop-filter:none; }
+  :is(.screenCard__cover,.merchCard__cover,.officialVideoCard__cover) { border-radius:.75rem; }
+  .merchCard { display:block; }
+  .merchCard__cover { display:block;aspect-ratio:auto;min-height:0;background:transparent; }
+  .merchCard__cover img { width:100%;height:auto;object-fit:contain; }
+  :is(.screenCard__body,.merchCard__body,.officialVideoCard__body) { padding:.75rem 0 0; }
+  :is(.screenCard__body,.merchCard__body) h3,.officialVideoCard__body strong { font-size:1rem;line-height:1.55;letter-spacing:0;color:var(--mobile-ink);margin-bottom:.375rem;font-weight:650; }
+  body :is(.screenCard__body,.merchCard__body,.officialVideoCard__body) :is(p,small) { color:var(--mobile-muted)!important;font-size:.8125rem;line-height:1.7; }
+  .screenCard__body>span { font-size:.6875rem;color:var(--mobile-muted);font-weight:500; }
+  .trackLinks { gap:.5rem;margin-top:.75rem; }
+  body .trackLinks :is(a,button) { min-height:2.75rem;display:inline-flex;align-items:center;padding:.5rem .75rem;border:1px solid var(--mobile-line);border-radius:.75rem;background:transparent;color:var(--mobile-accent);font-size:.75rem;box-shadow:none; }
+  body .photocard-entry { padding:1.125rem;border:1px solid var(--mobile-line);border-radius:.75rem;background:transparent;box-shadow:none;margin-bottom:1.5rem; }
+  .photocard-entry small { display:none; }
+  body .photocard-entry strong { font-size:1rem;color:var(--mobile-ink); }
+  .photocard-entry span span { color:var(--mobile-muted);font-size:.75rem; }
+  body .searchGlassShell { padding:0;background:transparent!important;border:0;box-shadow:none;backdrop-filter:none; }
+  .globalSearchPanel { display:flex;flex-direction:column;gap:.75rem;padding:0;border:0;background:transparent; }
+  .globalSearchBox { width:100%; }
+  body .globalSearchPanel input { min-height:3.25rem;background:var(--mobile-surface)!important;border:0;border-radius:.875rem;color:var(--mobile-ink);font-size:.875rem; }
+  .globalSearchScope { display:flex;align-items:center;gap:.75rem; }
+  .globalSearchScope>span { position:static;font-size:.75rem;color:var(--mobile-muted); }
+  body .globalSearchPanel select { min-height:2.75rem;width:auto;background:transparent;border:1px solid var(--mobile-line);border-radius:.75rem;padding:.5rem .75rem; }
+  .globalSearchResults { display:grid;grid-template-columns:1fr;gap:0;margin-top:1.25rem; }
+  body .globalResult { grid-template-columns:4.5rem minmax(0,1fr);gap:1rem;padding:1rem 0;border:0;border-bottom:1px solid var(--mobile-line);border-radius:0;background:transparent!important;box-shadow:none; }
+  .globalResult__cover { min-height:4.5rem;border-radius:.5rem;aspect-ratio:1; }
+  .globalResult__body { padding:0;min-width:0; }
+  .globalResult__body h3 { font-size:.9375rem;line-height:1.5; }
+  body .globalResult p { color:var(--mobile-muted);font-size:.8125rem; }
+  .profileLayout,.profileIntroStack { display:grid;grid-template-columns:1fr;gap:1rem; }
+  body :is(.profileHero,.settingsCard) { padding:1.25rem;border:1px solid var(--mobile-line);border-radius:.875rem;background:transparent!important;box-shadow:none!important;backdrop-filter:none; }
+  .profileHero { min-height:9rem;justify-content:center; }
+  .profileHero>span { font-size:.6875rem;font-weight:500;letter-spacing:.12em;color:var(--mobile-muted); }
+  .profileHero h3 { font-size:1.5rem;line-height:1.4; }
+  .profileHero__planetLink { width:4rem;height:4rem;right:1.25rem;top:2.5rem;background:transparent!important;border:0;box-shadow:none;backdrop-filter:none; }
+  .settingsCard h3 { font-size:.9375rem;margin:0; }
+  .settingsCard strong { font-size:1.25rem;color:var(--mobile-ink); }
+  .settingsCard .feedbackCard__mail strong { font-size:.875rem;overflow-wrap:anywhere; }
+  .feedbackCard__eyebrow { display:none; }
+  body .settingsCard p { font-size:.8125rem;color:var(--mobile-muted); }
+  .segmentedControl { gap:.5rem; }
+  body .segmentedControl button { min-height:2.75rem;background:var(--mobile-surface);color:var(--mobile-muted);border:0;border-radius:.75rem;box-shadow:none; }
+  body .segmentedControl button.is-active { background:var(--mobile-selected);color:var(--mobile-accent); }
+  body :is(.empty,.selectionPrompt) { min-height:8rem;border:0;background:transparent;color:var(--mobile-muted);font-size:.875rem;box-shadow:none;backdrop-filter:none; }
+  body :is(.listMoreButton,.library-more) { min-height:2.75rem;margin-top:1.5rem;padding:.5rem 1.5rem;border:1px solid var(--mobile-line);border-radius:.75rem;background:transparent;box-shadow:none;color:var(--mobile-muted);font-size:.8125rem; }
+  body #bottomNav { bottom:calc(.75rem + env(safe-area-inset-bottom))!important;width:min(24rem,calc(100% - 2.5rem))!important;background:var(--mobile-surface)!important;border:1px solid var(--mobile-line)!important;box-shadow:0 .25rem 1rem #0000000c!important;backdrop-filter:none!important; }
+  body #bottomNav button { color:var(--mobile-muted)!important; }
+  body #bottomNav button.is-active { color:var(--mobile-accent)!important; }
+  body #bottomNav .bottomNav__indicator { background:var(--mobile-selected)!important;border:0!important;box-shadow:none!important; }
+  body .player-host { bottom:calc(5.375rem + env(safe-area-inset-bottom));width:calc(100% - 2.5rem); }
+  body .player-host .mini { border-radius:1rem;background:var(--mobile-surface)!important;border:1px solid var(--mobile-line)!important;box-shadow:0 .25rem 1rem #0000000c!important;color:var(--mobile-ink); }
+  .player-host .mini::before { display:none; }
+  body .player-host .mini :is(strong,.meta,.icon,.play) { color:var(--mobile-ink)!important; }
+  body .player-host .mini small { color:var(--mobile-muted);font-size:.6875rem; }
+  body .player-host .mini .mini-fav { color:#c76579!important; }
+  .player-bubble { box-shadow:0 .125rem .5rem #00000018;border-color:var(--mobile-line); }
+  .player-bubble .bubble-status { left:calc(50% - 1.375rem);right:auto;top:calc(100% - .25rem);bottom:auto; }
+  .searchPage:not(.has-search) .globalSearchResults::before { content:"从歌名、专辑或一场演出开始。";padding:2rem 0;color:var(--mobile-muted);font-size:.875rem; }
+  body :is(.queue-panel,.track-action-panel,.player-dialog,.music-tutorial,.lyricsDialog) { color:var(--mobile-ink);background:var(--mobile-bg);border:1px solid var(--mobile-line);box-shadow:none;backdrop-filter:none;border-radius:1.25rem; }
+  .queue-panel { max-height:80dvh;padding:1.25rem; }
+  .queue-modes { gap:.5rem; }
+  .queue-modes button { border-radius:.75rem;font-size:.75rem; }
+  .queue-modes button[aria-pressed="true"] { background:var(--mobile-selected);color:var(--mobile-accent); }
+  .queue-panel header small { display:none; }
+  .queue-panel h2 { font-size:1.25rem; }
+  .queue-row { min-height:4rem; }
+  body #side.open { inset:0;width:100%;height:100dvh;padding:4.5rem 1.5rem calc(1rem + env(safe-area-inset-bottom));border:0;border-radius:0;background:var(--mobile-bg);color:var(--mobile-ink);box-shadow:none;backdrop-filter:none; }
+  body.lyrics-open { overflow:hidden; }
+  body.lyrics-open[data-active-view="music"] :is(#bottomNav,#toTopButton) { display:none!important; }
+  #side .eyebrow { font-size:.6875rem;color:var(--mobile-muted); }
+  #side .lyric-cover-play .maincover { border-radius:.75rem;box-shadow:none; }
+  #side .songhead h2 { color:var(--mobile-ink); }
+  #side .songhead small { color:var(--mobile-muted);font-size:.8125rem; }
+  #side .lyrics { padding-inline:.25rem; }
+  #side .verse { color:var(--mobile-muted);line-height:1.6;text-shadow:none; }
+  #side .verse small { color:var(--mobile-muted); }
+  #side .verse.is-active { color:var(--mobile-accent);text-shadow:none;transform:scale(1.04); }
+  #side .verse.is-active small { color:var(--mobile-accent); }
+  #side :is(.close,.lyric-settings,.lyric-only-toggle) { background:transparent;border:0;color:var(--mobile-muted); }
+  .playlist-grid { gap:1.5rem 1rem; }
+  .playlist-grid button { padding:0;background:transparent; }
+  .feature-toolbar h2 { font-size:1.25rem; }
+  .personal-song { padding:.75rem 0;border-color:var(--mobile-line); }
+  .music-tutorial header,.tutorial-content { padding:1.25rem; }
+  .music-tutorial header small { display:none; }
+  .music-tutorial h3 { color:var(--mobile-accent); }
+  .photocard-layout { --ink:var(--mobile-ink);--field:var(--mobile-surface);--card:var(--mobile-surface); }
+  .photocard-layout main { padding:0 1.25rem 3rem; }
+  .photocard-layout .topbar { padding:1rem 1.25rem; }
+  .photocard-layout .topbar :is(a,button) { min-height:2.75rem;display:flex;align-items:center; }
+  .photocard-layout .intro { padding:1.5rem 0; }
+  .photocard-layout h1 { font-size:1.75rem;line-height:1.4; }
+  .photocard-layout .hero-art { transform:none;box-shadow:none;width:6.5rem;height:9rem; }
+  .photocard-layout .stats { background:transparent;border:0;border-bottom:1px solid var(--mobile-line);border-radius:0;box-shadow:none; }
+  .photocard-layout .stats div { padding:1rem .5rem; }
+  .photocard-layout .stats span { font-size:.6875rem; }
+  .photocard-layout .filters { padding:1rem;background:transparent;border-radius:.75rem; }
+  .photocard-layout :is(button,select,input[type="search"]) { min-height:2.75rem; }
+  .photocard-layout .grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1rem; }
+  .photocard-layout .art { border:0;box-shadow:none;border-radius:.75rem; }
+  .photocard-layout .card h3 { font-size:.8125rem; }
+  .photocard-layout .card p { font-size:.6875rem; }
+  .photocard-layout .card:hover img { transform:none; }
+  .photocard-layout dialog { background:var(--mobile-bg);box-shadow:none; }
+  /* Legacy theme selectors carry extra specificity: replace their surfaces too. */
+  html body:is(.light,.theme-light) { background:var(--mobile-bg)!important;color:var(--mobile-ink)!important; }
+  html body:is(.light,.theme-light) :is(.settingsCard,.profileHero,.globalResult,.searchGlassShell,.globalSearchPanel,.sectionTabs) { background:transparent!important;color:var(--mobile-ink);box-shadow:none!important; }
+  html body:is(.light,.theme-light) .sectionTabs { background:var(--mobile-bg)!important; }
+  html body:is(.light,.theme-light) #bottomNav { background:var(--mobile-surface)!important;box-shadow:0 .25rem 1rem #0000000c!important; }
+  html body:is(.light,.theme-light) #bottomNav .bottomNav__indicator { background:var(--mobile-selected)!important; }
+  html body:is(.light,.theme-light) :is(.queue-panel,.track-action-panel,.player-dialog,.music-tutorial,.lyricsDialog) { background:var(--mobile-bg);color:var(--mobile-ink); }
+  html body .queue-row.is-current { background:var(--mobile-selected);color:var(--mobile-accent); }
+  html body .queue-row.is-current .queue-song strong { color:var(--mobile-accent); }
+  html body #side :is(.lyric-settings,.close,.lyric-only-toggle) { border:0!important;background:transparent;box-shadow:none; }
+  body :is(.segmentedControl button,.sectionTabs button) { box-shadow:none!important;filter:none; }
+  body:is(.theme-light,.theme-dark) .segmentedControl button { background:var(--mobile-surface);color:var(--mobile-muted); }
+  body:is(.theme-light,.theme-dark) .segmentedControl button.is-active { background:var(--mobile-selected);color:var(--mobile-accent); }
+  body :is(.screenCard__body,.merchCard__body) h3 { font-size:1rem!important;line-height:1.55!important; }
+  body .globalSearchScope select { padding-left:.75rem; }
+  @media (max-width:360px) {
+    .app,.shell { padding-left:1rem;padding-right:1rem; }
+    .brand-title strong { font-size:1rem; }
+    .top { gap:.25rem; }
+    .top .logo { width:1.75rem;height:1.75rem; }
+    .app .tabs button { font-size:.75rem; }
+    .sectionHead { align-items:flex-start;flex-direction:column;gap:.5rem; }
+  }
+}
+@media (max-width:740px) and (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; }
+}

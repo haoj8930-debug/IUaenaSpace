@@ -1,0 +1,73 @@
+/* A mobile record collection, not a second desktop design. */
+.album-overview,.record-track-head,.library-order { display:none; }
+@media (max-width:740px) {
+  .app .top { margin-bottom:1.5rem;position:relative;gap:.5rem; }
+  .app .brand-title { display:block; }
+  .app .brand-title .fanchant-link { position:absolute;right:5.5rem;top:0; }
+  .app .brand-title strong { font-size:1.125rem; }
+  .app .brand small { margin-top:.375rem; }
+  .app .top-actions { gap:0;padding-left:2.75rem; }
+  .app .heading { display:none; }
+  .app .search { min-height:3rem;margin-bottom:1rem; }
+  .app .tabs { gap:0;padding-bottom:.75rem;margin-bottom:.5rem;border-bottom:1px solid var(--mobile-line); }
+  .app .tabs button { border-radius:0;background:transparent;position:relative; }
+  .app .tabs button.active { background:transparent;color:var(--mobile-ink); }
+  .app .tabs button.active::after { content:"";position:absolute;bottom:0;left:calc(50% - .625rem);width:1.25rem;height:.1875rem;border-radius:1rem;background:var(--mobile-accent); }
+  body[data-library-mode="songs"] .app .grid,
+  body[data-library-mode="albums"] .app .grid { grid-template-columns:1fr;gap:0; }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card { position:relative;display:grid;grid-template-columns:3.5rem minmax(0,1fr);grid-template-rows:auto auto;align-content:center;column-gap:1rem;min-height:5rem;padding:.75rem 0;border-bottom:1px solid var(--mobile-line); }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card .art { grid-column:1;grid-row:1/3;width:3.5rem;height:3.5rem;aspect-ratio:1;border-radius:.5rem;align-self:center; }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card strong { grid-column:2;grid-row:1;margin:0;align-self:end;font-size:.9375rem;font-weight:600;line-height:1.5; }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card small { grid-column:2;grid-row:2;margin:.125rem 0 0;align-self:start;font-size:.75rem;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical; }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card.is-playing strong { color:var(--mobile-accent); }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card.actions-open :is(strong,small) { opacity:0; }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card .card-actions { left:4.5rem;top:50%;transform:translateY(-50%);border:0;padding:0;gap:.5rem;background:var(--mobile-bg);box-shadow:none;backdrop-filter:none; }
+  body:is([data-library-mode="songs"],[data-library-mode="albums"]) .app .card .card-actions button { background:var(--mobile-surface);color:var(--mobile-accent);border-radius:.75rem; }
+  body.album-overview-open .album-overview { display:block; }
+  body[data-library-mode="albums"] :is(#subShelf,.shelf-scrollbar) { display:none!important; }
+  body.record-tracks-open .record-track-head { display:block;margin:.75rem 0 1rem; }
+  .record-track-head button { display:block;min-height:2.75rem;padding:0;color:var(--mobile-accent);font-size:.8125rem; }
+  .record-track-head h2 { font-size:1.25rem;line-height:1.4;margin:.5rem 0 .25rem;overflow-wrap:anywhere; }
+  .record-track-head small { font-size:.75rem;color:var(--mobile-muted); }
+  body.album-overview-open :is(#subShelf,.shelf-scrollbar,#grid,#libraryMore) { display:none!important; }
+  .record-shelf-head { display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:1.25rem 0; }
+  .record-shelf-head h2 { font-size:1.25rem;font-weight:650;letter-spacing:-.025em;margin:0; }
+  .record-shelf-head small { color:var(--mobile-muted);font-size:.75rem; }
+  .record-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.75rem 1.25rem; }
+  .record-card { display:block;min-width:0;width:100%;padding:0;text-align:left; }
+  .record-sleeve { display:block;position:relative;margin-right:.375rem;aspect-ratio:1;border-radius:.375rem;background:var(--mobile-surface);box-shadow:.1875rem .1875rem 0 var(--mobile-bg),.25rem .25rem 0 var(--mobile-line); }
+  .record-sleeve img { display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit; }
+  .record-card strong { display:block;font-size:.875rem;font-weight:600;line-height:1.5;margin-top:.875rem;overflow-wrap:anywhere; }
+  .record-card small { display:block;font-size:.6875rem;color:var(--mobile-muted);margin-top:.25rem; }
+  .record-card:active .record-sleeve { opacity:.8; }
+  .record-empty { font-size:.875rem;color:var(--mobile-muted);padding:1rem 0; }
+  .app .shelf { margin-top:.75rem; }
+  .app .shelf img { border-radius:.375rem; }
+  .app .playlist-grid img { border-radius:.375rem; }
+  body[data-library-mode="songs"] .library-order { display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin:.5rem 0;padding:0; }
+  .library-order label { font-size:.75rem;color:var(--mobile-muted);margin-right:auto; }
+  .library-order select { min-height:2.75rem;max-width:75%;padding:.5rem .625rem;border:0;border-radius:.5rem;background:transparent;color:var(--mobile-ink);font:inherit;font-size:.8125rem; }
+  .library-order option { color:var(--mobile-ink);background:var(--mobile-bg); }
+  .melon-order-note { flex-basis:100%;font-size:.75rem;line-height:1.6;color:var(--mobile-muted);margin:0 0 .5rem; }
+  .melon-order-note:empty { display:none; }
+  .song-melon { grid-column:2;grid-row:3;font-size:.6875rem;line-height:1.5;color:var(--mobile-muted);margin-top:.25rem; }
+  .app .card:has(.song-melon) .art { grid-row:1/4; }
+  .app .card.actions-open .song-melon { opacity:0; }
+  body[data-library-mode="albums"] .app #shelf { display:flex!important;gap:.5rem;overflow-x:auto;padding:.5rem 0;margin:0;scrollbar-width:none; }
+  body[data-library-mode="albums"] .app #shelf button { flex:0 0 auto;width:auto;min-width:0;min-height:2.75rem;padding:.5rem .75rem;border-radius:.5rem;color:var(--mobile-muted); }
+  body[data-library-mode="albums"] .app #shelf button.active { background:var(--mobile-selected);color:var(--mobile-accent); }
+  body[data-library-mode="albums"] .app #shelf img { display:none; }
+  body[data-library-mode="albums"] .app #shelf small { margin:0;font-size:.8125rem;overflow:visible; }
+  .record-grid { grid-template-columns:1fr;gap:0; }
+  .record-card { display:grid;grid-template-columns:3.5rem minmax(0,1fr);grid-template-rows:auto auto;column-gap:1rem;min-height:5rem;padding:.75rem 0;border-bottom:1px solid var(--mobile-line); }
+  .record-sleeve { grid-column:1;grid-row:1/3;width:3.5rem;height:3.5rem;margin:0;border-radius:.5rem;box-shadow:none;align-self:center; }
+  .record-card strong { grid-column:2;grid-row:1;margin:0;font-size:.9375rem;align-self:end; }
+  .record-card small { grid-column:2;grid-row:2;margin:.125rem 0 0;font-size:.75rem;align-self:start; }
+  .record-shelf-head { margin:.75rem 0 .5rem; }
+  @media(max-width:360px) {
+    .app .top { gap:.375rem; }
+    .app .brand-title strong { font-size:1rem; }
+    .app .brand small { font-size:.625rem; }
+    .record-grid { gap:0; }
+  }
+}

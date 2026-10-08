@@ -1,4 +1,4 @@
-const CACHE_NAME = "uaena-app-preview-v37";
+const CACHE_NAME = "uaena-app-preview-v41";
 const ASSETS = [
   "app-preview.html",
   "app.webmanifest",
@@ -12,6 +12,11 @@ const ASSETS = [
   "ui-glass.css",
   "player-features.js",
   "player-features.css",
+  "mobile-ui.css",
+  "music-records.css",
+  "library-order.js",
+  "data/melon-likes.js",
+  "theme-bootstrap.js",
   "nav-icons.js",
   "assets/uaena-symbol-dark.png",
   "assets/uaena-symbol-light.png",
@@ -36,9 +41,8 @@ self.addEventListener("install", event => {
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+    caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith('uaena-app-preview-') && key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
@@ -49,13 +53,13 @@ self.addEventListener("fetch", event => {
     return;
   }
   if (['document', 'script', 'style'].includes(event.request.destination)) {
-    event.respondWith(fetch(event.request).then(response => {
+    event.respondWith(fetch(event.request, { cache: 'no-store' }).then(response => {
       if (response.ok && new URL(event.request.url).origin === location.origin) {
         const copy = response.clone();
         event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)));
       }
       return response;
-    }).catch(() => caches.match(event.request)));
+    }).catch(() => caches.open(CACHE_NAME).then(cache => cache.match(event.request))));
     return;
   }
   event.respondWith(

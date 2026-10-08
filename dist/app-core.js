@@ -558,7 +558,7 @@ $('.install').onclick = async () => {
   if (!deferredInstall) { toast('浏览器菜单里也可以安装到桌面'); return; }
   deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; $('.install').classList.add('hidden');
 };
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('app-sw.js').catch(() => {});
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('app-sw.js', { updateViaCache: 'none' }).then(registration => registration.update()).catch(() => {});
 setPlaybackModeUi();
 if ('mediaSession' in mediaNavigator) {
   const handlers = {

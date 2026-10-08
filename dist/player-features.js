@@ -130,6 +130,9 @@
   $('.track-action-cancel').before(playlistAction);
   const oldRender = render;
   render = function () {
+    document.body.dataset.libraryMode = mode;
+    document.body.classList.toggle('album-overview-open', mode === 'albums' && !libraryAlbum);
+    document.body.classList.toggle('record-tracks-open', mode === 'albums' && Boolean(libraryAlbum));
     const personal = ['playlists', 'recent'].includes(mode);
     const favorite = favorites.has(tracks[selected]?.id);
     for (const node of [$('.fav'), $('.mini-fav')]) node.textContent = favorite ? '♥' : '♡';

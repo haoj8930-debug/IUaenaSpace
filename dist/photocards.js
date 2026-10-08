@@ -2,7 +2,7 @@
   'use strict';
   const $=id=>document.getElementById(id), limit=36;
   let data=null, collection='catalog', filtered=[], shown=0, selected=0, side='front', opener=null;
-  let dark=localStorage.getItem('iu-photocard-theme')==='dark';
+  let dark=window.uaenaInitialTheme ? window.uaenaInitialTheme==='dark' : localStorage.getItem('iu-photocard-theme')==='dark';
   const applyTheme=()=>document.body.classList.toggle('dark',dark);
   applyTheme(); $('theme').onclick=()=>{dark=!dark;applyTheme();localStorage.setItem('iu-photocard-theme',dark?'dark':'light')};
   const text=(el,value)=>{el.textContent=value};
