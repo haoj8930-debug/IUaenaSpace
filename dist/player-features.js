@@ -28,6 +28,13 @@
   tutorialButton.setAttribute('aria-label', '打开使用教程'); tutorialButton.setAttribute('aria-haspopup', 'dialog');
   tutorialButton.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 8.5a2.5 2.5 0 0 1 4.8 1c0 1.7-2.4 1.8-2.4 3.5"/><path d="M12 16.5h.01"/></svg>';
   $('.theme').before(tutorialButton);
+  const fanchantLink = document.createElement('a');
+  fanchantLink.className = 'fanchant-link'; fanchantLink.href = 'https://fanchants.iutsc.com/';
+  fanchantLink.target = '_blank'; fanchantLink.rel = 'noopener noreferrer';
+  fanchantLink.title = '应援教程'; fanchantLink.setAttribute('aria-label', '应援教程（在新标签页打开）');
+  fanchantLink.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 14 4 3-4 5-4-3z"/><path d="m9 14-2-4 2-5 5-2 5 4 1 5-4 4-3 1"/><path d="m10 7 2-1 3 2 1 3-2 2"/><path d="m3 3 1 1M20 2l-1 2M22 16l-2-1"/></svg>';
+  const brandTitle = document.createElement('div'); brandTitle.className = 'brand-title';
+  const brandName = $('.brand strong'); brandName.before(brandTitle); brandTitle.append(brandName, fanchantLink);
   const tutorialDialog = document.createElement('dialog');
   tutorialDialog.className = 'music-tutorial'; tutorialDialog.setAttribute('aria-labelledby', 'musicTutorialTitle');
   tutorialDialog.innerHTML = `<header><div><small>UAENA · MUSIC GUIDE</small><h2 id="musicTutorialTitle">使用教程</h2></div><button type="button" class="tutorial-close" aria-label="关闭教程" autofocus>×</button></header><div class="tutorial-content" tabindex="0" aria-label="教程内容">

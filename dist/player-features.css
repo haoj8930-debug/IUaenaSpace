@@ -93,6 +93,14 @@ button:focus-visible { outline:2px solid #a98acd;outline-offset:3px; }
 }
 .tutorial-toggle { display:grid;place-items:center;width:2.75rem;min-width:2.75rem;height:2.75rem;border:1px solid var(--line);border-radius:50%;background:var(--sheet);color:var(--text);cursor:pointer; }
 .tutorial-toggle svg { width:1.4rem;height:1.4rem;pointer-events:none; }
+.brand-title { display:flex;align-items:center;gap:.375rem; }
+.brand-title strong { white-space:nowrap; }
+.fanchant-link { display:grid;place-items:center;flex:0 0 2.75rem;width:2.75rem;height:2.75rem;border-radius:50%;color:var(--accent);text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent; }
+.fanchant-link svg { width:1.4rem;height:1.4rem;pointer-events:none; }
+.fanchant-link:hover { background:rgba(150,127,212,.15); }
+.fanchant-link:active { opacity:.75; }
+.fanchant-link:focus-visible { outline:2px solid var(--accent);outline-offset:2px; }
+@media(max-width:380px) { .top { gap:.375rem; } .top .logo { width:32px;height:32px; } .brand-title { gap:0; } .brand-title strong { font-size:1rem; } .top-actions { gap:.375rem; } }
 .tutorial-toggle:hover { background:rgba(150,127,212,.2); }
 .tutorial-toggle:active { opacity:.75; }
 .music-tutorial { box-sizing:border-box;width:min(38rem,calc(100vw - 2rem));max-height:calc(100dvh - 3rem);padding:0;border:1px solid #a78dc766;border-radius:1.5rem;background:#24202e;color:#f1eaf9;box-shadow:0 1rem 3rem #15102044; }
